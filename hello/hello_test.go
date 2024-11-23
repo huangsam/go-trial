@@ -31,3 +31,16 @@ func TestName(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkWorld(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		World()
+	}
+}
+
+func BenchmarkName(b *testing.B) {
+	name := "Alice"
+	for i := 0; i < b.N; i++ {
+		Name(name)
+	}
+}
