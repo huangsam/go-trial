@@ -5,14 +5,14 @@ type Person struct {
 	age  int32
 }
 
-func GetAge(p Person) int32 {
+func (p Person) GetAge() int32 {
 	return p.age
 }
 
-func SetAge(p *Person, newAge int32) {
+func (p *Person) SetAge(newAge int32) {
 	p.age = newAge
 }
 
-func IsOlderThan(first Person, target int32) bool {
-	return first.age >= target
+func (p Person) IsOlderThan(target int32) bool {
+	return p.age >= target
 }
