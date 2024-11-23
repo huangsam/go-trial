@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"sambyte.net/go-trial/hello"
+	"sambyte.net/go-trial/basic"
 )
 
 func main() {
-	fmt.Println(hello.World())
-	fmt.Println(hello.Name("Peter"))
+	fmt.Println(basic.World())
+	fmt.Println(basic.Name("Peter"))
 }
