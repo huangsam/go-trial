@@ -4,6 +4,15 @@ import (
 	"testing"
 )
 
+func TestGetNameDirectly(t *testing.T) {
+	var expected string = "Sally"
+	person := Person{expected, 0}
+	actual := person.Name
+	if actual != expected {
+		t.Errorf("Expected name %s but got %s", expected, actual)
+	}
+}
+
 func TestGetAge(t *testing.T) {
 	var expected int32 = 12
 	person := Person{"John", expected}
@@ -24,7 +33,7 @@ func TestSetAge(t *testing.T) {
 }
 
 func BenchmarkGetAge(b *testing.B) {
-	person := Person{"Mary", 0}
+	person := Person{"Bob", 0}
 	for i := 0; i < b.N; i++ {
 		GetAge(person)
 	}
