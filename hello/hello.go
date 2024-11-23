@@ -1,11 +1,16 @@
 package hello
 
-import "fmt"
+import (
+	"strings"
+)
 
 func World() string {
 	return "Hello world"
 }
 
 func Name(content string) string {
-	return fmt.Sprintf("Hello %s\n", content)
+	var builder strings.Builder
+	builder.WriteString("Hello ")
+	builder.WriteString(content)
+	return builder.String()
 }
