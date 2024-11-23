@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"sambyte.net/go-trial/hello"
+)
 
 func main() {
-	fmt.Println("Hello world")
+	fmt.Println(hello.World())
+	fmt.Println(hello.Name("Peter"))
 }
