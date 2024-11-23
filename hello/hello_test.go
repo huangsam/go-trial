@@ -18,9 +18,9 @@ func TestName(t *testing.T) {
 		input    string
 		expected string
 	}{
-		{"Alice", "Hello Alice\n"},
-		{"Bob", "Hello Bob\n"},
-		{"", "Hello \n"},
+		{"Alice", "Hello Alice"},
+		{"Bob", "Hello Bob"},
+		{"", "Hello "},
 	}
 
 	for _, tc := range testCases {
