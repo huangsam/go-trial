@@ -1,6 +1,8 @@
+SOURCES := *.go $(wildcard **/*.go)
+
 all: main.out
 
-main.out: *.go $(wildcard **/*.go)
+main.out: $(SOURCES)
 	go build -o main.out
 
 clean:
