@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	fmt.Println(basic.World())
-	fmt.Println(basic.Name("Peter"))
+	fmt.Println(basic.GreetWorld())
+	fmt.Println(basic.GreetName("Peter"))
 }

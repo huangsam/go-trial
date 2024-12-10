@@ -4,11 +4,11 @@ import (
 	"strings"
 )
 
-func World() string {
-	return "Hello world"
+func GreetWorld() string {
+	return GreetName("World")
 }
 
-func Name(content string) string {
+func GreetName(content string) string {
 	var builder strings.Builder
 	builder.WriteString("Hello ")
 	builder.WriteString(content)
