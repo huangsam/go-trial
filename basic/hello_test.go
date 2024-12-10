@@ -5,8 +5,8 @@ import (
 )
 
 func TestWorld(t *testing.T) {
-	expected := "Hello world"
-	actual := World()
+	expected := "Hello World"
+	actual := GreetWorld()
 
 	if actual != expected {
 		t.Errorf("World() = %v, want %v", actual, expected)
@@ -24,7 +24,7 @@ func TestName(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		actual := Name(tc.input)
+		actual := GreetName(tc.input)
 
 		if actual != tc.expected {
 			t.Errorf("Name(%q) = %q, want %q", tc.input, actual, tc.expected)
@@ -34,13 +34,13 @@ func TestName(t *testing.T) {
 
 func BenchmarkWorld(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		World()
+		GreetWorld()
 	}
 }
 
 func BenchmarkName(b *testing.B) {
 	name := "Alice"
 	for i := 0; i < b.N; i++ {
-		Name(name)
+		GreetName(name)
 	}
 }
