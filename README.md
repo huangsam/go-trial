@@ -18,3 +18,4 @@ Here is a checklist of things I want to cover:
 Useful resources:
 
 - <https://github.com/avelino/awesome-go>
+- <https://go.dev/tour/list>
