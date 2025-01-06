@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"sambyte.net/go-trial/basic"
+	"io.huangsam/trial/basic"
 )
 
 func main() {
