@@ -2,6 +2,16 @@
 
 Time to master certain things for Golang.
 
+## Getting started
+
+`./build.sh` to run a build on the whole codebase.
+
+`./format.sh` to format all logic.
+
+`./test.sh` to run all tests.
+
+## Goals
+
 Here is a checklist of things I want to cover:
 
 - [ ] Data structures
@@ -15,7 +25,7 @@ Here is a checklist of things I want to cover:
 - [ ] Mocking if possible
 - [ ] HTTP and GRPC
 
-Useful resources:
+## Useful resources
 
 - <https://github.com/avelino/awesome-go>
 - <https://github.com/golang-standards/project-layout>
