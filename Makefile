@@ -1,9 +1,9 @@
 SOURCES := *.go $(wildcard **/*.go)
 
-all: main.out
+all: gotrial
 
-main.out: $(SOURCES)
-	go build -o main.out
+gotrial: $(SOURCES)
+	go build io.huangsam/trial/cmd/gotrial
 
 clean:
-	rm main.out
+	rm gotrial
