@@ -36,8 +36,8 @@ godoc -http :8080
 
 Here is a checklist of things I want to cover:
 
-- [x] Intro to functions, structs
-- [x] Data structures
+- [x] [Intro to functions, structs](pkg/basicintro/)
+- [x] [Data structures](pkg/datastructure/)
 - [ ] Goroutines
 - [ ] Channels
 - [ ] Synchronization primitives
