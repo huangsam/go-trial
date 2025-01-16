@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	basic "io.huangsam/trial/internal/basicintro"
+	basic "io.huangsam/trial/pkg/basicintro"
 )
 
 func main() {
