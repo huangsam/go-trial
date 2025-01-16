@@ -20,6 +20,18 @@ Here are the commands you need to know:
 ./test.sh bench
 ```
 
+### Documentation
+
+To see the documentation over a local web server:
+
+```shell
+# Install godoc
+go install golang.org/x/tools/cmd/godoc@latest
+
+# Run godoc server
+godoc -http :8080
+```
+
 ## Goals
 
 Here is a checklist of things I want to cover:
