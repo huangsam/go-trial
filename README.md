@@ -14,6 +14,7 @@ Time to master certain things for Golang.
 
 Here is a checklist of things I want to cover:
 
+- [x] Intro of simple primitives
 - [x] Data structures
 - [ ] Goroutines
 - [ ] Channels
