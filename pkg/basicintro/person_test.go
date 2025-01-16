@@ -8,7 +8,7 @@ import (
 
 func TestGetInfo(t *testing.T) {
 	var expectedName string = "John"
-	var expectedAge int32 = 12
+	var expectedAge int = 12
 	person := basicintro.Person{expectedName, expectedAge}
 
 	actualName := person.Name

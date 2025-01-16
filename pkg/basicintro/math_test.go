@@ -9,14 +9,14 @@ import (
 
 func TestAdd(t *testing.T) {
 	type args struct {
-		num1 int32
-		num2 int32
+		num1 int
+		num2 int
 	}
 
 	tests := []struct {
 		name string
 		args args
-		want int32
+		want int
 	}{
 		{name: "Positive Numbers", args: args{num1: 1, num2: 2}, want: 3},
 		{name: "Negative Numbers", args: args{num1: -1, num2: -2}, want: -3},
@@ -36,14 +36,14 @@ func TestAdd(t *testing.T) {
 
 func TestSubtract(t *testing.T) {
 	type args struct {
-		num1 int32
-		num2 int32
+		num1 int
+		num2 int
 	}
 
 	tests := []struct {
 		name string
 		args args
-		want int32
+		want int
 	}{
 		{name: "Positive Numbers", args: args{num1: 5, num2: 2}, want: 3},
 		{name: "Negative Numbers", args: args{num1: -1, num2: -2}, want: 1},
@@ -62,14 +62,14 @@ func TestSubtract(t *testing.T) {
 
 func TestMultiply(t *testing.T) {
 	type args struct {
-		num1 int32
-		num2 int32
+		num1 int
+		num2 int
 	}
 
 	tests := []struct {
 		name string
 		args args
-		want int32
+		want int
 	}{
 		{name: "Positive Numbers", args: args{num1: 2, num2: 3}, want: 6},
 		{name: "Negative Numbers", args: args{num1: -2, num2: -3}, want: 6},
@@ -88,20 +88,20 @@ func TestMultiply(t *testing.T) {
 
 func TestDivide(t *testing.T) {
 	type args struct {
-		num1 int32
-		num2 int32
+		num1 int
+		num2 int
 	}
 
 	tests := []struct {
 		name string
 		args args
-		want int32
+		want int
 	}{
 		{name: "Positive Numbers", args: args{num1: 10, num2: 2}, want: 5},
 		{name: "Negative Numbers", args: args{num1: -10, num2: -2}, want: 5},
 		{name: "Positive and Negative", args: args{num1: 10, num2: -2}, want: -5},
 		{name: "Zero Dividend", args: args{num1: 0, num2: 5}, want: 0},
-		{name: "Division by Zero", args: args{num1: 5, num2: 0}, want: math.MaxInt32}, // Test division by zero
+		{name: "Division by Zero", args: args{num1: 5, num2: 0}, want: math.MaxInt}, // Test division by zero
 	}
 
 	for _, tt := range tests {
