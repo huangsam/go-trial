@@ -1,4 +1,4 @@
-name: CI
+name: Lint
 
 on:
   push:
@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  go-build:
-    name: Go
+  go-lint:
+    name: golangci-lint
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - name: Run tests
-        run: bash ./test.sh
-      - name: Run build
-        run: bash ./build.sh
+      - name: Run lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.63
