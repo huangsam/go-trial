@@ -1,6 +1,12 @@
 # Go Trial
 
-Time to master certain things for Golang.
+There's no better time to master Golang than now!
+
+Previous trials:
+
+- [Python](https://github.com/huangsam/ultimate-python)
+- [Java](https://github.com/huangsam/java-trial)
+- [C++](https://github.com/huangsam/cpp-trial)
 
 ## Getting started
 
