@@ -1,2 +1,2 @@
-// Package basicintro contains simple functions and structs
+// Package basicintro contains simple functions and structs.
 package basicintro
