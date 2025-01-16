@@ -4,11 +4,19 @@ Time to master certain things for Golang.
 
 ## Getting started
 
-`./build.sh` to run a build on the whole codebase.
+```shell
+# Run build
+./build.sh
 
-`./format.sh` to format all logic.
+# Run formatting
+./format.sh
 
-`./test.sh` to run all tests.
+# Run tests
+./test.sh
+
+# Run benchmarks
+./test.sh bench
+```
 
 ## Goals
 
