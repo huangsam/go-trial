@@ -42,11 +42,8 @@ Here is a checklist of things I want to cover:
 - [ ] Channels
 - [ ] Synchronization primitives
 - [ ] Interfaces
-- [ ] Error handling
-- [ ] Standard library (file I/O and date/time)
 - [ ] Generics
-- [ ] Mocking if possible
-- [ ] HTTP and GRPC
+- [ ] Mocking
 
 ## Useful resources
 
