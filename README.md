@@ -1,12 +1,8 @@
 # Go Trial
 
-There's no better time to master Golang than now!
+There's no better time to master Golang than now! 🔥
 
-Previous trials:
-
-- [Python](https://github.com/huangsam/ultimate-python)
-- [Java](https://github.com/huangsam/java-trial)
-- [C++](https://github.com/huangsam/cpp-trial)
+Previous trials include: [Python], [Java], [C++]
 
 ## Getting started
 
@@ -55,3 +51,7 @@ Here is a checklist of things I want to cover:
 - <https://go.dev/talks/2014/organizeio.slide#9>
 - <https://go.dev/blog/organizing-go-code>
 - <https://go.dev/blog/package-names>
+
+[Python]: https://github.com/huangsam/ultimate-python
+[Java]: https://github.com/huangsam/java-trial
+[C++]: https://github.com/huangsam/cpp-trial
