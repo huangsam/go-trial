@@ -4,6 +4,8 @@ Time to master certain things for Golang.
 
 ## Getting started
 
+Here are the commands you need to know:
+
 ```shell
 # Run build
 ./build.sh
