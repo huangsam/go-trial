@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
-
+	"github.com/rs/zerolog/log"
 	basic "io.huangsam/trial/pkg/basicintro"
 )
 
 func main() {
-	fmt.Println(basic.GreetWorld())
-	fmt.Println(basic.GreetName("Peter"))
+	log.Info().Msg(basic.GreetWorld())
+	log.Info().Msg(basic.GreetName("Peter"))
 }
