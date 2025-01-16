@@ -40,6 +40,8 @@ Here is a checklist of things I want to cover:
 
 - <https://github.com/avelino/awesome-go>
 - <https://github.com/golang-standards/project-layout>
+- <https://github.com/golangci/golangci-lint>
+- <https://github.com/uber-go/mock>
 - <https://go.dev/tour/list>
 - <https://gobyexample.com>
 - <https://go.dev/talks/2014/organizeio.slide#9>
