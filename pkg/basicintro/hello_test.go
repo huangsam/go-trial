@@ -1,12 +1,14 @@
-package basicintro
+package basicintro_test
 
 import (
 	"testing"
+
+	"io.huangsam/trial/pkg/basicintro"
 )
 
 func TestWorld(t *testing.T) {
 	expected := "Hello World"
-	actual := GreetWorld()
+	actual := basicintro.GreetWorld()
 
 	if actual != expected {
 		t.Errorf("World() = %v, want %v", actual, expected)
@@ -24,7 +26,7 @@ func TestName(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		actual := GreetName(tc.input)
+		actual := basicintro.GreetName(tc.input)
 
 		if actual != tc.expected {
 			t.Errorf("Name(%q) = %q, want %q", tc.input, actual, tc.expected)
@@ -34,13 +36,13 @@ func TestName(t *testing.T) {
 
 func BenchmarkWorld(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		GreetWorld()
+		basicintro.GreetWorld()
 	}
 }
 
 func BenchmarkName(b *testing.B) {
 	name := "Alice"
 	for i := 0; i < b.N; i++ {
-		GreetName(name)
+		basicintro.GreetName(name)
 	}
 }

@@ -1,13 +1,15 @@
-package basicintro
+package basicintro_test
 
 import (
 	"testing"
+
+	"io.huangsam/trial/pkg/basicintro"
 )
 
 func TestGetInfo(t *testing.T) {
 	var expectedName string = "John"
 	var expectedAge int32 = 12
-	person := Person{expectedName, expectedAge}
+	person := basicintro.Person{expectedName, expectedAge}
 
 	actualName := person.Name
 	if actualName != expectedName {
@@ -27,7 +29,7 @@ func TestGetInfo(t *testing.T) {
 
 func TestSetAge(t *testing.T) {
 	var expected int32 = 24
-	person := Person{"Mary", 0}
+	person := basicintro.Person{"Mary", 0}
 	person.SetAge(expected)
 	actual := person.GetAge()
 	if actual != expected {
@@ -36,14 +38,14 @@ func TestSetAge(t *testing.T) {
 }
 
 func BenchmarkGetAge(b *testing.B) {
-	person := Person{"Bob", 0}
+	person := basicintro.Person{"Bob", 0}
 	for i := 0; i < b.N; i++ {
 		person.GetAge()
 	}
 }
 
 func BenchmarkIsOlderThan(b *testing.B) {
-	person := Person{"Jerry", 0}
+	person := basicintro.Person{"Jerry", 0}
 	for i := 0; i < b.N; i++ {
 		person.IsOlderThan(18)
 	}

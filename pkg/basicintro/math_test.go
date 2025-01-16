@@ -1,6 +1,10 @@
-package basicintro
+package basicintro_test
 
-import "testing"
+import (
+	"testing"
+
+	"io.huangsam/trial/pkg/basicintro"
+)
 
 func TestAdd(t *testing.T) {
 	type args struct {
@@ -22,7 +26,7 @@ func TestAdd(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Add(tt.args.num1, tt.args.num2); got != tt.want {
+			if got := basicintro.Add(tt.args.num1, tt.args.num2); got != tt.want {
 				t.Errorf("Add() = %v, want %v", got, tt.want)
 			}
 		})
@@ -31,6 +35,6 @@ func TestAdd(t *testing.T) {
 
 func BenchmarkAdd(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		Add(1, 2)
+		basicintro.Add(1, 2)
 	}
 }
