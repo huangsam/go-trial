@@ -1,5 +1,9 @@
 package basicintro
 
+// Fibonacci calculates the nth Fibonacci number.
+//
+// The Fibonacci sequence is a series of numbers where each number is the sum
+// of the two preceding ones, starting from 0 and 1.
 func Fibonacci(n int) int {
 	if n <= 1 {
 		return 1
