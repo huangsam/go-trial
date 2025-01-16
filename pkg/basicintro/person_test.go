@@ -16,7 +16,7 @@ func TestGetInfo(t *testing.T) {
 		t.Errorf("Expected name %s but got %s", expectedName, actualName)
 	}
 
-	actualAge := person.GetAge()
+	actualAge := person.Age
 	if actualAge != expectedAge {
 		t.Errorf("Expected age %d but got %d", expectedAge, actualAge)
 	}
@@ -24,23 +24,6 @@ func TestGetInfo(t *testing.T) {
 	isOlderThanSeventeen := person.IsOlderThan(17)
 	if isOlderThanSeventeen {
 		t.Errorf("Expected a young one, but got someone with age %d", actualAge)
-	}
-}
-
-func TestSetAge(t *testing.T) {
-	var expected int32 = 24
-	person := basicintro.Person{"Mary", 0}
-	person.SetAge(expected)
-	actual := person.GetAge()
-	if actual != expected {
-		t.Errorf("Expected age %d but got %d", expected, actual)
-	}
-}
-
-func BenchmarkGetAge(b *testing.B) {
-	person := basicintro.Person{"Bob", 0}
-	for i := 0; i < b.N; i++ {
-		person.GetAge()
 	}
 }
 

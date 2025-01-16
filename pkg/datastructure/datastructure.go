@@ -1,2 +1,2 @@
-// Package datastructure is for validating maps, slices, etc.
+// Package datastructure has tests for maps and slices.
 package datastructure
