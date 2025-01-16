@@ -10,9 +10,6 @@ Here are the commands you need to know:
 # Run build
 ./build.sh
 
-# Run formatting
-./format.sh
-
 # Run tests
 ./test.sh
 
