@@ -37,8 +37,8 @@ Here is a checklist of things I want to cover:
 
 - [x] [Intro to functions, structs](pkg/basicintro/)
 - [x] [Data structures](pkg/datastructure/)
-- [ ] Goroutines, channels, sync primitives
-- [ ] Interfaces, generics, mocking
+- [ ] [Goroutines, channels, sync primitives](pkg/concurrency/)
+- [ ] [Interfaces, generics, mocking](pkg/abstraction/)
 
 ## Useful resources
 
