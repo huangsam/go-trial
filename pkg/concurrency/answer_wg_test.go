@@ -8,11 +8,10 @@ import (
 
 func TestGetAnswersWithWaitGroup(t *testing.T) {
 	results := concurrency.GetAnswersWithWaitGroup()
-	if results[0] != 0 {
-		t.Errorf("Expected 0 at index 0 but got %d", results[0])
-	}
-	if results[99] != 198 {
-		t.Errorf("Expected 198 at index 0 but got %d", results[99])
+	for i := 0; i < 100; i++ {
+		if results[i] != i*2 {
+			t.Errorf("Expected %d at index %d but got %d", i*2, i, results[0])
+		}
 	}
 }
 
