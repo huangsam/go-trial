@@ -7,7 +7,7 @@ import (
 )
 
 func TestPointerSetOne(t *testing.T) {
-	var n int = 0
+	var n int
 	basicintro.PointerSetOne(&n)
 	if n != 1 {
 		t.Errorf("Expected n to be 1, but got %d", n)
