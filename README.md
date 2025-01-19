@@ -51,12 +51,20 @@ Here is a checklist of things I want to cover:
 
 ## Useful resources
 
+### GitHub projects
+
 - <https://github.com/avelino/awesome-go>
 - <https://github.com/golang-standards/project-layout>
 - <https://github.com/golangci/golangci-lint>
 - <https://github.com/uber-go/mock>
+
+### Online tutorials
+
 - <https://go.dev/tour/list>
 - <https://gobyexample.com>
+
+### Blog posts
+
 - <https://go.dev/talks/2014/organizeio.slide#9>
 - <https://go.dev/blog/organizing-go-code>
 - <https://go.dev/blog/package-names>
