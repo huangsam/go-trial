@@ -9,9 +9,9 @@ import (
 func update(m *[100]int, from int, to int, mu *sync.Mutex) {
 	for i := from; i < to; i++ {
 		time.Sleep(10 * time.Millisecond)
-		mu.Lock()
+		mu.Lock() // Acquire the mutex
 		(*m)[i] = i * 2
-		mu.Unlock()
+		mu.Unlock() // Release the mutex
 	}
 }
 
