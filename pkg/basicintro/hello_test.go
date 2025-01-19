@@ -9,7 +9,6 @@ import (
 func TestWorld(t *testing.T) {
 	expected := "Hello World"
 	actual := basicintro.GreetWorld()
-
 	if actual != expected {
 		t.Errorf("World() = %v, want %v", actual, expected)
 	}
@@ -24,7 +23,6 @@ func TestName(t *testing.T) {
 		{"Bob", "Hello Bob"},
 		{"", "Hello "},
 	}
-
 	for _, tc := range testCases {
 		actual := basicintro.GreetName(tc.input)
 

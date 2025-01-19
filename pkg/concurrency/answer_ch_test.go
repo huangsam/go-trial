@@ -7,10 +7,7 @@ import (
 )
 
 func TestGetAnswersWithChannels(t *testing.T) {
-	// Get the results from the function
 	results := concurrency.GetAnswersWithChannels()
-
-	// Compare the results with the expected values
 	if results[0] != 0 {
 		t.Errorf("Expected 0 at index 0 but got %d", results[0])
 	}

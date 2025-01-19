@@ -18,7 +18,6 @@ func TestFibonacci(t *testing.T) {
 		{5, 8},
 		{10, 89},
 	}
-
 	for _, tc := range testCases {
 		actual := basicintro.Fibonacci(tc.input)
 		if actual != tc.expected {
