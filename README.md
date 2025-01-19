@@ -56,21 +56,20 @@ Here is a checklist of things I want to cover:
 
 ### GitHub projects
 
-- <https://github.com/avelino/awesome-go>
-- <https://github.com/golang-standards/project-layout>
-- <https://github.com/golangci/golangci-lint>
-- <https://github.com/uber-go/mock>
+- [avelino/awesome-go](https://github.com/avelino/awesome-go): A curated list of awesome Go frameworks, libraries, and software.
+- [golang-standards/project-layout](https://github.com/golang-standards/project-layout): Standard Go project layout.
+- [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner for Go.
+- [uber-go/mock](https://github.com/uber-go/mock): A mocking framework for Go.
 
 ### Online tutorials
 
-- <https://go.dev/tour/list>
-- <https://gobyexample.com>
+- [A Tour of Go](https://go.dev/tour/list): An interactive tour of Go.
+- [Go by Example](https://gobyexample.com): Hands-on introduction to Go using annotated example programs.
 
 ### Blog posts
 
-- <https://go.dev/talks/2014/organizeio.slide#9>
-- <https://go.dev/blog/organizing-go-code>
-- <https://go.dev/blog/package-names>
+- [Organizing Go code](https://go.dev/blog/organizing-go-code): A blog post on how to organize Go code.
+- [Package names](https://go.dev/blog/package-names): A blog post on how to name Go packages effectively.
 
 [Python]: https://github.com/huangsam/ultimate-python
 [Java]: https://github.com/huangsam/java-trial
