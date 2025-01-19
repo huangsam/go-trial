@@ -10,22 +10,22 @@ func TestClassifyRectangle(t *testing.T) {
 	tests := []struct {
 		name  string
 		shape abstraction.Rectangle
-		want  string
+		want  abstraction.ShapeSize
 	}{
 		{
 			name:  "Small rectangle",
 			shape: abstraction.Rectangle{Width: 2, Height: 2},
-			want:  "Small",
+			want:  abstraction.SizeSmall,
 		},
 		{
 			name:  "Medium rectangle",
 			shape: abstraction.Rectangle{Width: 5, Height: 5},
-			want:  "Medium",
+			want:  abstraction.SizeMedium,
 		},
 		{
 			name:  "Large rectangle",
 			shape: abstraction.Rectangle{Width: 11, Height: 11},
-			want:  "Large",
+			want:  abstraction.SizeLarge,
 		},
 	}
 	for _, tt := range tests {
@@ -41,22 +41,22 @@ func TestClassifyCircle(t *testing.T) {
 	tests := []struct {
 		name  string
 		shape abstraction.Circle
-		want  string
+		want  abstraction.ShapeSize
 	}{
 		{
 			name:  "Small circle",
 			shape: abstraction.Circle{Radius: 1},
-			want:  "Small",
+			want:  abstraction.SizeSmall,
 		},
 		{
 			name:  "Medium circle",
 			shape: abstraction.Circle{Radius: 5},
-			want:  "Medium",
+			want:  abstraction.SizeMedium,
 		},
 		{
 			name:  "Large circle",
 			shape: abstraction.Circle{Radius: 6},
-			want:  "Large",
+			want:  abstraction.SizeLarge,
 		},
 	}
 	for _, tt := range tests {
