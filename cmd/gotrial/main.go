@@ -3,13 +3,13 @@ package main
 import (
 	"github.com/rs/zerolog/log"
 	"io.huangsam/trial/pkg/abstraction"
-	basic "io.huangsam/trial/pkg/basicintro"
+	"io.huangsam/trial/pkg/basicintro"
 )
 
 // main is the entry point of the application.
 func main() {
-	log.Info().Msg(basic.GreetWorld())
-	log.Info().Msg(basic.GreetName("Peter"))
+	log.Info().Msg(basicintro.GreetWorld())
+	log.Info().Msg(basicintro.GreetName("Peter"))
 
 	circle := abstraction.Circle{Radius: 6}
 	logCircleSize(circle)
