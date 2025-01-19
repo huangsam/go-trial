@@ -67,3 +67,17 @@ func TestClassifyCircle(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkClassifyRectangle(b *testing.B) {
+	rect := abstraction.Rectangle{Width: 5, Height: 5}
+	for i := 0; i < b.N; i++ {
+		abstraction.Classify(rect)
+	}
+}
+
+func BenchmarkClassifyCircle(b *testing.B) {
+	circle := abstraction.Circle{Radius: 5}
+	for i := 0; i < b.N; i++ {
+		abstraction.Classify(circle)
+	}
+}
