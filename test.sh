@@ -9,7 +9,7 @@ mode:
     default: Run tests for all packages.
     cover: Run tests and report coverage for all packages.
     bench: Run benchmarks for all packages.
-    concurrency: Run tests for the "concurrency" package 10 times.
+    race: Run tests with race detection for the concurrency package.
 EOF
 }
 
@@ -29,8 +29,8 @@ case "$mode" in
         go test -cover ./... ;;
     "bench")
         go test -bench=. ./... ;;
-    "concurrency")
-        go test -count=10 io.huangsam/trial/pkg/concurrency ;;
+    "race")
+        go test -race -count=10 io.huangsam/trial/pkg/concurrency ;;
     *)
         echo "Invalid mode '$mode' detected" && exit 1 ;;
 esac
