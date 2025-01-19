@@ -8,6 +8,10 @@ mode="${1:-default}"
 if [[ "$mode" == "default" ]]; then
     go test ./...
 
+# Run tests and report coverage for all packages
+elif [[ "$mode" == "cover" ]]; then
+    go test -cover ./...
+
 # Run benchmarks for all packages
 elif [[ "$mode" == "bench" ]]; then
     go test -bench=. ./...
