@@ -71,6 +71,7 @@ Here is a checklist of things I want to cover:
 
 - [Organizing Go code](https://go.dev/blog/organizing-go-code): A blog post on how to organize Go code.
 - [Package names](https://go.dev/blog/package-names): A blog post on how to name Go packages effectively.
+- [4 Mocking Approaches for Go](https://www.twilio.com/en-us/blog/4-mocking-approaches-go): A blog post on mocking techniques in Go.
 
 [Python]: https://github.com/huangsam/ultimate-python
 [Java]: https://github.com/huangsam/java-trial
