@@ -3,6 +3,7 @@ package basicintro_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"io.huangsam/trial/pkg/basicintro"
 )
 
@@ -20,9 +21,7 @@ func TestFibonacci(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		actual := basicintro.Fibonacci(tc.input)
-		if actual != tc.expected {
-			t.Errorf("Fibonacci(%d) expected: %d, got: %d", tc.input, tc.expected, actual)
-		}
+		assert.Equal(t, tc.expected, actual)
 	}
 }
 

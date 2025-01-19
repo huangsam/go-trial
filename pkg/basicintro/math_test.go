@@ -4,6 +4,7 @@ import (
 	"math"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"io.huangsam/trial/pkg/basicintro"
 )
 
@@ -25,9 +26,7 @@ func TestAdd(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := basicintro.Add(tt.args.num1, tt.args.num2); got != tt.want {
-				t.Errorf("Add() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, basicintro.Add(tt.args.num1, tt.args.num2))
 		})
 	}
 }
@@ -49,9 +48,7 @@ func TestSubtract(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := basicintro.Subtract(tt.args.num1, tt.args.num2); got != tt.want {
-				t.Errorf("Subtract() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, basicintro.Subtract(tt.args.num1, tt.args.num2))
 		})
 	}
 }
@@ -73,9 +70,7 @@ func TestMultiply(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := basicintro.Multiply(tt.args.num1, tt.args.num2); got != tt.want {
-				t.Errorf("Multiply() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, basicintro.Multiply(tt.args.num1, tt.args.num2))
 		})
 	}
 }
@@ -98,9 +93,7 @@ func TestDivide(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := basicintro.Divide(tt.args.num1, tt.args.num2); got != tt.want {
-				t.Errorf("Divide() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, basicintro.Divide(tt.args.num1, tt.args.num2))
 		})
 	}
 }

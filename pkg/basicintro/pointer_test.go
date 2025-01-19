@@ -3,15 +3,14 @@ package basicintro_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"io.huangsam/trial/pkg/basicintro"
 )
 
 func TestPointerSetOne(t *testing.T) {
 	var n int
 	basicintro.PointerSetOne(&n)
-	if n != 1 {
-		t.Errorf("Expected n to be 1, but got %d", n)
-	}
+	assert.Equal(t, 1, n)
 }
 
 func BenchmarkPointerSetOne(b *testing.B) {

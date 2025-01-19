@@ -3,15 +3,14 @@ package basicintro_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"io.huangsam/trial/pkg/basicintro"
 )
 
 func TestWorld(t *testing.T) {
 	expected := "Hello World"
 	actual := basicintro.GreetWorld()
-	if actual != expected {
-		t.Errorf("World() = %v, want %v", actual, expected)
-	}
+	assert.Equal(t, expected, actual)
 }
 
 func TestName(t *testing.T) {
@@ -25,10 +24,7 @@ func TestName(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		actual := basicintro.GreetName(tc.input)
-
-		if actual != tc.expected {
-			t.Errorf("Name(%q) = %q, want %q", tc.input, actual, tc.expected)
-		}
+		assert.Equal(t, tc.expected, actual)
 	}
 }
 
