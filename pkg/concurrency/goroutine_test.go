@@ -1,12 +1,14 @@
-package concurrency
+package concurrency_test
 
 import (
 	"testing"
+
+	"io.huangsam/trial/pkg/concurrency"
 )
 
 func TestGetMultiAnswers(t *testing.T) {
 	// Get the results from the function
-	results := GetMultiAnswers()
+	results := concurrency.GetMultiAnswers()
 
 	// Compare the results with the expected values
 	if results[0] != 0 {
