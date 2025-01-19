@@ -1,10 +1,11 @@
 # Go Trial
 
-There's no better time to master Golang than now! 🔥
+Curated learning designed for Software Engineers proficient in [Python]/[Java]/[C++]
+who need to quickly ramp up their Go skills for work.
 
 > The best time to start was yesterday. The second best time is now.
 
-Previous trials include: [Python], [Java], [C++]
+There's no better time to master Golang than now! 🔥
 
 ## Getting started
 
