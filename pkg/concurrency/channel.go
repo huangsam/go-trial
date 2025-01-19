@@ -11,6 +11,7 @@ func processTask(taskQueue <-chan int, resultChannel chan<- int) {
 		time.Sleep(10 * time.Millisecond)
 		resultChannel <- task * 2
 	}
+	close(resultChannel) // Close resultChannel after processing all tasks
 }
 
 // distributeTasks distributes work requests to the taskQueue and collects results from the resultChannel.
@@ -18,7 +19,7 @@ func distributeTasks(m *[100]int, from int, to int, taskQueue chan<- int, result
 	for i := from; i < to; i++ {
 		taskQueue <- i
 	}
-	close(taskQueue)
+	close(taskQueue) // Close taskQueue after sending all tasks
 
 	for i := from; i < to; i++ {
 		(*m)[i] = <-resultChannel
