@@ -7,6 +7,40 @@ import (
 	"io.huangsam/trial/pkg/abstraction"
 )
 
+func TestShapeSizeString(t *testing.T) {
+	tests := []struct {
+		name string
+		size abstraction.ShapeSize
+		want string
+	}{
+		{
+			name: "Small string",
+			size: abstraction.SizeSmall,
+			want: "Small",
+		},
+		{
+			name: "Medium string",
+			size: abstraction.SizeMedium,
+			want: "Medium",
+		},
+		{
+			name: "Large string",
+			size: abstraction.SizeLarge,
+			want: "Large",
+		},
+		{
+			name: "Unknown string",
+			size: abstraction.ShapeSize(999), // Invalid ShapeSize value
+			want: "Unknown",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equal(t, tt.want, tt.size.String())
+		})
+	}
+}
+
 func TestClassifyRectangle(t *testing.T) {
 	tests := []struct {
 		name  string
