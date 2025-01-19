@@ -4,7 +4,6 @@ set -eu
 # Default mode is "default"
 mode="${1:-default}"
 
-
 # Run tests for all packages
 if [[ "$mode" == "default" ]]; then
     go test ./...
