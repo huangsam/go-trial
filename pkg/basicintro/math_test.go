@@ -104,27 +104,3 @@ func TestDivide(t *testing.T) {
 		})
 	}
 }
-
-func BenchmarkAdd(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		basicintro.Add(1, 2)
-	}
-}
-
-func BenchmarkSubtract(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		basicintro.Subtract(10, 5)
-	}
-}
-
-func BenchmarkMultiply(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		basicintro.Multiply(10, 5)
-	}
-}
-
-func BenchmarkDivide(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		basicintro.Divide(10, 2) // Avoid division by zero in benchmark
-	}
-}
