@@ -11,7 +11,6 @@ func processTask(taskQueue <-chan int, resultChannel chan<- int) {
 		time.Sleep(10 * time.Millisecond)
 		resultChannel <- task * 2
 	}
-	close(resultChannel) // Close resultChannel after processing all tasks
 }
 
 // distributeTasks distributes work requests to the taskQueue and collects results from the resultChannel.
@@ -19,8 +18,6 @@ func distributeTasks(m *[100]int, from int, to int, taskQueue chan<- int, result
 	for i := from; i < to; i++ {
 		taskQueue <- i
 	}
-	close(taskQueue) // Close taskQueue after sending all tasks
-
 	for i := from; i < to; i++ {
 		(*m)[i] = <-resultChannel
 	}
@@ -34,8 +31,8 @@ func GetAnswersWithChannels() [100]int {
 	var wg sync.WaitGroup
 	var answers [100]int
 	for i := 0; i < 10; i++ {
-		taskQueue := make(chan int, 10)
-		resultChannel := make(chan int, 10) // Create a result channel for each set of tasks
+		taskQueue := make(chan int, 10)     // Buffered channel for tasks
+		resultChannel := make(chan int, 10) // Buffered channel for results
 		wg.Add(1)
 		go processTask(taskQueue, resultChannel)
 		go func(i int) {
