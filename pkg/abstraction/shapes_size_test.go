@@ -3,6 +3,7 @@ package abstraction_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"io.huangsam/trial/pkg/abstraction"
 )
 
@@ -30,9 +31,8 @@ func TestClassifyRectangle(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := abstraction.Classify(tt.shape); got != tt.want {
-				t.Errorf("Classify() = %v, want %v", got, tt.want)
-			}
+			got := abstraction.Classify(tt.shape)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
@@ -61,9 +61,8 @@ func TestClassifyCircle(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := abstraction.Classify(tt.shape); got != tt.want {
-				t.Errorf("Classify() = %v, want %v", got, tt.want)
-			}
+			got := abstraction.Classify(tt.shape)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
