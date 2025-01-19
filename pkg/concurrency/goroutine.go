@@ -15,11 +15,11 @@ func update(m *[100]int, from int, to int, mu *sync.Mutex) {
 	}
 }
 
-// GetMultiAnswers concurrently updates portions of a 100-element integer array
+// GetAnswersWithWaitGroup concurrently updates portions of a 100-element integer array
 // using a combination of goroutines and sequential calls to the update function.
 // It utilizes a WaitGroup to ensure all concurrent operations complete before returning
-// the updated array.
-func GetMultiAnswers() [100]int {
+// the updated array. The function uses a mutex to protect concurrent access to the shared array.
+func GetAnswersWithWaitGroup() [100]int {
 	var wg sync.WaitGroup
 	var answers [100]int
 	var mu sync.Mutex

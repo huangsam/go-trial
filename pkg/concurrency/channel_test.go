@@ -6,9 +6,9 @@ import (
 	"io.huangsam/trial/pkg/concurrency"
 )
 
-func TestGetAnswersWithWaitGroup(t *testing.T) {
+func TestGetAnswersWithChannels(t *testing.T) {
 	// Get the results from the function
-	results := concurrency.GetAnswersWithWaitGroup()
+	results := concurrency.GetAnswersWithChannels()
 
 	// Compare the results with the expected values
 	if results[0] != 0 {
