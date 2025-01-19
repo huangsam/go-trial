@@ -1,27 +1,36 @@
 #!/bin/bash
 set -eu
 
-# Default mode is "default"
+display_help() {
+    cat <<'EOF'
+Usage: [mode]
+
+mode:
+    default: Run tests for all packages.
+    cover: Run tests and report coverage for all packages.
+    bench: Run benchmarks for all packages.
+    concurrency: Run tests for the "concurrency" package 10 times.
+EOF
+}
+
+help="${1:-none}"
+
+if [[ "$help" == "-h" || "$help" == "--help" ]]; then
+    display_help
+    exit 0
+fi
+
 mode="${1:-default}"
 
-# Run tests for all packages
-if [[ "$mode" == "default" ]]; then
-    go test ./...
-
-# Run tests and report coverage for all packages
-elif [[ "$mode" == "cover" ]]; then
-    go test -cover ./...
-
-# Run benchmarks for all packages
-elif [[ "$mode" == "bench" ]]; then
-    go test -bench=. ./...
-
-# Run tests for the "concurrency" package 10 times
-elif [[ "$mode" == "concurrency" ]]; then
-    go test -count=10 io.huangsam/trial/pkg/concurrency
-
-# Exit abruptly
-else
-    echo "Invalid mode '$mode' detected"
-    exit 1
-fi
+case "$mode" in
+    "default")
+        go test ./... ;;
+    "cover")
+        go test -cover ./... ;;
+    "bench")
+        go test -bench=. ./... ;;
+    "concurrency")
+        go test -count=10 io.huangsam/trial/pkg/concurrency ;;
+    *)
+        echo "Invalid mode '$mode' detected" && exit 1 ;;
+esac
