@@ -21,7 +21,17 @@ Here are the commands you need to know:
 
 ### Documentation
 
-To see the documentation over a local web server:
+To see the documentation via CLI:
+
+```shell
+# Show docs for package
+go doc io.huangsam/trial/pkg/basicintro
+
+# Show docs for package entity
+go doc io.huangsam/trial/pkg/basicintro.Person
+```
+
+To see the documentation via web server:
 
 ```shell
 # Install godoc
@@ -30,6 +40,8 @@ go install golang.org/x/tools/cmd/godoc@latest
 # Run godoc server
 godoc -http :8080
 ```
+
+Then open up a browser on <http://localhost:8080>.
 
 ## Goals
 
