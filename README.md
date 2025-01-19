@@ -2,6 +2,8 @@
 
 There's no better time to master Golang than now! 🔥
 
+> The best time to start was yesterday. The second best time is now.
+
 Previous trials include: [Python], [Java], [C++]
 
 ## Getting started
