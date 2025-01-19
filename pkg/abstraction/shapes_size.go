@@ -12,6 +12,20 @@ const (
 	SizeLarge
 )
 
+// ShapeSize implements the Stringer interface for ShapeSize.
+func (s ShapeSize) String() string {
+	switch s {
+	case SizeSmall:
+		return "Small"
+	case SizeMedium:
+		return "Medium"
+	case SizeLarge:
+		return "Large"
+	default:
+		return "Unknown"
+	}
+}
+
 // Classify determines the size category of a shape based on its area.
 //
 // This function takes a shape that implements the Shape interface and
