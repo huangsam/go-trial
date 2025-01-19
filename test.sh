@@ -4,15 +4,21 @@ set -eu
 # Default mode is "default"
 mode="${1:-default}"
 
+
+# Run tests for all packages
+if [[ "$mode" == "default" ]]; then
+    go test ./...
+
 # Run benchmarks for all packages
-if [[ "$mode" == "bench" ]]; then
+elif [[ "$mode" == "bench" ]]; then
     go test -bench=. ./...
 
 # Run tests for the "concurrency" package 10 times
 elif [[ "$mode" == "concurrency" ]]; then
     go test -count=10 io.huangsam/trial/pkg/concurrency
 
-# Run tests for all packages
+# Exit abruptly
 else
-    go test ./...
+    echo "Invalid mode '$mode' detected"
+    exit 1
 fi
