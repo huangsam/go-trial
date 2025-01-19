@@ -6,10 +6,12 @@ import (
 )
 
 // update updates a portion of the given integer array concurrently.
-func update(m *[100]int, from int, to int) {
+func update(m *[100]int, from int, to int, mu *sync.Mutex) {
 	for i := from; i < to; i++ {
 		time.Sleep(10 * time.Millisecond)
+		mu.Lock()
 		(*m)[i] = i * 2
+		mu.Unlock()
 	}
 }
 
@@ -20,15 +22,16 @@ func update(m *[100]int, from int, to int) {
 func GetMultiAnswers() [100]int {
 	var wg sync.WaitGroup
 	var answers [100]int
+	var mu sync.Mutex
 	for i := 0; i < 10; i++ {
 		if i%2 == 0 {
 			wg.Add(1)
-			go func(i int) {
-				update(&answers, i*10, (i+1)*10)
+			go func(i int, mu *sync.Mutex) {
+				update(&answers, i*10, (i+1)*10, mu)
 				wg.Done() // Signal that the goroutine has finished
-			}(i)
+			}(i, &mu)
 		} else {
-			update(&answers, i*10, (i+1)*10)
+			update(&answers, i*10, (i+1)*10, &mu)
 		}
 	}
 	wg.Wait() // Wait for all goroutines to finish
