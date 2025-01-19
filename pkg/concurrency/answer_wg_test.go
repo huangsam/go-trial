@@ -18,3 +18,9 @@ func TestGetAnswersWithWaitGroup(t *testing.T) {
 		t.Errorf("Expected 198 at index 0 but got %d", results[99])
 	}
 }
+
+func BenchmarkGetAnswersWithWaitGroup(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = concurrency.GetAnswersWithWaitGroup()
+	}
+}
