@@ -8,7 +8,7 @@ import (
 )
 
 func TestSliceValuesArePositive(t *testing.T) {
-	data := datastructure.SamplePositiveSlice
+	data := datastructure.PositiveSlice
 	for i := 0; i < len(data); i++ {
 		assert.LessOrEqual(t, 0, data[i])
 	}

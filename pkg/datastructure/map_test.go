@@ -8,7 +8,7 @@ import (
 )
 
 func TestMapCanAccessValues(t *testing.T) {
-	data := datastructure.SampleFruitNumberMap
+	data := datastructure.FruitNumberMap
 	assert.Equal(t, 1, data["apple"], "Expected apple value to be 1")
 	assert.Equal(t, 2, data["banana"], "Expected banana value to be 2")
 	assert.Equal(t, 3, data["cherry"], "Expected cherry value to be 3")
