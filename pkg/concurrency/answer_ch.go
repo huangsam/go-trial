@@ -16,12 +16,12 @@ func processTask(taskQueue <-chan int, resultChannel chan<- int) {
 
 // distributeTasks distributes work requests to the taskQueue and collects results
 // from the resultChannel.
-func distributeTasks(m *[100]int, from int, to int, taskQueue chan<- int, resultChannel <-chan int) {
+func distributeTasks(ans *[100]int, from int, to int, taskQueue chan<- int, resultChannel <-chan int) {
 	for i := from; i < to; i++ {
 		taskQueue <- i
 	}
 	for i := from; i < to; i++ {
-		(*m)[i] = <-resultChannel
+		(*ans)[i] = <-resultChannel
 	}
 }
 
