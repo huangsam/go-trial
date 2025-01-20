@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// processTask receives work requests on the 'taskQueue' channel and sends results
-// on the 'resultChannel' channel.
+// processTask receives work requests from the taskQueue and sends results
+// to the resultChannel.
 func processTask(taskQueue <-chan int, resultChannel chan<- int) {
 	for task := range taskQueue {
 		time.Sleep(10 * time.Millisecond)
