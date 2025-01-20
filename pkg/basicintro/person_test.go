@@ -11,15 +11,9 @@ func TestGetInfo(t *testing.T) {
 	var expectedName string = "John"
 	var expectedAge int = 12
 	person := basicintro.Person{expectedName, expectedAge}
-
-	actualName := person.Name
-	assert.Equal(t, expectedName, actualName)
-
-	actualAge := person.Age
-	assert.Equal(t, expectedAge, actualAge)
-
-	isOlderThanSeventeen := person.IsOlderThan(17)
-	assert.False(t, isOlderThanSeventeen)
+	assert.Equal(t, expectedName, person.Name)
+	assert.Equal(t, expectedAge, person.Age)
+	assert.False(t, person.IsOlderThan(17))
 }
 
 func BenchmarkIsOlderThan(b *testing.B) {
