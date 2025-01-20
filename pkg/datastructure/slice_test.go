@@ -2,13 +2,15 @@ package datastructure_test
 
 import (
 	"testing"
+
+	"io.huangsam/trial/pkg/datastructure"
 )
 
 func TestSliceValuesArePositive(t *testing.T) {
-	positiveSlice := []int32{1, 2, 3, 4}
-	for i := 0; i < len(positiveSlice); i++ {
-		if positiveSlice[i] <= 0 {
-			t.Errorf("Found non-positive integer %d", positiveSlice[i])
+	data := datastructure.SamplePositiveSlice
+	for i := 0; i < len(data); i++ {
+		if data[i] <= 0 {
+			t.Errorf("Found non-positive integer %d", data[i])
 		}
 	}
 }
