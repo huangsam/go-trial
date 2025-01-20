@@ -59,7 +59,6 @@ Here is a checklist of things I want to cover:
 - [avelino/awesome-go](https://github.com/avelino/awesome-go): A curated list of awesome Go frameworks, libraries, and software.
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout): Standard Go project layout.
 - [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner for Go.
-- [uber-go/mock](https://github.com/uber-go/mock): A mocking framework for Go.
 - [vektra/mockery](https://github.com/vektra/mockery): A mock code autogenerator for Golang.
 
 ### Online tutorials
