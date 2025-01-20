@@ -1,0 +1,13 @@
+with-expecter: true
+
+# Fix warnings from mockery CLI
+resolve-type-alias: false
+issue-845-fix: true
+
+packages:
+  github.com/huangsam/go-trial/pkg/abstraction:
+    config:
+      dir: "mocks/mocks_{{.PackageName}}"
+      outpkg: "mocks_{{.PackageName}}"
+    interfaces:
+      UserRepository:

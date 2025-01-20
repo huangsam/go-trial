@@ -24,11 +24,11 @@ mode="${1:-default}"
 
 case "$mode" in
     "default")
-        go test ./... ;;
+        go test github.com/huangsam/go-trial/pkg/... ;;
     "cover")
-        go test -cover ./... ;;
+        go test -cover github.com/huangsam/go-trial/pkg/... ;;
     "bench")
-        go test -bench=. ./... ;;
+        go test -bench=. github.com/huangsam/go-trial/pkg/... ;;
     "race")
         go test -race -count=10 github.com/huangsam/go-trial/pkg/concurrency ;;
     *)
