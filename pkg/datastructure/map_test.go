@@ -3,21 +3,15 @@ package datastructure_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"io.huangsam/trial/pkg/datastructure"
 )
 
 func TestMapCanAccessValues(t *testing.T) {
 	data := datastructure.SampleFruitNumberMap
-	if data["apple"] != 1 {
-		t.Errorf("Expected apple value to be 1, got %d", data["apple"])
-	}
-	if data["banana"] != 2 {
-		t.Errorf("Expected banana value to be 2, got %d", data["banana"])
-	}
-	if data["cherry"] != 3 {
-		t.Errorf("Expected cherry value to be 3, got %d", data["cherry"])
-	}
-	if _, ok := data["bogus"]; ok {
-		t.Error("Expected bogus to be missing")
-	}
+	assert.Equal(t, 1, data["apple"], "Expected apple value to be 1")
+	assert.Equal(t, 2, data["banana"], "Expected banana value to be 2")
+	assert.Equal(t, 3, data["cherry"], "Expected cherry value to be 3")
+	_, ok := data["bogus"]
+	assert.False(t, ok, "Expected bogus to be missing")
 }

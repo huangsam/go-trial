@@ -3,14 +3,13 @@ package datastructure_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"io.huangsam/trial/pkg/datastructure"
 )
 
 func TestSliceValuesArePositive(t *testing.T) {
 	data := datastructure.SamplePositiveSlice
 	for i := 0; i < len(data); i++ {
-		if data[i] <= 0 {
-			t.Errorf("Found non-positive integer %d", data[i])
-		}
+		assert.LessOrEqual(t, 0, data[i])
 	}
 }
