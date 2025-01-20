@@ -24,15 +24,11 @@ func GetAnswersWithWaitGroup() [100]int {
 	var answers [100]int
 	var mu sync.Mutex
 	for i := 0; i < 10; i++ {
-		if i%2 == 0 {
-			wg.Add(1)
-			go func(i int, mu *sync.Mutex) {
-				update(&answers, i*10, (i+1)*10, mu)
-				wg.Done() // Signal that the goroutine has finished
-			}(i, &mu)
-		} else {
-			update(&answers, i*10, (i+1)*10, &mu)
-		}
+		wg.Add(1)
+		go func(i int, mu *sync.Mutex) {
+			update(&answers, i*10, (i+1)*10, mu)
+			wg.Done() // Signal that the goroutine has finished
+		}(i, &mu)
 	}
 	wg.Wait() // Wait for all goroutines to finish
 	return answers
