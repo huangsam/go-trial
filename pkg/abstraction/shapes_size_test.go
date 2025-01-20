@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestShapeSizeString(t *testing.T) {
+func TestShapeSize_String(t *testing.T) {
 	tests := []struct {
 		name string
 		size abstraction.ShapeSize

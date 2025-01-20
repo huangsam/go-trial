@@ -7,16 +7,35 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetInfo(t *testing.T) {
+func TestPersonFields(t *testing.T) {
 	var expectedName string = "John"
 	var expectedAge int = 12
 	person := basicintro.Person{expectedName, expectedAge}
 	assert.Equal(t, expectedName, person.Name)
 	assert.Equal(t, expectedAge, person.Age)
-	assert.False(t, person.IsOlderThan(17))
 }
 
-func BenchmarkIsOlderThan(b *testing.B) {
+func TestPerson_IsOlderThan(t *testing.T) {
+	tests := []struct {
+		name     string
+		age      int
+		compare  int
+		expected bool
+	}{
+		{"Less", 17, 18, false},
+		{"Equal", 18, 18, false},
+		{"Greater", 19, 18, true},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			person := basicintro.Person{"Jerry", tt.age}
+			assert.Equal(t, tt.expected, person.IsOlderThan(tt.compare))
+		})
+	}
+}
+
+func BenchmarkPerson_IsOlderThan(b *testing.B) {
 	person := basicintro.Person{"Jerry", 0}
 	for i := 0; i < b.N; i++ {
 		person.IsOlderThan(18)
