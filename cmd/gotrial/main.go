@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/huangsam/go-trial/pkg/abstraction"
+	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/rs/zerolog/log"
-	"io.huangsam/trial/pkg/abstraction"
-	"io.huangsam/trial/pkg/basicintro"
 )
 
 // main is the entry point of the application.

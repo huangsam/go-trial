@@ -3,8 +3,8 @@ package basicintro_test
 import (
 	"testing"
 
+	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/stretchr/testify/assert"
-	"io.huangsam/trial/pkg/basicintro"
 )
 
 func TestWorld(t *testing.T) {

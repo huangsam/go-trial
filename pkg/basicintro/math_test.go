@@ -4,8 +4,8 @@ import (
 	"math"
 	"testing"
 
+	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/stretchr/testify/assert"
-	"io.huangsam/trial/pkg/basicintro"
 )
 
 func TestAdd(t *testing.T) {

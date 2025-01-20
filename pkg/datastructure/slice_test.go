@@ -3,8 +3,8 @@ package datastructure_test
 import (
 	"testing"
 
+	"github.com/huangsam/go-trial/pkg/datastructure"
 	"github.com/stretchr/testify/assert"
-	"io.huangsam/trial/pkg/datastructure"
 )
 
 func TestSliceValuesArePositive(t *testing.T) {

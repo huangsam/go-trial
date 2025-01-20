@@ -4,8 +4,8 @@ import (
 	"math"
 	"testing"
 
+	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/stretchr/testify/assert"
-	"io.huangsam/trial/pkg/abstraction"
 )
 
 func TestRectangleArea(t *testing.T) {

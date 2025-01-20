@@ -2,4 +2,4 @@
 set -eu
 
 # Build the "gotrial" command
-go build io.huangsam/trial/cmd/gotrial
+go build github.com/huangsam/go-trial/cmd/gotrial

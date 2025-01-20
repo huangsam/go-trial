@@ -25,10 +25,10 @@ To see the documentation via CLI:
 
 ```shell
 # Show docs for package
-go doc io.huangsam/trial/pkg/basicintro
+go doc github.com/huangsam/go-trial/pkg/basicintro
 
 # Show docs for package entity
-go doc io.huangsam/trial/pkg/basicintro.Person
+go doc github.com/huangsam/go-trial/pkg/basicintro.Person
 ```
 
 To see the documentation via web server:

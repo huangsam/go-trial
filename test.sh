@@ -30,7 +30,7 @@ case "$mode" in
     "bench")
         go test -bench=. ./... ;;
     "race")
-        go test -race -count=10 io.huangsam/trial/pkg/concurrency ;;
+        go test -race -count=10 github.com/huangsam/go-trial/pkg/concurrency ;;
     *)
         echo "Invalid mode '$mode' detected" && exit 1 ;;
 esac

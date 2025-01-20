@@ -3,8 +3,8 @@ package concurrency_test
 import (
 	"testing"
 
+	"github.com/huangsam/go-trial/pkg/concurrency"
 	"github.com/stretchr/testify/assert"
-	"io.huangsam/trial/pkg/concurrency"
 )
 
 func TestGetAnswersWithChannels(t *testing.T) {

@@ -3,8 +3,8 @@ package abstraction_test
 import (
 	"testing"
 
+	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/stretchr/testify/assert"
-	"io.huangsam/trial/pkg/abstraction"
 )
 
 func TestShapeSizeString(t *testing.T) {

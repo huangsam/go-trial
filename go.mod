@@ -1,4 +1,4 @@
-module io.huangsam/trial
+module github.com/huangsam/go-trial
 
 go 1.23.4
 
