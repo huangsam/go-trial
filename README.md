@@ -1,5 +1,7 @@
 # Go Trial
 
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/huangsam/go-trial/ci.yml)](https://github.com/huangsam/go-trial/actions)
+
 Curated learning designed for Software Engineers proficient in [Python] / [Java] / [C++]
 and need to quickly ramp up their Go skills for work.
 
