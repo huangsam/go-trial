@@ -1,17 +1,15 @@
 # https://vektra.github.io/mockery/v2.51/configuration/
 
-# Generate EXPECT() methods for the mocks
+# Settings to avoid deprecation warnings
 with-expecter: true
-
-# Set the output directory for the mocks
-dir: "mocks/mocks_{{.PackageName}}"
-
-# Set the package name for the mocks
-outpkg: "mocks_{{.PackageName}}"
-
-# Fix warnings from mockery CLI
 resolve-type-alias: false
 issue-845-fix: true
+
+# Set output directory for the mocks
+dir: "mocks/mocks_{{.PackageName}}"
+
+# Set package name for the mocks
+outpkg: "mocks_{{.PackageName}}"
 
 packages:
   # Generate mocks for interface(s) in the abstraction package
