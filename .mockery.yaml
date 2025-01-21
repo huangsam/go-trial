@@ -6,8 +6,7 @@ resolve-type-alias: false
 issue-845-fix: true
 
 # Settings for mock layout
-dir: "mocks/mocks_{{.PackageName}}"
-outpkg: "mocks_{{.PackageName}}"
+outpkg: "{{.PackageName}}_mock"
 
 packages:
   # Generate mocks for interface(s) in the abstraction package

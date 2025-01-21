@@ -3,13 +3,13 @@ package abstraction_test
 import (
 	"testing"
 
-	"github.com/huangsam/go-trial/mocks/mocks_abstraction"
+	abstraction_mock "github.com/huangsam/go-trial/mocks/github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGetUserByID(t *testing.T) {
-	mockRepo := new(mocks_abstraction.MockUserRepository)
+	mockRepo := new(abstraction_mock.MockUserRepository)
 	user := &abstraction.User{ID: 1, Name: "John Doe", Email: "john.doe@example.com"}
 
 	mockRepo.On("GetUserByID", 1).Return(user, nil)
@@ -22,7 +22,7 @@ func TestGetUserByID(t *testing.T) {
 }
 
 func TestCreateUser(t *testing.T) {
-	mockRepo := new(mocks_abstraction.MockUserRepository)
+	mockRepo := new(abstraction_mock.MockUserRepository)
 	user := &abstraction.User{ID: 2, Name: "Jane Doe", Email: "jane.doe@example.com"}
 
 	mockRepo.On("CreateUser", user).Return(nil)
