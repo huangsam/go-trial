@@ -34,10 +34,3 @@ func TestPerson_IsOlderThan(t *testing.T) {
 		})
 	}
 }
-
-func BenchmarkPerson_IsOlderThan(b *testing.B) {
-	person := basicintro.Person{"Jerry", 0}
-	for i := 0; i < b.N; i++ {
-		person.IsOlderThan(18)
-	}
-}
