@@ -25,3 +25,9 @@ func TestMultiStagePipeline(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkMultiStagePipeline(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = concurrency.MultiStagePipeline(1, 1000)
+	}
+}
