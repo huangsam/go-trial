@@ -6,6 +6,7 @@ resolve-type-alias: false
 issue-845-fix: true
 
 # Settings for mock layout
+dir: "mocks/{{.PackageName}}"
 outpkg: "{{.PackageName}}_mock"
 
 packages:
