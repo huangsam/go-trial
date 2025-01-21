@@ -65,9 +65,8 @@ func merge(cs []<-chan int) <-chan int {
 	return out
 }
 
-// MultiStagePipeline creates a multi-stage pipeline that generates a range of integers,
-// squares each integer, and then doubles the result. The function returns the sum of
-// all the doubled squared integers.
+// MultiStagePipelineSimple creates a multi-stage pipeline that generates a range of integers,
+// squares them, and then doubles them. It then sums the output.
 func MultiStagePipelineSimple(from int, to int) int {
 	sum := 0
 	for n := range double(square(generate(from, to))) {
@@ -76,9 +75,7 @@ func MultiStagePipelineSimple(from int, to int) int {
 	return sum
 }
 
-// MultiStagePipeline creates a multi-stage pipeline that generates a range of integers,
-// squares each integer, and then doubles the result. The function returns the sum of
-// all the doubled squared integers.
+// MultiStagePipelineMerge extends the simple pipeline with a merge function.
 func MultiStagePipelineMerge(from int, to int) int {
 	sum := 0
 
