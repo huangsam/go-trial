@@ -5,10 +5,8 @@ with-expecter: true
 resolve-type-alias: false
 issue-845-fix: true
 
-# Set output directory for the mocks
+# Settings for mock layout
 dir: "mocks/mocks_{{.PackageName}}"
-
-# Set package name for the mocks
 outpkg: "mocks_{{.PackageName}}"
 
 packages:
