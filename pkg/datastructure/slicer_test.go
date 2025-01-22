@@ -12,9 +12,7 @@ func TestPositiveSliceContains(t *testing.T) {
 	assert.NotNil(t, keys)
 }
 
-func TestSliceValuesArePositive(t *testing.T) {
-	data := datastructure.PositiveSlice
-	for i := 0; i < len(data); i++ {
-		assert.LessOrEqual(t, 0, data[i])
-	}
+func TestPositiveSliceIsPositive(t *testing.T) {
+	flag := datastructure.PositiveSliceIsPositive()
+	assert.True(t, flag)
 }
