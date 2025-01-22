@@ -21,11 +21,11 @@ func TestFibonacci(t *testing.T) {
 		{"Ten", 10, 89},
 	}
 	for _, tc := range testCases {
-		t.Run("Iterative "+tc.name, func(t *testing.T) {
+		t.Run(tc.name+"-Iterative", func(t *testing.T) {
 			actual := basicintro.FibonacciIterative(tc.input)
 			assert.Equal(t, tc.expected, actual)
 		})
-		t.Run("Recursive "+tc.name, func(t *testing.T) {
+		t.Run(tc.name+"-Recursive", func(t *testing.T) {
 			actual := basicintro.FibonacciRecursive(tc.input)
 			assert.Equal(t, tc.expected, actual)
 		})
