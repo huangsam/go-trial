@@ -9,6 +9,8 @@ and need to quickly ramp up their Go skills for work.
 
 There's no better time to master Golang than now! 🔥
 
+<img src="images/gopher.jpeg" alt="Gopher" width="250px" style="border-radius: 25%;" />
+
 ## Getting started
 
 Here are the commands you need to know:
@@ -45,7 +47,7 @@ godoc -http :8080
 
 Then open up a browser on <http://localhost:8080>.
 
-![Go documentation](images/godoc-browser.png)
+<img src="images/godoc-server.png" alt="Godoc server" width="500px" />
 
 ## Goals
 
