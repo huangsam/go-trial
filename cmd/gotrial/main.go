@@ -1,25 +1,25 @@
 package main
 
 import (
+	"fmt"
+	"log/slog"
+	"os"
+
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/huangsam/go-trial/pkg/concurrency"
-	"github.com/rs/zerolog/log"
 )
 
 // main is the entry point of the application.
 func main() {
-	log.Info().Msg(basicintro.GreetWorld())
-	log.Info().Msg(basicintro.GreetName("Peter"))
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	logger.Info(basicintro.GreetWorld())
+	logger.Info(basicintro.GreetName("Peter"))
 
 	circle := abstraction.Circle{Radius: 6}
-	logCircleSize(circle)
-
-	concurrency.GetAnswersWithChannels()
-}
-
-// logCircleSize logs the size of the given circle.
-func logCircleSize(circle abstraction.Circle) {
 	size := abstraction.Classify(circle)
-	log.Info().Msgf("Circle size is %v", size)
+	logger.Info(fmt.Sprintf("Circle size is %v", size))
+
+	answers := concurrency.GetAnswersWithChannels()
+	logger.Info("Retrieved answers with channels", "answers", answers)
 }
