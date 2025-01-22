@@ -7,8 +7,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestReadLines(t *testing.T) {
+func TestReadLinesSuccess(t *testing.T) {
 	lines, err := realworld.ReadLines("testdata/test.txt")
 	assert.Nil(t, err)
 	assert.Equal(t, []string{"Hello, world!", "This is a test file."}, lines)
+}
+
+func TestReadLinesFailure(t *testing.T) {
+	lines, err := realworld.ReadLines("testdata/nonexistent.txt")
+	assert.NotNil(t, err)
+	assert.Nil(t, lines)
 }
