@@ -7,6 +7,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestPositiveSliceContains(t *testing.T) {
+	keys := datastructure.PositiveSliceContains(3)
+	assert.NotNil(t, keys)
+}
+
 func TestSliceValuesArePositive(t *testing.T) {
 	data := datastructure.PositiveSlice
 	for i := 0; i < len(data); i++ {

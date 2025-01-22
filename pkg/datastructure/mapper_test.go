@@ -1,11 +1,18 @@
 package datastructure_test
 
 import (
+	"slices"
 	"testing"
 
 	"github.com/huangsam/go-trial/pkg/datastructure"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestGetFruitNames(t *testing.T) {
+	expected := []string{"apple", "banana", "cherry"}
+	names := slices.Collect(datastructure.GetFruitNames())
+	assert.ElementsMatch(t, expected, names, "Expected fruit names to match")
+}
 
 func TestMapCanAccessValues(t *testing.T) {
 	data := datastructure.FruitNumberMap
