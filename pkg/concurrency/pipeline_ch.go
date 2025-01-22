@@ -1,18 +1,10 @@
 package concurrency
 
-import "sync"
+import (
+	"sync"
 
-// generate creates a channel of integers from a range.
-func generate(from int, to int) <-chan int {
-	out := make(chan int)
-	go func() {
-		for n := from; n <= to; n++ {
-			out <- n
-		}
-		close(out)
-	}()
-	return out
-}
+	"github.com/huangsam/go-trial/internal/utils"
+)
 
 // square squares the input.
 func square(in <-chan int) <-chan int {
@@ -69,7 +61,7 @@ func merge(cs []<-chan int) <-chan int {
 // squares them, and then doubles them. It then sums the output.
 func MultiStagePipelineSimple(from int, to int) int {
 	sum := 0
-	for n := range double(square(generate(from, to))) {
+	for n := range double(square(utils.Range(from, to))) {
 		sum += n
 	}
 	return sum
@@ -79,7 +71,7 @@ func MultiStagePipelineSimple(from int, to int) int {
 func MultiStagePipelineMerge(from int, to int) int {
 	sum := 0
 
-	in := generate(from, to)
+	in := utils.Range(from, to)
 	squareOut := merge([]<-chan int{square(in), square(in)})
 	doubleOut := merge([]<-chan int{double(squareOut), double(squareOut)})
 

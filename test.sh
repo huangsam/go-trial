@@ -23,15 +23,20 @@ fi
 
 mode="${1:-default}"
 
+selector=(
+    "github.com/huangsam/go-trial/pkg/..."
+    "github.com/huangsam/go-trial/internal/..."
+)
+
 case "$mode" in
     "default")
-        go test github.com/huangsam/go-trial/pkg/... ;;
+        go test "${selector[@]}" ;;
     "bench")
-        go test -bench=. github.com/huangsam/go-trial/pkg/... ;;
+        go test -bench=. "${selector[@]}" ;;
     "cover")
-        go test -cover github.com/huangsam/go-trial/pkg/... ;;
+        go test -cover "${selector[@]}" ;;
     "force")
-        go test -count=1 github.com/huangsam/go-trial/pkg/... ;;
+        go test -count=1 "${selector[@]}" ;;
     "race")
         go test -race github.com/huangsam/go-trial/pkg/concurrency ;;
     *)
