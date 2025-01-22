@@ -9,7 +9,7 @@ and need to quickly ramp up their Go skills for work.
 
 There's no better time to master Golang than now! 🔥
 
-<img src="images/gopher.jpeg" alt="Gopher" width="250px" style="border-radius: 25%;" />
+<img src="images/gopher.jpeg" alt="Gopher" width="250px" />
 
 ## Getting started
 
