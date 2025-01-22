@@ -41,10 +41,10 @@ func TestShapeSize_String(t *testing.T) {
 	}
 }
 
-func TestClassifyRectangle(t *testing.T) {
+func TestClassify(t *testing.T) {
 	tests := []struct {
 		name  string
-		shape abstraction.Rectangle
+		shape abstraction.Shape
 		want  abstraction.ShapeSize
 	}{
 		{
@@ -62,21 +62,6 @@ func TestClassifyRectangle(t *testing.T) {
 			shape: abstraction.Rectangle{Width: 11, Height: 11},
 			want:  abstraction.SizeLarge,
 		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := abstraction.Classify(tt.shape)
-			assert.Equal(t, tt.want, got)
-		})
-	}
-}
-
-func TestClassifyCircle(t *testing.T) {
-	tests := []struct {
-		name  string
-		shape abstraction.Circle
-		want  abstraction.ShapeSize
-	}{
 		{
 			name:  "Small circle",
 			shape: abstraction.Circle{Radius: 1},
@@ -101,16 +86,17 @@ func TestClassifyCircle(t *testing.T) {
 	}
 }
 
-func BenchmarkClassifyRectangle(b *testing.B) {
-	rect := abstraction.Rectangle{Width: 5, Height: 5}
-	for i := 0; i < b.N; i++ {
-		abstraction.Classify(rect)
-	}
-}
-
-func BenchmarkClassifyCircle(b *testing.B) {
-	circle := abstraction.Circle{Radius: 5}
-	for i := 0; i < b.N; i++ {
-		abstraction.Classify(circle)
-	}
+func BenchmarkClassify(b *testing.B) {
+	b.Run("Rectangle", func(b *testing.B) {
+		rect := abstraction.Rectangle{Width: 5, Height: 5}
+		for i := 0; i < b.N; i++ {
+			abstraction.Classify(rect)
+		}
+	})
+	b.Run("Circle", func(b *testing.B) {
+		circle := abstraction.Circle{Radius: 5}
+		for i := 0; i < b.N; i++ {
+			abstraction.Classify(circle)
+		}
+	})
 }
