@@ -45,7 +45,7 @@ godoc -http :8080
 
 Then open up a browser on <http://localhost:8080>.
 
-<img src="images/godoc-browser.png" alt="Go documentation" width="500px">
+![Go documentation](images/godoc-browser.png)
 
 ## Goals
 
