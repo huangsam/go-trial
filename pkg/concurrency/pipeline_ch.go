@@ -54,6 +54,7 @@ func merge(cs []<-chan int) <-chan int {
 		wg.Wait()
 		close(out)
 	}()
+
 	return out
 }
 
@@ -72,8 +73,20 @@ func MultiStagePipelineMerge(from int, to int) int {
 	sum := 0
 
 	in := utils.Range(from, to)
-	squareOut := merge([]<-chan int{square(in), square(in)})
-	doubleOut := merge([]<-chan int{double(squareOut), double(squareOut)})
+
+	// Create an array of square channels
+	squareChans := make([]<-chan int, 4)
+	for i := range squareChans {
+		squareChans[i] = square(in)
+	}
+	squareOut := merge(squareChans)
+
+	// Create an array of double channels
+	doubleChans := make([]<-chan int, 2)
+	for i := range doubleChans {
+		doubleChans[i] = double(squareOut)
+	}
+	doubleOut := merge(doubleChans)
 
 	for n := range doubleOut {
 		sum += n
