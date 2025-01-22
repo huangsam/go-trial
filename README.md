@@ -73,6 +73,7 @@ Here is a checklist of things I want to cover:
 - [Organizing Go code](https://go.dev/blog/organizing-go-code): A blog post on how to organize Go code.
 - [Package names](https://go.dev/blog/package-names): A blog post on how to name Go packages effectively.
 - [Go Concurrency Patterns: Pipelines and cancellation](https://go.dev/blog/pipelines): A blog post on how to use pipelines in Go.
+- [Structured Logging with slog](https://go.dev/blog/slog): A blog post on structured logging in Go using the slog package.
 - [4 Mocking Approaches for Go](https://www.twilio.com/en-us/blog/4-mocking-approaches-go): A blog post on mocking techniques in Go.
 
 [Python]: https://github.com/huangsam/ultimate-python
