@@ -1,4 +1,4 @@
-// Package datastructure has tests for maps and slices.
+// Package datastructure has examples using maps and slices.
 package datastructure
 
 // FruitNumberMap is a map of fruit names to numbers.
