@@ -42,6 +42,7 @@ func GetAnswersWithChannels() [100]int {
 
 	// Worker function
 	update := func(start, end int) {
+		time.Sleep(10 * time.Millisecond)
 		for i := start; i < end; i++ {
 			answers[i] = i * 2
 		}
