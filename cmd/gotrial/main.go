@@ -12,15 +12,17 @@ import (
 
 // main is the entry point of the application.
 func main() {
-	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+	slog.SetDefault(logger)
 
-	slog.Info(basicintro.GreetWorld())
+	slog.Debug(basicintro.GreetWorld())
+
 	slog.Info(basicintro.GreetName("Peter"))
 
 	circle := abstraction.Circle{Radius: 6}
 	size := abstraction.Classify(circle)
-	slog.Info(fmt.Sprintf("Circle size is %v", size))
+	slog.Warn(fmt.Sprintf("Circle size is %v", size))
 
 	answers := concurrency.GetAnswersWithChannels()
-	slog.Info("Retrieved answers with channels", "answers", answers)
+	slog.Error("Retrieved answers with channels", "answers", answers)
 }
