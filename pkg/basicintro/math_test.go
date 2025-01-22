@@ -1,7 +1,7 @@
 package basicintro_test
 
 import (
-	"math"
+	"errors"
 	"testing"
 
 	"github.com/huangsam/go-trial/pkg/basicintro"
@@ -81,19 +81,26 @@ func TestDivide(t *testing.T) {
 		num2 int
 	}
 	tests := []struct {
-		name string
-		args args
-		want int
+		name    string
+		args    args
+		want    int
+		wantErr error
 	}{
-		{name: "Positive Numbers", args: args{num1: 10, num2: 2}, want: 5},
-		{name: "Negative Numbers", args: args{num1: -10, num2: -2}, want: 5},
-		{name: "Positive and Negative", args: args{num1: 10, num2: -2}, want: -5},
-		{name: "Zero Dividend", args: args{num1: 0, num2: 5}, want: 0},
-		{name: "Division by Zero", args: args{num1: 5, num2: 0}, want: math.MaxInt}, // Test division by zero
+		{name: "Positive Numbers", args: args{num1: 10, num2: 2}, want: 5, wantErr: nil},
+		{name: "Negative Numbers", args: args{num1: -10, num2: -2}, want: 5, wantErr: nil},
+		{name: "Positive and Negative", args: args{num1: 10, num2: -2}, want: -5, wantErr: nil},
+		{name: "Zero Dividend", args: args{num1: 0, num2: 5}, want: 0, wantErr: nil},
+		{name: "Division by Zero", args: args{num1: 5, num2: 0}, want: 0, wantErr: errors.New("division by zero")},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equal(t, tt.want, basicintro.Divide(tt.args.num1, tt.args.num2))
+			got, err := basicintro.Divide(tt.args.num1, tt.args.num2)
+			if tt.wantErr != nil {
+				assert.EqualError(t, err, tt.wantErr.Error())
+			} else {
+				assert.NoError(t, err)
+			}
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
