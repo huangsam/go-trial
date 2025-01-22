@@ -6,8 +6,10 @@ type ShapeSize int
 const (
 	// SizeSmall represents a small shape.
 	SizeSmall ShapeSize = iota
+
 	// SizeMedium represents a medium shape.
 	SizeMedium
+
 	// SizeLarge represents a large shape.
 	SizeLarge
 )

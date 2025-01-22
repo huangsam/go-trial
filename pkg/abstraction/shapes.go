@@ -8,6 +8,7 @@ import (
 type Shape interface {
 	// Area returns the area of the shape.
 	Area() float64
+
 	// Perimeter returns the perimeter of the shape.
 	Perimeter() float64
 }
