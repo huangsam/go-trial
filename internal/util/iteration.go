@@ -1,4 +1,4 @@
-package utils
+package util
 
 // Range creates a channel of integers from a range.
 func Range(from int, to int) <-chan int {

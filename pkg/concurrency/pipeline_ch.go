@@ -3,7 +3,7 @@ package concurrency
 import (
 	"sync"
 
-	"github.com/huangsam/go-trial/internal/utils"
+	util "github.com/huangsam/go-trial/internal/util"
 )
 
 // square squares the input.
@@ -62,7 +62,7 @@ func merge(cs []<-chan int) <-chan int {
 // squares them, and then doubles them. It then sums the output.
 func MultiStagePipelineSimple(from int, to int) int {
 	sum := 0
-	for n := range double(square(utils.Range(from, to))) {
+	for n := range double(square(util.Range(from, to))) {
 		sum += n
 	}
 	return sum
@@ -72,7 +72,7 @@ func MultiStagePipelineSimple(from int, to int) int {
 func MultiStagePipelineMerge(from int, to int) int {
 	sum := 0
 
-	in := utils.Range(from, to)
+	in := util.Range(from, to)
 
 	// Create an array of square channels
 	squareChans := make([]<-chan int, 4)
