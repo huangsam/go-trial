@@ -3,7 +3,7 @@ package abstraction_test
 import (
 	"testing"
 
-	abstraction_mock "github.com/huangsam/go-trial/mocks/abstraction"
+	abstraction_mock "github.com/huangsam/go-trial/mock/abstraction"
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/stretchr/testify/assert"
 )
