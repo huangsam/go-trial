@@ -23,8 +23,8 @@ func GetAnswersWithWaitGroup() [100]int {
 	var wg sync.WaitGroup
 	var answers [100]int
 	var mu sync.Mutex
-	for i := 0; i < 10; i++ {
-		wg.Add(1)
+	wg.Add(answersRoutineCount)
+	for i := 0; i < answersRoutineCount; i++ {
 		go func(i int, mu *sync.Mutex) {
 			update(&answers, i*10, (i+1)*10, mu)
 			wg.Done() // Signal that the goroutine has finished
@@ -38,7 +38,7 @@ func GetAnswersWithWaitGroup() [100]int {
 // It utilizes goroutines to update 10 elements each, and channels to signal completion.
 func GetAnswersWithChannels() [100]int {
 	var answers [100]int
-	ch := make(chan int, 10) // Channel to track completion
+	done := make(chan struct{}, answersRoutineCount) // Channel to track completion
 
 	// Worker function
 	update := func(start, end int) {
@@ -46,17 +46,17 @@ func GetAnswersWithChannels() [100]int {
 		for i := start; i < end; i++ {
 			answers[i] = i * 2
 		}
-		ch <- 0 // Signal completion
+		done <- struct{}{} // Signal completion
 	}
 
-	// Spawn 10 goroutines
-	for i := 0; i < 10; i++ {
+	// Spawn all goroutines
+	for i := 0; i < answersRoutineCount; i++ {
 		go update(i*10, (i+1)*10)
 	}
 
 	// Wait for all goroutines to complete
-	for i := 0; i < 10; i++ {
-		<-ch
+	for i := 0; i < answersRoutineCount; i++ {
+		<-done
 	}
 
 	return answers
