@@ -1,8 +1,6 @@
 package concurrency
 
-import (
-	util "github.com/huangsam/go-trial/internal/util"
-)
+import "github.com/huangsam/go-trial/internal/util"
 
 // square squares the input.
 func square(in <-chan int) <-chan int {

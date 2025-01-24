@@ -1,8 +1,6 @@
 package realworld
 
-import (
-	"time"
-)
+import "time"
 
 // CompareTime compares two time values.
 func CompareTime(time1 time.Time, time2 time.Time) int {

@@ -1,8 +1,6 @@
 package basicintro
 
-import (
-	"strings"
-)
+import "strings"
 
 // GreetWorld returns a greeting for the world.
 func GreetWorld() string {
