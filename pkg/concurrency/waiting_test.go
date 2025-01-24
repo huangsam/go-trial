@@ -1,0 +1,20 @@
+package concurrency_test
+
+import (
+	"testing"
+	"time"
+
+	"github.com/huangsam/go-trial/pkg/concurrency"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestWaitForOne(t *testing.T) {
+	result := concurrency.WaitForSum(time.Millisecond * 300)
+	assert.Equal(t, 300/100, result)
+}
+
+func BenchmarkWaitForOne(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		concurrency.WaitForSum(time.Millisecond * 300)
+	}
+}
