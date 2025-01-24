@@ -25,8 +25,8 @@ func GetAnswersWithWaitGroup() [100]int {
 	var mu sync.Mutex
 	wg.Add(answersRoutineCount)
 	for i := 0; i < answersRoutineCount; i++ {
-		go func(i int, mu *sync.Mutex) {
-			update(&answers, i*10, (i+1)*10, mu)
+		go func(i int, mup *sync.Mutex) {
+			update(&answers, i*10, (i+1)*10, mup)
 			wg.Done() // Signal that the goroutine has finished
 		}(i, &mu)
 	}
