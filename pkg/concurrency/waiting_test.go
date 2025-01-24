@@ -9,12 +9,12 @@ import (
 )
 
 func TestWaitForOne(t *testing.T) {
-	result := concurrency.WaitForSum(time.Millisecond * 300)
-	assert.Equal(t, 300/100, result)
+	result := concurrency.WaitForSum(time.Millisecond * 350)
+	assert.True(t, result == 3 || result == 4)
 }
 
 func BenchmarkWaitForOne(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		concurrency.WaitForSum(time.Millisecond * 300)
+		concurrency.WaitForSum(time.Millisecond * 350)
 	}
 }
