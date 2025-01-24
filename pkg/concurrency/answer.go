@@ -19,8 +19,8 @@ func update(m *[100]int, from int, to int, mu *sync.Mutex) {
 // using goroutines and a WaitGroup to ensure all updates are completed before returning.
 // A mutex is used to prevent race conditions during updates.
 func GetAnswersWithWaitGroup() [100]int {
-	var wg sync.WaitGroup
 	var answers [100]int
+	var wg sync.WaitGroup
 	var mu sync.Mutex
 	wg.Add(answersRoutineCount)
 	for i := 0; i < answersRoutineCount; i++ {
@@ -38,8 +38,6 @@ func GetAnswersWithWaitGroup() [100]int {
 func GetAnswersWithChannels() [100]int {
 	var answers [100]int
 	done := make(chan struct{}, answersRoutineCount) // Channel to track completion
-
-	// Worker function
 	update := func(start, end int) {
 		time.Sleep(10 * time.Millisecond)
 		for i := start; i < end; i++ {
@@ -47,16 +45,11 @@ func GetAnswersWithChannels() [100]int {
 		}
 		done <- struct{}{} // Signal completion
 	}
-
-	// Spawn all goroutines
 	for i := 0; i < answersRoutineCount; i++ {
 		go update(i*10, (i+1)*10)
 	}
-
-	// Wait for all goroutines to complete
 	for i := 0; i < answersRoutineCount; i++ {
 		<-done
 	}
-
 	return answers
 }
