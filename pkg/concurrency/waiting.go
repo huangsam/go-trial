@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-// WaitForSum waits for a duration and returns the sum of the numbers sent to the channel.
-func WaitForSum(duration time.Duration) int {
+// SumOneUntil returns the sum of 1s received until the timeout is reached.
+func SumOneUntil(timeout time.Duration) int {
 	var ctx context.Context
 	var cancel context.CancelFunc
-	ctx, cancel = context.WithTimeout(context.Background(), duration)
+	ctx, cancel = context.WithTimeout(context.Background(), timeout)
 	ch := make(chan int)
 	sum := 0
 	defer cancel()
