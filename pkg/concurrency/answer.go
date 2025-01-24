@@ -5,23 +5,21 @@ import (
 	"time"
 )
 
-// update updates a portion of the given integer array concurrently.
-func update(m *[100]int, from int, to int) {
-	for i := from; i < to; i++ {
-		time.Sleep(10 * time.Millisecond)
-		(*m)[i] = i * 2
-	}
-}
-
 // GetAnswersWithWaitGroup updates a 100-element array using goroutines and a WaitGroup.
 func GetAnswersWithWaitGroup() [100]int {
 	var answers [100]int
 	var wg sync.WaitGroup
+	update := func(m *[100]int, from int, to int) {
+		for i := from; i < to; i++ {
+			time.Sleep(10 * time.Millisecond)
+			(*m)[i] = i * 2
+		}
+	}
 	wg.Add(answersRoutineCount)
 	for i := 0; i < answersRoutineCount; i++ {
 		go func(i int) {
-			update(&answers, i*10, (i+1)*10)
-			wg.Done() // Signal that the goroutine has finished
+			update(&answers, i*10, (i+1)*10) // Skip mutex due to isolation
+			wg.Done()                        // Signal that the goroutine has finished
 		}(i)
 	}
 	wg.Wait() // Wait for all goroutines to finish
