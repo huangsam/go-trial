@@ -71,7 +71,7 @@ Here is a checklist of things I want to cover:
 - [x] [Data structures](pkg/datastructure/)
 - [x] [Goroutines, channels, sync primitives](pkg/concurrency/)
 - [x] [Interfaces, generics, mocking](pkg/abstraction/)
-- [ ] [Real world integrations](pkg/realworld/)
+- [x] [Real world integrations](pkg/realworld/)
 
 ## Useful resources
 
