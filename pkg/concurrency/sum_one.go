@@ -14,7 +14,7 @@ func SumOneUntil(timeout time.Duration) int {
 	sum := 0
 	defer cancel()
 	go func() {
-		defer close(ch) // Close the channel when the function returns
+		defer close(ch) // Close the channel when the routine returns
 		for {
 			select {
 			case <-ctx.Done(): // Return when timeout is reached
