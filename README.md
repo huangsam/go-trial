@@ -49,6 +49,20 @@ Then open up a browser on <http://localhost:8080>.
 
 <img src="images/godoc-server.png" alt="Godoc server" width="500px" />
 
+### Generate mocks
+
+To generate mocks for testing, add interfaces to `.mockery.yaml`.
+
+Then run the following commands:
+
+```shell
+# Install mockery
+brew install mockery
+
+# Run mockery to generate mocks
+mockery
+```
+
 ## Goals
 
 Here is a checklist of things I want to cover:
