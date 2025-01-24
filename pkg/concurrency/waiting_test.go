@@ -8,12 +8,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestWaitForOne(t *testing.T) {
+func TestWaitForSum(t *testing.T) {
 	result := concurrency.WaitForSum(time.Millisecond * 350)
 	assert.True(t, result == 3 || result == 4)
 }
 
-func BenchmarkWaitForOne(b *testing.B) {
+func BenchmarkWaitForSum(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		concurrency.WaitForSum(time.Millisecond * 350)
 	}
