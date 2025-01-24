@@ -16,9 +16,8 @@ func update(m *[100]int, from int, to int, mu *sync.Mutex) {
 }
 
 // GetAnswersWithWaitGroup concurrently updates portions of a 100-element integer array
-// using a combination of goroutines and sequential calls to the update function.
-// It utilizes a WaitGroup to ensure all concurrent operations complete before returning
-// the updated array, and it uses a mutex to prevent race conditions during updates.
+// using goroutines and a WaitGroup to ensure all updates are completed before returning.
+// A mutex is used to prevent race conditions during updates.
 func GetAnswersWithWaitGroup() [100]int {
 	var wg sync.WaitGroup
 	var answers [100]int
