@@ -28,7 +28,7 @@ func WaitForSum(duration time.Duration) int {
 		select {
 		case <-ctx.Done(): // Return sum when timeout is reached
 			return sum
-		case num := <-ch:
+		case num := <-ch: // Add the number received from the channel to the sum
 			sum += num
 		}
 	}
