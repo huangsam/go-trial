@@ -34,7 +34,9 @@ case "$mode" in
     "bench")
         go test -bench=. "${selector[@]}" ;;
     "cover")
-        go test -cover "${selector[@]}" ;;
+        go test -coverprofile=coverage.out "${selector[@]}"
+        go tool cover -html=coverage.out -o coverage.html
+        ;;
     "force")
         go test -count=1 "${selector[@]}" ;;
     "race")

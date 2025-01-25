@@ -26,3 +26,8 @@ go.work.sum
 
 # Project executable
 /gotrial
+
+# Other coverage output
+coverage.html
+coverage.json
+coverage.xml
