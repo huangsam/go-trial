@@ -31,10 +31,10 @@ func SumUntil(timeout time.Duration, factor int) int {
 	go func() {
 		defer close(ch) // Close the channel when goroutine ends
 		ctxSumInfo, ok := ctx.Value(sumInfoKey).(sumInfo)
-		channelInput := 1
 		if !ok {
 			panic("Cannot retrieve sum info from context")
 		}
+		channelInput := 1
 		for {
 			select {
 			case <-ctx.Done(): // Return when timeout is reached
