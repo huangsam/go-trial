@@ -8,13 +8,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSumOneUntil(t *testing.T) {
-	result := concurrency.SumOneUntil(time.Millisecond * 350)
-	assert.True(t, result == 3 || result == 4)
+func TestSumUntil(t *testing.T) {
+	result := concurrency.SumUntil(time.Millisecond*350, 2)
+	assert.True(t, result == 12 || result == 20, "The result should be 12 or 20 but got %d", result)
 }
 
-func BenchmarkWaitForSum(b *testing.B) {
+func BenchmarkSumUntil(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		concurrency.SumOneUntil(time.Millisecond * 350)
+		concurrency.SumUntil(time.Millisecond*350, 1)
 	}
 }

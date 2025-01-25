@@ -2,6 +2,14 @@ package concurrency
 
 import "github.com/huangsam/go-trial/internal/util"
 
+var (
+	// squareChannelCount is the number of square channels.
+	squareChannelCount int = 4
+
+	// doubleChannelCount is the number of double channels.
+	doubleChannelCount int = 2
+)
+
 // square squares the input.
 func square(in <-chan int) <-chan int {
 	out := make(chan int)

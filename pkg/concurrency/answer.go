@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+// answersRoutineCount is the number of goroutines to use to update the answers array.
+var answersRoutineCount int = 10
+
 // GetAnswersWithWaitGroup updates a 100-element array using goroutines and a WaitGroup.
 func GetAnswersWithWaitGroup() [100]int {
 	var answers [100]int
