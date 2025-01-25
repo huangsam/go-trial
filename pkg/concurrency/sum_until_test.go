@@ -15,6 +15,6 @@ func TestSumUntil(t *testing.T) {
 
 func BenchmarkSumUntil(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		concurrency.SumUntil(time.Millisecond*350, 1)
+		concurrency.SumUntil(time.Millisecond*200, 2)
 	}
 }
