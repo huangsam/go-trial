@@ -45,7 +45,6 @@ func SumUntil(timeout time.Duration, factor int) int {
 	for {
 		select {
 		case <-ctx.Done(): // Return sum when timeout is reached
-			time.Sleep(50 * time.Millisecond)
 			return sum
 		case num := <-ch: // Add the number received from the channel to the sum
 			sum += num
