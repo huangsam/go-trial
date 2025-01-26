@@ -12,11 +12,20 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// appConfig is a data model for configuration
 type appConfig struct {
 	App   string
 	Roles []string
 	Extra map[string]string
 }
+
+var (
+	// JSON path for app configuration
+	jsonLocation string = "testdata/config.json"
+
+	// YAML path for app configuration
+	yamlLocation string = "testdata/config.yml"
+)
 
 func assertAppConfig(t *testing.T, cfg appConfig) {
 	assert.Equal(t, "jenkins", cfg.App)
@@ -27,7 +36,7 @@ func assertAppConfig(t *testing.T, cfg appConfig) {
 func TestJsonConfig(t *testing.T) {
 	t.Run("Viper", func(t *testing.T) {
 		viper.SetConfigType("json")
-		file, err := os.Open("testdata/config.json")
+		file, err := os.Open(jsonLocation)
 		assert.Nil(t, err)
 		assert.Nil(t, viper.ReadConfig(file))
 		assert.Equal(t, "jenkins", viper.Get("app"))
@@ -37,7 +46,7 @@ func TestJsonConfig(t *testing.T) {
 	})
 	t.Run("Koanf", func(t *testing.T) {
 		k := koanf.New(".")
-		assert.Nil(t, k.Load(file.Provider("testdata/config.json"), json.Parser()))
+		assert.Nil(t, k.Load(file.Provider(jsonLocation), json.Parser()))
 		assert.Equal(t, "jenkins", k.String("app"))
 		var cfg appConfig
 		assert.Nil(t, k.Unmarshal("", &cfg))
@@ -48,7 +57,7 @@ func TestJsonConfig(t *testing.T) {
 func TestYamlConfig(t *testing.T) {
 	t.Run("Viper", func(t *testing.T) {
 		viper.SetConfigType("yaml")
-		file, err := os.Open("testdata/config.yml")
+		file, err := os.Open(yamlLocation)
 		assert.Nil(t, err)
 		assert.Nil(t, viper.ReadConfig(file))
 		assert.Equal(t, "jenkins", viper.Get("app"))
@@ -58,7 +67,7 @@ func TestYamlConfig(t *testing.T) {
 	})
 	t.Run("Koanf", func(t *testing.T) {
 		k := koanf.New(".")
-		assert.Nil(t, k.Load(file.Provider("testdata/config.yml"), yaml.Parser()))
+		assert.Nil(t, k.Load(file.Provider(yamlLocation), yaml.Parser()))
 		assert.Equal(t, "jenkins", k.String("app"))
 		var cfg appConfig
 		assert.Nil(t, k.Unmarshal("", &cfg))
@@ -70,7 +79,7 @@ func BenchmarkJsonConfig(b *testing.B) {
 	b.Run("Viper", func(b *testing.B) {
 		viper.SetConfigType("json")
 		for i := 0; i < b.N; i++ {
-			if file, err := os.Open("testdata/config.json"); err != nil {
+			if file, err := os.Open(jsonLocation); err != nil {
 				b.Errorf("Unexpected error: %v", err)
 			} else {
 				_ = viper.ReadConfig(file)
@@ -82,7 +91,7 @@ func BenchmarkJsonConfig(b *testing.B) {
 	b.Run("Koanf", func(b *testing.B) {
 		k := koanf.New(".")
 		for i := 0; i < b.N; i++ {
-			_ = k.Load(file.Provider("testdata/config.json"), json.Parser())
+			_ = k.Load(file.Provider(jsonLocation), json.Parser())
 			var cfg appConfig
 			_ = k.Unmarshal("", &cfg)
 		}
@@ -93,7 +102,7 @@ func BenchmarkYamlConfig(b *testing.B) {
 	b.Run("Viper", func(b *testing.B) {
 		viper.SetConfigType("yaml")
 		for i := 0; i < b.N; i++ {
-			if file, err := os.Open("testdata/config.yml"); err != nil {
+			if file, err := os.Open(yamlLocation); err != nil {
 				b.Errorf("Unexpected error: %v", err)
 			} else {
 				_ = viper.ReadConfig(file)
@@ -105,7 +114,7 @@ func BenchmarkYamlConfig(b *testing.B) {
 	b.Run("Koanf", func(b *testing.B) {
 		k := koanf.New(".")
 		for i := 0; i < b.N; i++ {
-			_ = k.Load(file.Provider("testdata/config.yml"), json.Parser())
+			_ = k.Load(file.Provider(yamlLocation), json.Parser())
 			var cfg appConfig
 			_ = k.Unmarshal("", &cfg)
 		}
