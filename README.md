@@ -92,7 +92,7 @@ Here is a checklist of things I want to cover:
 ### Online tutorials
 
 - [A Tour of Go](https://go.dev/tour/list): An interactive tour of Go.
-- [Go by Example](https://gobyexample.com): Hands-on introduction to Go using annotated example programs.
+- [Go by Example](https://gobyexample.com): Annotated programs in Go.
 
 ### Blog posts
 
