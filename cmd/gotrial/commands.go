@@ -13,8 +13,9 @@ import (
 
 // demoCommand is a command that calls pkg functions.
 var demoCommand *cli.Command = &cli.Command{
-	Name:  "demo",
-	Usage: "Run a demo with some pkg functions",
+	Name:        "demo",
+	Usage:       "Run a demo with some pkg functions",
+	Description: "This command runs functions from basicintro, abstraction, concurrency, etc.",
 	Action: func(ctx context.Context, c *cli.Command) error {
 		slog.Debug(basicintro.GreetWorld())
 
