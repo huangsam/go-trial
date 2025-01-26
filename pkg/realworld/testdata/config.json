@@ -1,6 +1,6 @@
 {
     "app": "jenkins",
-    "roles": ["ci"],
+    "roles": ["ci", "cd"],
     "extra": {
         "jvmopt": "-Xms256m -Xmx2048m"
     }
