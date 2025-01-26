@@ -77,7 +77,7 @@ Here is a checklist of things I want to cover:
 
 ### GitHub projects
 
-#### Resources
+#### Content
 
 - [avelino/awesome-go](https://github.com/avelino/awesome-go): A curated list of awesome Go frameworks, libraries, and software.
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout): Standard Go project layout.
