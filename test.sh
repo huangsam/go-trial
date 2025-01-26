@@ -9,7 +9,6 @@ mode:
     default: Run tests for all packages with caching.
     bench: Run benchmarks for all packages.
     cover: Run tests and report coverage for all packages.
-    force: Run tests for all packages without caching.
     race: Run tests with race detection for the concurrency package.
 EOF
 }
@@ -30,15 +29,11 @@ selector=(
 
 case "$mode" in
     "default")
-        go test "${selector[@]}" ;;
+        gotestsum --packages "${selector[@]}" ;;
     "bench")
         go test -bench=. "${selector[@]}" ;;
     "cover")
-        go test -coverprofile=coverage.out "${selector[@]}"
-        go tool cover -html=coverage.out -o coverage.html
-        ;;
-    "force")
-        go test -count=1 "${selector[@]}" ;;
+        gotestsum --junitfile coverage.xml --packages "${selector[@]}" ;;
     "race")
         go test -race github.com/huangsam/go-trial/pkg/concurrency ;;
     *)

@@ -16,6 +16,9 @@ There's no better time to master Golang than now! 🔥
 Here are the commands you need to know:
 
 ```shell
+# Setup tools
+./setup.sh
+
 # Run build
 ./build.sh
 
