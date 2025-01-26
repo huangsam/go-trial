@@ -18,11 +18,11 @@ func TestMultiStagePipeline(t *testing.T) {
 		{"Large range", 1, 1000000, 666667666667000000},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name+"-Simple", func(t *testing.T) {
+		t.Run(tt.name+" simple", func(t *testing.T) {
 			actualSum := concurrency.MultiStagePipelineSimple(tt.start, tt.end)
 			assert.Equal(t, tt.expectedSum, actualSum)
 		})
-		t.Run(tt.name+"-Merge", func(t *testing.T) {
+		t.Run(tt.name+" merge", func(t *testing.T) {
 			actualSum := concurrency.MultiStagePipelineMerge(tt.start, tt.end)
 			assert.Equal(t, tt.expectedSum, actualSum)
 		})
