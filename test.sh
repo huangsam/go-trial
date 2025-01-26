@@ -33,7 +33,7 @@ case "$mode" in
     "bench")
         go test -bench=. "${selector[@]}" ;;
     "cover")
-        gotestsum --junitfile coverage.xml --packages="${selector[@]}" ;;
+        gotestsum --junitfile=coverage.xml --packages="${selector[@]}" ;;
     "race")
         go test -race github.com/huangsam/go-trial/pkg/concurrency ;;
     *)
