@@ -14,9 +14,9 @@ func main() {
 	slog.SetDefault(logger)
 
 	cmd := &cli.Command{
-		Commands: [](*cli.Command){
-			demoCommand,
-		},
+		Usage:       "Use it to try Go in action! 🔥",
+		Description: "This binary currently has a demo command. More to follow later",
+		Commands:    [](*cli.Command){demoCommand},
 	}
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
