@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// appConfig is a data model for configuration
+// appConfig represents app configuration
 type appConfig struct {
 	App   string
 	Roles []string
@@ -20,10 +20,10 @@ type appConfig struct {
 }
 
 var (
-	// JSON path for app configuration
+	// JSON path for sample app configuration
 	jsonLocation string = "testdata/config.json"
 
-	// YAML path for app configuration
+	// YAML path for sample app configuration
 	yamlLocation string = "testdata/config.yml"
 )
 
