@@ -1,6 +1,6 @@
 ---
 app: jenkins
-role:
+roles:
 - ci
 - cd
 extra:
