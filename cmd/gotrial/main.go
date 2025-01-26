@@ -15,7 +15,7 @@ func main() {
 
 	cmd := &cli.Command{
 		Usage:       "Use it to try Go in action! 🔥",
-		Description: "This binary currently has a demo command. More to follow later",
+		Description: "This binary has a demo command. More to follow later",
 		Commands:    [](*cli.Command){demoCommand},
 	}
 
