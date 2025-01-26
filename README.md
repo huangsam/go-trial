@@ -86,8 +86,8 @@ Here is a checklist of things I want to cover:
 
 - [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner for Go.
 - [knadh/koanf](https://github.com/knadh/koanf): Simple configuration management for Go.
-- [urfave/cli](https://github.com/urfave/cli): Build simple, fast, fun CLIs for Go.
-- [vektra/mockery](https://github.com/vektra/mockery): A mock code autogenerator for Go.
+- [urfave/cli](https://github.com/urfave/cli): Simple, fast, fun CLIs for Go.
+- [vektra/mockery](https://github.com/vektra/mockery): Mock code autogenerator for Go.
 
 ### Online tutorials
 
