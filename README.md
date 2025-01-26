@@ -53,7 +53,7 @@ Then open up a browser on <http://localhost:8080>.
 
 To generate mocks for testing, add interfaces to `.mockery.yaml`.
 
-Then run the following commands:
+Then run the following command:
 
 ```shell
 # Run mockery to generate mocks
