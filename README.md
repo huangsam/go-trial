@@ -56,9 +56,6 @@ To generate mocks for testing, add interfaces to `.mockery.yaml`.
 Then run the following commands:
 
 ```shell
-# Install mockery
-brew install mockery
-
 # Run mockery to generate mocks
 mockery
 ```
