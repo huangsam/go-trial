@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// sumInfoKey is the key used to store the delay and factor values in the context.
-var sumInfoKey int = 1
+// sumKey is the key for storing sumInfo instances into context.
+type sumKey struct{}
 
 // sumInfo stores the delay and factor values.
 type sumInfo struct {
@@ -16,7 +16,7 @@ type sumInfo struct {
 
 // newContext returns a new context with the sumInfo value.
 func newContext(ctx context.Context, sumInfoValue sumInfo) context.Context {
-	return context.WithValue(ctx, sumInfoKey, sumInfoValue)
+	return context.WithValue(ctx, sumKey{}, sumInfoValue)
 }
 
 // SumUntil sums numbers until the timeout is reached.
@@ -30,7 +30,7 @@ func SumUntil(timeout time.Duration, factor int) int {
 	defer cancel()
 	go func() {
 		defer close(ch) // Close the channel when goroutine ends
-		ctxSumInfo := ctx.Value(sumInfoKey).(sumInfo)
+		ctxSumInfo := ctx.Value(sumKey{}).(sumInfo)
 		channelInput := 1
 		for {
 			select {
