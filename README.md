@@ -41,9 +41,6 @@ go doc github.com/huangsam/go-trial/pkg/basicintro.Person
 To see the documentation via web server:
 
 ```shell
-# Install godoc
-go install golang.org/x/tools/cmd/godoc@latest
-
 # Run godoc server
 godoc -http :8080
 ```
