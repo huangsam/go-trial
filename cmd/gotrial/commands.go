@@ -11,10 +11,10 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-// demoCommand is a CLI command
+// demoCommand is a command that calls pkg functions.
 var demoCommand *cli.Command = &cli.Command{
 	Name:  "demo",
-	Usage: "Do the demo thing",
+	Usage: "Run a demo with some pkg functions",
 	Action: func(ctx context.Context, c *cli.Command) error {
 		slog.Debug(basicintro.GreetWorld())
 
