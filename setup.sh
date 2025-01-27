@@ -6,12 +6,12 @@ mode="${1:-default}"
 declare -a brew_queue
 declare -a go_queue
 
-check_and_add_brew() {
+check_and_queue_brew () {
     [[ -n "$(which "$1")" ]] && return
     brew_queue+=("$1")
 }
 
-check_and_add_go() {
+check_and_queue_go () {
     [[ -n "$(which "$1")" ]] && return
     go_queue+=("$2")
 }
@@ -20,12 +20,12 @@ case "$mode" in
     "default")
         brew_list=("golangci-lint" "gotestsum" "mockery")
         for brew in "${brew_list[@]}"; do
-            check_and_add_brew "$brew"
+            check_and_queue_brew "$brew"
         done
-        check_and_add_go "godoc" "golang.org/x/tools/cmd/godoc@latest"
+        check_and_queue_go "godoc" "golang.org/x/tools/cmd/godoc@latest"
         ;;
     "ci")
-        check_and_add_go "gotestsum" "gotest.tools/gotestsum@latest" ;;
+        check_and_queue_go "gotestsum" "gotest.tools/gotestsum@latest" ;;
     *)
         echo "Invalid mode '$mode' detected" && exit 1 ;;
 esac

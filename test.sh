@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-display_help() {
+display_help () {
     cat <<'EOF'
 Usage: [mode]
 
