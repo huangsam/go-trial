@@ -76,7 +76,7 @@ Here is a checklist of things I want to cover:
 
 #### Content
 
-- [avelino/awesome-go](https://github.com/avelino/awesome-go): A curated list of awesome Go frameworks, libraries, and software.
+- [avelino/awesome-go](https://github.com/avelino/awesome-go): Awesome Go frameworks, libraries, software.
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout): Standard Go project layout.
 
 #### Tools
@@ -93,12 +93,12 @@ Here is a checklist of things I want to cover:
 
 ### Blog posts
 
-- [Organizing Go code](https://go.dev/blog/organizing-go-code): A blog post on how to organize Go code.
-- [Package names](https://go.dev/blog/package-names): A blog post on how to name Go packages effectively.
-- [Go Concurrency Patterns: Pipelines and cancellation](https://go.dev/blog/pipelines): A blog post on how to use pipelines in Go.
-- [Go Concurrency Patterns: Context](https://go.dev/blog/context): A blog post on using context in Go.
-- [Structured Logging with slog](https://go.dev/blog/slog): A blog post on structured logging in Go using the slog package.
-- [4 Mocking Approaches for Go](https://www.twilio.com/en-us/blog/4-mocking-approaches-go): A blog post on mocking techniques in Go.
+- [Organizing Go code](https://go.dev/blog/organizing-go-code): General codebase conventions.
+- [Package names](https://go.dev/blog/package-names): Package naming conventions.
+- [Go Concurrency Patterns: Pipelines and cancellation](https://go.dev/blog/pipelines): Pipelines with multiple stages.
+- [Go Concurrency Patterns: Context](https://go.dev/blog/context): Context for downstream logic.
+- [Structured Logging with slog](https://go.dev/blog/slog): Structured logging using slog.
+- [4 Mocking Approaches for Go](https://www.twilio.com/en-us/blog/4-mocking-approaches-go): Different mocking techniques.
 
 [Python]: https://github.com/huangsam/ultimate-python
 [Java]: https://github.com/huangsam/java-trial
