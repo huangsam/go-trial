@@ -47,6 +47,10 @@ var serverCommand *cli.Command = &cli.Command{
 	},
 	Action: func(ctx context.Context, c *cli.Command) error {
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			slog.Info(
+				fmt.Sprintf("Got %s request from %s", r.Method, r.Host),
+				"path", r.URL.Path,
+			)
 			fmt.Fprintf(w, "Hello, World!")
 		})
 		if err := http.ListenAndServe(c.String("port"), nil); err != nil {
