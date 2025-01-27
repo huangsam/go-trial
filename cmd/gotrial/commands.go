@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"net/http"
 
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/huangsam/go-trial/pkg/basicintro"
@@ -11,11 +12,11 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-// demoCommand is a command that calls pkg functions.
+// demoCommand is a CLI command.
 var demoCommand *cli.Command = &cli.Command{
 	Name:        "demo",
 	Usage:       "Run demo with some pkg functions",
-	Description: "This command runs logic from basicintro, abstraction, etc.",
+	Description: "This command runs functions from multiple packages under pkg.",
 	Action: func(ctx context.Context, c *cli.Command) error {
 		slog.Debug(basicintro.GreetWorld())
 
@@ -28,6 +29,22 @@ var demoCommand *cli.Command = &cli.Command{
 		answers := concurrency.GetAnswersWithChannels()
 		slog.Error("Retrieved answers with channels", "answers", answers)
 
+		return nil
+	},
+}
+
+// serverCommand is a server command.
+var serverCommand *cli.Command = &cli.Command{
+	Name:        "server",
+	Usage:       "Run server with HTTP responses",
+	Description: "This command runs HTTP server with one endpoint.",
+	Action: func(ctx context.Context, c *cli.Command) error {
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintf(w, "Hello, World!")
+		})
+		if err := http.ListenAndServe(":8080", nil); err != nil {
+			panic(err)
+		}
 		return nil
 	},
 }

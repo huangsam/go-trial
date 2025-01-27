@@ -15,8 +15,11 @@ func main() {
 
 	cmd := &cli.Command{
 		Usage:       "Try Go in action! 🔥",
-		Description: "This binary has a demo command. More to follow later",
-		Commands:    [](*cli.Command){demoCommand},
+		Description: "This binary has multiple commands to choose from.",
+		Commands: [](*cli.Command){
+			demoCommand,
+			serverCommand,
+		},
 	}
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
