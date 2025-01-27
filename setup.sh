@@ -18,7 +18,7 @@ check_and_add_go() {
 
 case "$mode" in
     "default")
-        brew_list=("golangci-lint" "gotestsum" "mockery" "staticcheck")
+        brew_list=("golangci-lint" "gotestsum" "mockery")
         for brew in "${brew_list[@]}"; do
             check_and_add_brew "$brew"
         done
