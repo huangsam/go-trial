@@ -36,13 +36,20 @@ var demoCommand *cli.Command = &cli.Command{
 // serverCommand is a command to run an HTTP server.
 var serverCommand *cli.Command = &cli.Command{
 	Name:        "server",
-	Usage:       "Run server with HTTP responses",
-	Description: "This command runs HTTP server with one endpoint.",
+	Usage:       "Run simple HTTP server",
+	Description: "This command runs an HTTP server with one endpoint.",
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name:  "port",
+			Value: ":8080",
+			Usage: "HTTP server port",
+		},
+	},
 	Action: func(ctx context.Context, c *cli.Command) error {
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "Hello, World!")
 		})
-		if err := http.ListenAndServe(":8080", nil); err != nil {
+		if err := http.ListenAndServe(c.String("port"), nil); err != nil {
 			panic(err)
 		}
 		return nil
