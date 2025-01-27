@@ -16,7 +16,7 @@ import (
 var demoCommand *cli.Command = &cli.Command{
 	Name:        "demo",
 	Usage:       "Run demo with some pkg functions",
-	Description: "This command runs functions from multiple packages under pkg.",
+	Description: "This command runs functions from multiple packages.",
 	Action: func(ctx context.Context, c *cli.Command) error {
 		slog.Debug(basicintro.GreetWorld())
 
