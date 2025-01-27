@@ -12,7 +12,7 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-// demoCommand is a command for demo purposes.
+// demoCommand is a command to run a demo.
 var demoCommand *cli.Command = &cli.Command{
 	Name:        "demo",
 	Usage:       "Run demo with some pkg functions",
@@ -33,7 +33,7 @@ var demoCommand *cli.Command = &cli.Command{
 	},
 }
 
-// serverCommand is a command to run a HTTP server.
+// serverCommand is a command to run an HTTP server.
 var serverCommand *cli.Command = &cli.Command{
 	Name:        "server",
 	Usage:       "Run server with HTTP responses",
