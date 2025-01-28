@@ -61,7 +61,7 @@ var serverCommand *cli.Command = &cli.Command{
 	},
 }
 
-// scrapeCommand scrapes hackerspaces.org for links
+// scrapeCommand is a command to scrape hackerspaces.org for links.
 var scrapeCommand *cli.Command = &cli.Command{
 	Name:        "scrape",
 	Usage:       "Run scraping on a website",
