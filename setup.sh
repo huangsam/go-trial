@@ -1,8 +1,6 @@
 #!/bin/bash
 set -eu
 
-mode="${1:-default}"
-
 declare -a brew_queue
 declare -a go_queue
 
