@@ -17,7 +17,7 @@ type appConfig struct {
 	Extra map[string]string
 }
 
-var (
+const (
 	// testJsonLocation is a JSON path for app config.
 	testJsonLocation string = "testdata/config.json"
 
