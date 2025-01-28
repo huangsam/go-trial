@@ -82,7 +82,6 @@ Here is a checklist of things I want to cover:
 #### Tools
 
 - [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner.
-- [gotestyourself/gotestsum](https://github.com/gotestyourself/gotestsum): Improved test runner.
 - [knadh/koanf](https://github.com/knadh/koanf): Simple configuration management.
 - [urfave/cli](https://github.com/urfave/cli): Simple, fast, fun CLIs.
 - [vektra/mockery](https://github.com/vektra/mockery): Mock code autogenerator.

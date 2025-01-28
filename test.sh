@@ -29,11 +29,11 @@ selector=(
 
 case "$mode" in
     "default")
-        gotestsum --packages="${selector[@]}" ;;
+        go test "${selector[@]}" ;;
     "bench")
         go test -bench=. "${selector[@]}" ;;
     "cover")
-        gotestsum --junitfile=coverage.xml --packages="${selector[@]}" ;;
+        go test -cover "${selector[@]}" ;;
     "race")
         go test -race github.com/huangsam/go-trial/pkg/concurrency ;;
     *)

@@ -19,8 +19,6 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - name: Setup tools
-        run: bash ./setup.sh ci
       - name: Run tests
         run: bash ./test.sh
       - name: Run build
