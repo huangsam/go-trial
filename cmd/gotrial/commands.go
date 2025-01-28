@@ -55,7 +55,7 @@ var serverCommand *cli.Command = &cli.Command{
 			fmt.Fprintf(w, "Hello, World!")
 		})
 		if err := http.ListenAndServe(c.String("port"), nil); err != nil {
-			panic(err)
+			return err
 		}
 		return nil
 	},
@@ -64,8 +64,8 @@ var serverCommand *cli.Command = &cli.Command{
 // scrapeCommand scrapes hackerspaces.org for links
 var scrapeCommand *cli.Command = &cli.Command{
 	Name:        "scrape",
-	Usage:       "Run colly scraping on a website",
-	Description: "This command scrapes hackerspaces.org",
+	Usage:       "Run scraping on a website",
+	Description: "This command uses Colly to scrape hackerspaces.org",
 	Action: func(ctx context.Context, c *cli.Command) error {
 		collector := colly.NewCollector(
 			colly.AllowedDomains("hackerspaces.org", "wiki.hackerspaces.org"),
