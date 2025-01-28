@@ -12,11 +12,8 @@ check_and_queue_go () {
     [[ -n "$(which "$1")" ]] || go_queue+=("$2")
 }
 
-brew_list=("golangci-lint" "mockery")
-for brew in "${brew_list[@]}"; do
-    check_and_queue_brew "$brew"
-done
-
+check_and_queue_brew "golangci-lint"
+check_and_queue_brew "mockery"
 check_and_queue_go "godoc" "golang.org/x/tools/cmd/godoc@latest"
 
 # https://stackoverflow.com/a/15780028/2748860
