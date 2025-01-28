@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/gocolly/colly/v2"
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/huangsam/go-trial/pkg/concurrency"
@@ -56,6 +57,30 @@ var serverCommand *cli.Command = &cli.Command{
 		if err := http.ListenAndServe(c.String("port"), nil); err != nil {
 			panic(err)
 		}
+		return nil
+	},
+}
+
+var scrapeCommand *cli.Command = &cli.Command{
+	Name:        "scrape",
+	Usage:       "Run colly scraping on a website",
+	Description: "This command scrapes hackerspaces.org",
+	Action: func(ctx context.Context, c *cli.Command) error {
+		collector := colly.NewCollector(
+			colly.AllowedDomains("hackerspaces.org", "wiki.hackerspaces.org"),
+		)
+
+		collector.OnHTML("a[href]", func(e *colly.HTMLElement) {
+			link := e.Attr("href")
+			slog.Info("Link found", "link", link)
+		})
+
+		collector.OnRequest(func(r *colly.Request) {
+			slog.Debug("Visit site", "link", r.URL.String())
+		})
+
+		collector.Visit("https://hackerspaces.org/")
+
 		return nil
 	},
 }

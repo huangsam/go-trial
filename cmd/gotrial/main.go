@@ -19,6 +19,7 @@ func main() {
 		Commands: [](*cli.Command){
 			demoCommand,
 			serverCommand,
+			scrapeCommand,
 		},
 	}
 
