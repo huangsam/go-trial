@@ -61,6 +61,7 @@ var serverCommand *cli.Command = &cli.Command{
 	},
 }
 
+// scrapeCommand scrapes hackerspaces.org for links
 var scrapeCommand *cli.Command = &cli.Command{
 	Name:        "scrape",
 	Usage:       "Run colly scraping on a website",
