@@ -2,7 +2,7 @@ package concurrency
 
 import "github.com/huangsam/go-trial/internal/util"
 
-var (
+const (
 	// squareChannelCount is the number of square channels.
 	squareChannelCount int = 4
 
