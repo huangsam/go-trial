@@ -80,7 +80,9 @@ var scrapeCommand *cli.Command = &cli.Command{
 			slog.Debug("Visit site", "link", r.URL.String())
 		})
 
-		collector.Visit("https://hackerspaces.org/")
+		if err := collector.Visit("https://hackerspaces.org/"); err != nil {
+			return err
+		}
 
 		return nil
 	},
