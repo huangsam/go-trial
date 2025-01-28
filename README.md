@@ -24,6 +24,9 @@ Here are the commands you need to know:
 
 # Run tests
 ./test.sh
+
+# Run linter suite
+./lint.sh
 ```
 
 ### Documentation
