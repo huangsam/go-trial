@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"log/slog"
 	"net/http"
 
 	"github.com/gocolly/colly/v2"
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/huangsam/go-trial/pkg/concurrency"
+	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v3"
 )
 
@@ -19,16 +19,16 @@ var demoCommand *cli.Command = &cli.Command{
 	Usage:       "Run demo with some pkg functions",
 	Description: "This command runs functions from multiple packages.",
 	Action: func(ctx context.Context, c *cli.Command) error {
-		slog.Debug(basicintro.GreetWorld())
+		log.Debug().Msg(basicintro.GreetWorld())
 
-		slog.Info(basicintro.GreetName("Peter"))
+		log.Info().Msg(basicintro.GreetName("Peter"))
 
 		circle := abstraction.Circle{Radius: 6}
 		size := abstraction.Classify(circle)
-		slog.Warn(fmt.Sprintf("Circle size is %v", size))
+		log.Warn().Msgf("Circle size is %v", size)
 
 		answers := concurrency.GetAnswersWithChannels()
-		slog.Error("Retrieved answers with channels", "answers", answers)
+		log.Error().Interface("answers", answers).Msg("Got answers with channels")
 
 		return nil
 	},
@@ -48,10 +48,12 @@ var serverCommand *cli.Command = &cli.Command{
 	},
 	Action: func(ctx context.Context, c *cli.Command) error {
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			slog.Info(
-				fmt.Sprintf("Got %s request from %s", r.Method, r.Host),
-				"path", r.URL.Path,
-			)
+			log.Info().
+				Str("method", r.Method).
+				Str("host", r.Host).
+				Str("path", r.URL.Path).
+				Msg("Got request")
+
 			fmt.Fprintf(w, "Hello, World!")
 		})
 		if err := http.ListenAndServe(c.String("port"), nil); err != nil {
@@ -73,11 +75,11 @@ var scrapeCommand *cli.Command = &cli.Command{
 
 		collector.OnHTML("a[href]", func(e *colly.HTMLElement) {
 			link := e.Attr("href")
-			slog.Info("Link found", "link", link)
+			log.Info().Str("link", link).Msg("Link found")
 		})
 
 		collector.OnRequest(func(r *colly.Request) {
-			slog.Debug("Visit site", "link", r.URL.String())
+			log.Debug().Str("link", r.URL.String()).Msg("Visit site")
 		})
 
 		if err := collector.Visit("https://hackerspaces.org/"); err != nil {

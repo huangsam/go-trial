@@ -86,6 +86,7 @@ Here is a checklist of things I want to cover:
 
 - [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner.
 - [knadh/koanf](https://github.com/knadh/koanf): Simple configuration management.
+- [rs/zerolog](https://github.com/rs/zerolog): Efficient JSON logger.
 - [urfave/cli](https://github.com/urfave/cli): Simple, fast, fun CLIs.
 - [vektra/mockery](https://github.com/vektra/mockery): Mock code autogenerator.
 
