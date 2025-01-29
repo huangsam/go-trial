@@ -34,9 +34,9 @@ var demoCommand *cli.Command = &cli.Command{
 	},
 }
 
-// serverCommand is a command to run an HTTP server.
-var serverCommand *cli.Command = &cli.Command{
-	Name:        "server",
+// serveCommand is a command to run an HTTP server.
+var serveCommand *cli.Command = &cli.Command{
+	Name:        "serve",
 	Usage:       "Run simple HTTP server",
 	Description: "This command runs an HTTP server with one endpoint.",
 	Flags: []cli.Flag{
