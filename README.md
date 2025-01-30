@@ -17,16 +17,16 @@ Here are the commands you need to know:
 
 ```shell
 # Setup tools
-./setup.sh
+bash ./scripts/setup.sh
 
 # Run build
-./build.sh
+bash ./scripts/build.sh
 
 # Run tests
-./test.sh
+bash ./scripts/test.sh
 
-# Run linter suite
-./lint.sh
+# Run linters
+bash ./scripts/lint.sh
 ```
 
 ### Documentation

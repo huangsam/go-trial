@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - name: Run lint
+      - name: Run linters
         uses: golangci/golangci-lint-action@v6
         with:
           version: v1.63
