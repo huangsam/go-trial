@@ -4,7 +4,7 @@ import (
 	"context"
 	"os"
 
-	"github.com/huangsam/go-trial/cmd/gotrial/tier1"
+	"github.com/huangsam/go-trial/cmd/gotrial/sub"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v3"
 )
@@ -15,9 +15,9 @@ func main() {
 		Usage:       "Try Go in action! 🔥",
 		Description: "This binary has multiple commands to choose from.",
 		Commands: [](*cli.Command){
-			tier1.DemoCommand,
-			tier1.ScrapeCommand,
-			tier1.ServeCommand,
+			sub.DemoCommand,
+			sub.ScrapeCommand,
+			sub.ServeCommand,
 		},
 	}
 

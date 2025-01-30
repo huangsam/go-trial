@@ -1,4 +1,4 @@
-package tier1
+package sub
 
 import (
 	"context"
