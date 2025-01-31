@@ -103,6 +103,7 @@ Here is a checklist of things I want to cover:
 - [Go Concurrency Patterns: Context](https://go.dev/blog/context): Context for downstream logic.
 - [Structured Logging with slog](https://go.dev/blog/slog): Structured logging using slog.
 - [4 Mocking Approaches for Go](https://www.twilio.com/en-us/blog/4-mocking-approaches-go): Different mocking techniques.
+- [Proper HTTP shutdown in Go](https://dev.to/mokiat/proper-http-shutdown-in-go-3fji): Graceful HTTP shutdown.
 
 [Python]: https://github.com/huangsam/ultimate-python
 [Java]: https://github.com/huangsam/java-trial
