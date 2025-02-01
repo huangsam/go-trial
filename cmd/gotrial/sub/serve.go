@@ -2,6 +2,7 @@ package sub
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/gofiber/contrib/fiberzerolog"
@@ -31,12 +32,19 @@ var ServeCommand *cli.Command = &cli.Command{
 	Action: func(ctx context.Context, c *cli.Command) error {
 		app := fiber.New(fiber.Config{ReadTimeout: c.Duration("timeout")})
 		app.Use(fiberzerolog.New(fiberzerolog.Config{Logger: &log.Logger}))
+
 		app.Get("/", func(c *fiber.Ctx) error {
 			return c.SendString("Hello world")
 		})
-		if err := util.GracefulShutdown(app, c.String("addr")); err != nil {
-			return err
-		}
-		return nil
+
+		app.Get("/stack", func(c *fiber.Ctx) error {
+			return c.JSON(c.App().Stack())
+		})
+
+		app.Get("/error", func(c *fiber.Ctx) error {
+			return errors.New("What is going on with the world?")
+		})
+
+		return util.GracefulShutdown(app, c.String("addr"))
 	},
 }
