@@ -4,8 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/huangsam/go-trial/internal/util"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v3"
 )
@@ -23,19 +24,14 @@ var ServeCommand *cli.Command = &cli.Command{
 		},
 	},
 	Action: func(ctx context.Context, c *cli.Command) error {
-		gin.SetMode(gin.ReleaseMode)
-		router := gin.New()
-		router.Use(gin.Recovery(), util.ZerologMiddleware())
+		e := echo.New()
+		e.Use(middleware.Recover(), util.ZerologMiddleware())
 
-		router.GET("/", func(ctx *gin.Context) {
-			ctx.String(http.StatusOK, "Hello world")
+		e.GET("/", func(c echo.Context) error {
+			return c.String(http.StatusOK, "Hello world")
 		})
 
-		router.GET("/health", func(ctx *gin.Context) {
-			ctx.String(http.StatusOK, "Health check")
-		})
-
-		server := &http.Server{Addr: c.String("port"), Handler: router}
+		server := &http.Server{Addr: c.String("port"), Handler: e}
 
 		if err := util.GracefulShutdown(server); err != nil {
 			log.Error().Err(err).Msg("Shutdown error")
