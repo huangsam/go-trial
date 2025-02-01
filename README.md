@@ -45,7 +45,7 @@ directory of this repo. Here are some commands to get you started:
 ./gotrial demo
 ```
 
-### Documentation
+### See the docs
 
 To see the documentation via CLI:
 
