@@ -29,6 +29,22 @@ bash scripts/test.sh
 bash scripts/lint.sh
 ```
 
+### Run the binary
+
+After the build runs successfully, the `gotrial` binary should exist at the root
+directory of this repo. Here are some commands to get you started:
+
+```shell
+# Get help for global command
+./gotrial help
+
+# Get help for subcommand
+./gotrial help demo
+
+# Run a command
+./gotrial demo
+```
+
 ### Documentation
 
 To see the documentation via CLI:
