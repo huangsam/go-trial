@@ -1,38 +1,23 @@
 package util
 
 import (
-	"context"
-	"errors"
-	"net/http"
 	"os"
 	"os/signal"
-	"syscall"
-	"time"
 
+	"github.com/gofiber/fiber/v2"
 	"github.com/rs/zerolog/log"
 )
 
 // GracefulShutdown shuts down the HTTP server gracefully
-func GracefulShutdown(server *http.Server) error {
+func GracefulShutdown(app *fiber.App, addr string) error {
 	go func() {
-		if err := server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
-			log.Err(err).Msg("HTTP server error")
+		if err := app.Listen(addr); err != nil {
+			log.Error().Msg("HTTP server error")
 		}
-		log.Info().Msg("Stop serving new connections")
+		log.Info().Msg("Stop accepting connections")
 	}()
-
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
-	<-sigChan
-
-	shutdownCtx, shutdownRelease := context.WithTimeout(context.Background(), 10*time.Second)
-	defer shutdownRelease()
-
-	if err := server.Shutdown(shutdownCtx); err != nil {
-		log.Error().Err(err).Msg("Shutdown error")
-		return err
-	}
-
-	log.Info().Msg("Shutdown complete")
-	return nil
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, os.Interrupt)
+	<-ch
+	return app.Shutdown()
 }

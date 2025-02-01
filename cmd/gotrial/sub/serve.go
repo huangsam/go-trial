@@ -2,11 +2,11 @@ package sub
 
 import (
 	"context"
-	"net/http"
+	"time"
 
+	"github.com/gofiber/contrib/fiberzerolog"
+	"github.com/gofiber/fiber/v2"
 	"github.com/huangsam/go-trial/internal/util"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v3"
 )
@@ -18,27 +18,25 @@ var ServeCommand *cli.Command = &cli.Command{
 	Description: "This command runs an HTTP server with one endpoint.",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "port",
+			Name:  "addr",
 			Value: ":8080",
-			Usage: "HTTP server port",
+			Usage: "HTTP address",
+		},
+		&cli.DurationFlag{
+			Name:  "timeout",
+			Value: 5 * time.Second,
+			Usage: "HTTP read timeout",
 		},
 	},
 	Action: func(ctx context.Context, c *cli.Command) error {
-		e := echo.New()
-		e.Use(middleware.Recover(), util.ZerologMiddleware())
-
-		e.GET("/", func(c echo.Context) error {
-			return c.String(http.StatusOK, "Hello world")
+		app := fiber.New(fiber.Config{ReadTimeout: c.Duration("timeout")})
+		app.Use(fiberzerolog.New(fiberzerolog.Config{Logger: &log.Logger}))
+		app.Get("/", func(c *fiber.Ctx) error {
+			return c.SendString("Hello world")
 		})
-
-		server := &http.Server{Addr: c.String("port"), Handler: e}
-
-		if err := util.GracefulShutdown(server); err != nil {
-			log.Error().Err(err).Msg("Shutdown error")
+		if err := util.GracefulShutdown(app, c.String("addr")); err != nil {
 			return err
 		}
-
-		log.Info().Msg("Shutdown success")
 		return nil
 	},
 }
