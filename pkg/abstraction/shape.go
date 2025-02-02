@@ -15,8 +15,8 @@ type Shape interface {
 
 // Rectangle represents a rectangle with width and height.
 type Rectangle struct {
-	Width  float64
-	Height float64
+	Width  float64 `json:"width"`
+	Height float64 `json:"height"`
 }
 
 // Area calculates and returns the area of the rectangle.
