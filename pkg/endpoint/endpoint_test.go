@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestHandlerStatus(t *testing.T) {
+func TestHandler(t *testing.T) {
 	app := fiber.New()
 
 	testCases := []struct {
