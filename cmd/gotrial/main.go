@@ -1,17 +1,16 @@
 package main
 
 import (
-	"context"
 	"os"
 
 	"github.com/huangsam/go-trial/cmd/gotrial/sub"
 	"github.com/rs/zerolog/log"
-	"github.com/urfave/cli/v3"
+	"github.com/urfave/cli/v2"
 )
 
 // main is the entry point of the application.
 func main() {
-	cmd := &cli.Command{
+	cmd := &cli.App{
 		Usage:       "Try Go in action! 🔥",
 		Description: "This binary has multiple commands to choose from.",
 		Commands: [](*cli.Command){
@@ -21,7 +20,7 @@ func main() {
 		},
 	}
 
-	if err := cmd.Run(context.Background(), os.Args); err != nil {
+	if err := cmd.Run(os.Args); err != nil {
 		log.Fatal().Err(err).Msg("Cannot run command line")
 	}
 }

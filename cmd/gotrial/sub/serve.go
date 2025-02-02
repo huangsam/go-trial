@@ -1,7 +1,6 @@
 package sub
 
 import (
-	"context"
 	"time"
 
 	"github.com/gofiber/contrib/fiberzerolog"
@@ -9,7 +8,7 @@ import (
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/rs/zerolog/log"
-	"github.com/urfave/cli/v3"
+	"github.com/urfave/cli/v2"
 )
 
 // ServeCommand is a command to run an HTTP server.
@@ -29,7 +28,7 @@ var ServeCommand *cli.Command = &cli.Command{
 			Usage: "HTTP read timeout",
 		},
 	},
-	Action: func(ctx context.Context, c *cli.Command) error {
+	Action: func(c *cli.Context) error {
 		app := fiber.New(fiber.Config{ReadTimeout: c.Duration("timeout")})
 		app.Use(fiberzerolog.New(fiberzerolog.Config{Logger: &log.Logger}))
 
