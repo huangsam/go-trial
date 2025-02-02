@@ -106,6 +106,8 @@ Here is a checklist of things I want to cover:
 
 #### Tools
 
+- [gocolly/colly](https://github.com/gocolly/colly): Elegant and fast web scraping framework.
+- [gofiber/fiber](https://github.com/gofiber/fiber): Express.js inspired web framework.
 - [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner.
 - [knadh/koanf](https://github.com/knadh/koanf): Simple configuration management.
 - [rs/zerolog](https://github.com/rs/zerolog): Efficient JSON logger.
