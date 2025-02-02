@@ -2,14 +2,12 @@ package sub
 
 import (
 	"context"
-	"errors"
-	"strconv"
 	"time"
 
 	"github.com/gofiber/contrib/fiberzerolog"
 	"github.com/gofiber/fiber/v2"
 	"github.com/huangsam/go-trial/internal/util"
-	"github.com/huangsam/go-trial/pkg/abstraction"
+	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v3"
 )
@@ -35,43 +33,10 @@ var ServeCommand *cli.Command = &cli.Command{
 		app := fiber.New(fiber.Config{ReadTimeout: c.Duration("timeout")})
 		app.Use(fiberzerolog.New(fiberzerolog.Config{Logger: &log.Logger}))
 
-		// Handles the root path and returns a simple greeting.
-		app.Get("/", func(c *fiber.Ctx) error {
-			return c.SendString("Hello world")
-		})
-
-		// Returns the application's routing stack.  Useful for debugging.
-		app.Get("/stack", func(c *fiber.Ctx) error {
-			return c.JSON(c.App().Stack())
-		})
-
-		// Calculates and returns the area, perimeter, shape, and size classification of a rectangle.
-		// Accepts 'width' and 'height' query parameters (defaulting to 1.0).
-		// Returns an error if width or height are not valid numbers.
-		app.Get("/rectangle-size", func(c *fiber.Ctx) error {
-			width, err := strconv.ParseFloat(c.Query("width", "1.0"), 64)
-			if errors.Is(err, strconv.ErrSyntax) {
-				return c.JSON(map[string]error{"error": err})
-			}
-			height, err := strconv.ParseFloat(c.Query("height", "1.0"), 64)
-			if errors.Is(err, strconv.ErrSyntax) {
-				return c.JSON(map[string]error{"error": err})
-			}
-			rect := abstraction.Rectangle{Width: width, Height: height}
-			size := abstraction.Classify(&rect)
-			payload := map[string]any{
-				"area":      rect.Area(),
-				"perimeter": rect.Perimeter(),
-				"shape":     rect,
-				"size":      size.String(),
-			}
-			return c.JSON(payload)
-		})
-
-		// Returns a generic error.  Useful for testing error handling.
-		app.Get("/error", func(c *fiber.Ctx) error {
-			return errors.New("What is going on with the world?")
-		})
+		app.Get("/", endpoint.HelloHandler)
+		app.Get("/error", endpoint.ErrorHandler)
+		app.Get("/rectangle-size", endpoint.RectangleSizeHandler)
+		app.Get("/stack", endpoint.StackHandler)
 
 		return util.GracefulShutdown(app, c.String("addr"))
 	},
