@@ -12,7 +12,7 @@ import (
 func GracefulShutdown(app *fiber.App, addr string) error {
 	go func() {
 		if err := app.Listen(addr); err != nil {
-			log.Error().Msg("HTTP server error")
+			log.Fatal().Err(err).Msg("HTTP server error")
 		}
 		log.Info().Msg("Stop accepting connections")
 	}()
