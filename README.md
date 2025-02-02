@@ -83,11 +83,17 @@ mockery
 
 Here is a checklist of things I want to cover:
 
+### Core concepts
+
 - [x] [Intro to functions, structs](pkg/basicintro/)
 - [x] [Data structures](pkg/datastructure/)
 - [x] [Goroutines, channels, sync primitives](pkg/concurrency/)
 - [x] [Interfaces, generics, mocking](pkg/abstraction/)
-- [x] [Real world integrations](pkg/realworld/)
+
+### Applied concepts
+
+- [x] [Config, I/O, time](pkg/realworld/)
+- [x] [HTTP endpoints](pkg/endpoint/)
 
 ## Useful resources
 
