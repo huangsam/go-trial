@@ -35,7 +35,7 @@ func TestHandlerStatus(t *testing.T) {
 			path:             "/error",
 			handler:          endpoint.ErrorHandler,
 			expectedStatus:   http.StatusInternalServerError,
-			expectedContains: []string{"What", "the world?"},
+			expectedContains: []string{"generic", "error"},
 		},
 		{
 			name:             "Rectangle default",

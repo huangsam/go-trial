@@ -8,5 +8,5 @@ import (
 
 // ErrorHandler returns a generic error as text.
 func ErrorHandler(c *fiber.Ctx) error {
-	return errors.New("What is going on with the world?")
+	return errors.New("generic error")
 }
