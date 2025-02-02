@@ -26,10 +26,6 @@ var ScrapeCommand *cli.Command = &cli.Command{
 			log.Info().Str("link", r.URL.String()).Msg("Visit site")
 		})
 
-		if err := collector.Visit("https://hackerspaces.org/"); err != nil {
-			return err
-		}
-
-		return nil
+		return collector.Visit("https://hackerspaces.org/")
 	},
 }
