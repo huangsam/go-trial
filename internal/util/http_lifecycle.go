@@ -14,7 +14,6 @@ func GracefulShutdown(app *fiber.App, addr string) error {
 		if err := app.Listen(addr); err != nil {
 			log.Fatal().Err(err).Msg("HTTP server error")
 		}
-		log.Info().Msg("Stop accepting connections")
 	}()
 	ch := make(chan os.Signal, 1)
 	signal.Notify(ch, os.Interrupt)
