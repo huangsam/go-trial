@@ -19,5 +19,6 @@ func GracefulShutdown(app *fiber.App, addr string) error {
 	ch := make(chan os.Signal, 1)
 	signal.Notify(ch, os.Interrupt)
 	<-ch
+	log.Info().Msg("Stop HTTP server")
 	return app.Shutdown()
 }
