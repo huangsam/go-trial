@@ -22,6 +22,6 @@ func main() {
 	}
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
-		log.Err(err).Msg("Cannot run command line")
+		log.Fatal().Err(err).Msg("Cannot run command line")
 	}
 }
