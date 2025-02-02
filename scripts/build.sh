@@ -1,4 +1,7 @@
 #!/bin/bash
 set -eu
 
-go build github.com/huangsam/go-trial/cmd/gotrial
+root="$(git rev-parse --show-toplevel)"
+cmd="gotrial"
+
+go build -o "$root/bin/$cmd" "github.com/huangsam/go-trial/cmd/$cmd"

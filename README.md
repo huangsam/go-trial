@@ -79,6 +79,16 @@ Then run the following command:
 mockery
 ```
 
+### Run with Docker
+
+Here are the steps to run the `gotrial` CLI as a container:
+
+```
+bash scripts/docker.sh
+
+docker run --rm -it huangsam/gotrial:latest
+```
+
 ## Goals
 
 Here is a checklist of things I want to cover:
