@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// ErrorHandler returns a generic error.
+// ErrorHandler returns a generic error as text.
 func ErrorHandler(c *fiber.Ctx) error {
 	return errors.New("What is going on with the world?")
 }
