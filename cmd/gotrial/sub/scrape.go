@@ -19,12 +19,11 @@ var ScrapeCommand *cli.Command = &cli.Command{
 		)
 
 		collector.OnHTML("a[href]", func(e *colly.HTMLElement) {
-			link := e.Attr("href")
-			log.Info().Str("link", link).Msg("Link found")
+			log.Info().Str("link", e.Attr("href")).Msg("Link found")
 		})
 
 		collector.OnRequest(func(r *colly.Request) {
-			log.Debug().Str("link", r.URL.String()).Msg("Visit site")
+			log.Info().Str("link", r.URL.String()).Msg("Visit site")
 		})
 
 		if err := collector.Visit("https://hackerspaces.org/"); err != nil {
