@@ -33,7 +33,7 @@ To learn more, please consult the [user guide](USERGUIDE.md).
 
 ## Learning path
 
-Here is a checklist of things that are covered.
+Here is the learning path for getting proficient with Golang in weeks:
 
 ### Core concepts
 
