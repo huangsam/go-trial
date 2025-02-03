@@ -2,11 +2,12 @@ package endpoint
 
 import (
 	"errors"
+	"net/http"
 
-	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
 )
 
 // ErrorHandler returns a generic error as text.
-func ErrorHandler(c *fiber.Ctx) error {
-	return errors.New("generic error")
+func ErrorHandler(c *gin.Context) {
+	c.String(http.StatusInternalServerError, errors.New("generic error").Error())
 }

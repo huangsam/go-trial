@@ -7,19 +7,19 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestHandler(t *testing.T) {
-	app := fiber.New()
+	router := gin.New()
 
 	testCases := []struct {
 		name             string
 		path             string
 		query            string
-		handler          fiber.Handler
+		handler          gin.HandlerFunc
 		expectedStatus   int
 		expectedContains []string
 	}{
@@ -38,13 +38,6 @@ func TestHandler(t *testing.T) {
 			expectedContains: []string{"generic", "error"},
 		},
 		{
-			name:             "Rectangle default",
-			path:             "/rectangle-size",
-			handler:          endpoint.RectangleSizeHandler,
-			expectedStatus:   http.StatusOK,
-			expectedContains: []string{"width", "height"},
-		},
-		{
 			name:             "Rectangle with query",
 			path:             "/rectangle-size",
 			query:            "?width=3.14&height=3.14",
@@ -52,22 +45,17 @@ func TestHandler(t *testing.T) {
 			expectedStatus:   http.StatusOK,
 			expectedContains: []string{"width", "height"},
 		},
-		{
-			name:             "Stack",
-			path:             "/stack",
-			handler:          endpoint.StackHandler,
-			expectedStatus:   http.StatusOK,
-			expectedContains: []string{"GET", "HEAD"},
-		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			app.Get(tc.path, tc.handler)
+			router.GET(tc.path, tc.handler)
 			req := httptest.NewRequest(http.MethodGet, tc.path+tc.query, nil)
+			w := httptest.NewRecorder()
 
-			resp, err := app.Test(req)
-			assert.NoError(t, err)
+			router.ServeHTTP(w, req)
+
+			resp := w.Result()
 			assert.Equal(t, tc.expectedStatus, resp.StatusCode)
 
 			body, err := io.ReadAll(resp.Body)

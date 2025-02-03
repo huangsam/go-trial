@@ -2,9 +2,10 @@ package endpoint
 
 import (
 	"errors"
+	"net/http"
 	"strconv"
 
-	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
 	"github.com/huangsam/go-trial/pkg/abstraction"
 )
 
@@ -19,14 +20,16 @@ type RectanglePayload struct {
 //
 // Accepts 'width' and 'height' query parameters (defaulting to 1.0).
 // Returns an error if width or height are not valid numbers.
-func RectangleSizeHandler(c *fiber.Ctx) error {
-	width, err := strconv.ParseFloat(c.Query("width", "1.0"), 64)
+func RectangleSizeHandler(c *gin.Context) {
+	width, err := strconv.ParseFloat(c.DefaultQuery("width", "1.0"), 64)
 	if errors.Is(err, strconv.ErrSyntax) {
-		return c.JSON(map[string]error{"error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
-	height, err := strconv.ParseFloat(c.Query("height", "1.0"), 64)
+	height, err := strconv.ParseFloat(c.DefaultQuery("height", "1.0"), 64)
 	if errors.Is(err, strconv.ErrSyntax) {
-		return c.JSON(map[string]error{"error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 	rect := abstraction.Rectangle{Width: width, Height: height}
 	size := abstraction.Classify(&rect)
@@ -36,5 +39,5 @@ func RectangleSizeHandler(c *fiber.Ctx) error {
 		Dimensions: rect,
 		Size:       size.String(),
 	}
-	return c.JSON(payload)
+	c.JSON(http.StatusOK, payload)
 }

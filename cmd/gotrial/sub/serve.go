@@ -1,10 +1,11 @@
 package sub
 
 import (
+	"fmt"
+	"net/http"
 	"time"
 
-	"github.com/gofiber/contrib/fiberzerolog"
-	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/rs/zerolog/log"
@@ -23,20 +24,38 @@ var ServeCommand *cli.Command = &cli.Command{
 			Usage: "HTTP address",
 		},
 		&cli.DurationFlag{
-			Name:  "timeout",
+			Name:  "rw",
 			Value: 5 * time.Second,
-			Usage: "HTTP read timeout",
+			Usage: "HTTP read/write timeout",
+		},
+		&cli.DurationFlag{
+			Name:  "shutdown",
+			Value: 10 * time.Second,
+			Usage: "HTTP shutdown timeout",
 		},
 	},
 	Action: func(c *cli.Context) error {
-		app := fiber.New(fiber.Config{ReadTimeout: c.Duration("timeout")})
-		app.Use(fiberzerolog.New(fiberzerolog.Config{Logger: &log.Logger}))
+		gin.SetMode(gin.ReleaseMode)
+		router := gin.New()
+		router.Use(gin.LoggerWithConfig(gin.LoggerConfig{
+			Output: &log.Logger,
+			Formatter: func(params gin.LogFormatterParams) string {
+				return fmt.Sprintf("%s - %s - %d - %v", params.Method, params.Request.URL, params.StatusCode, params.Latency)
+			},
+		}))
+		router.Use(gin.Recovery())
 
-		app.Get("/", endpoint.HelloHandler)
-		app.Get("/error", endpoint.ErrorHandler)
-		app.Get("/rectangle-size", endpoint.RectangleSizeHandler)
-		app.Get("/stack", endpoint.StackHandler)
+		router.GET("/", endpoint.HelloHandler)
+		router.GET("/error", endpoint.ErrorHandler)
+		router.GET("/rectangle-size", endpoint.RectangleSizeHandler)
 
-		return util.GracefulShutdown(app, c.String("addr"))
+		srv := &http.Server{
+			Addr:         c.String("addr"),
+			Handler:      router,
+			ReadTimeout:  c.Duration("rw"),
+			WriteTimeout: c.Duration("rw"),
+		}
+
+		return util.GracefulShutdown(srv, c.Duration("shutdown"))
 	},
 }
