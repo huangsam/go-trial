@@ -31,18 +31,18 @@ bash scripts/lint.sh
 
 ### Run the binary
 
-After the build runs successfully, the `gotrial` binary should exist at the root
-directory of this repo. Here are some commands to get you started:
+After the build runs successfully, the `gotrial` binary should exist at the
+`bin` directory of this repo. Here are some commands to start with:
 
 ```shell
 # Get help for global command
-./gotrial help
+./bin/gotrial help
 
 # Get help for subcommand
-./gotrial help demo
+./bin/gotrial help demo
 
 # Run a command
-./gotrial demo
+./bin/gotrial demo
 ```
 
 ### See the docs
@@ -83,9 +83,11 @@ mockery
 
 Here are the steps to run the `gotrial` CLI as a container:
 
-```
+```shell
+# Run Docker build
 bash scripts/docker.sh
 
+# Run Docker container
 docker run --rm -it huangsam/gotrial:latest
 ```
 
