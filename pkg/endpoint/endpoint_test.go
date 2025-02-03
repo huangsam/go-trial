@@ -7,19 +7,19 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/huangsam/go-trial/pkg/endpoint"
+	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestHandler(t *testing.T) {
-	router := gin.New()
+	router := echo.New()
 
 	testCases := []struct {
 		name             string
 		path             string
 		query            string
-		handler          gin.HandlerFunc
+		handler          echo.HandlerFunc
 		expectedStatus   int
 		expectedContains []string
 	}{

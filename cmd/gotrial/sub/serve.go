@@ -1,14 +1,13 @@
 package sub
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
-	"github.com/rs/zerolog/log"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/urfave/cli/v2"
 )
 
@@ -35,23 +34,17 @@ var ServeCommand *cli.Command = &cli.Command{
 		},
 	},
 	Action: func(c *cli.Context) error {
-		gin.SetMode(gin.ReleaseMode)
-		router := gin.New()
-		router.Use(gin.LoggerWithConfig(gin.LoggerConfig{
-			Output: &log.Logger,
-			Formatter: func(params gin.LogFormatterParams) string {
-				return fmt.Sprintf("%s - %s - %d - %v", params.Method, params.Request.URL, params.StatusCode, params.Latency)
-			},
-		}))
-		router.Use(gin.Recovery())
+		e := echo.New()
+		e.Use(util.ZerologMiddleware)
+		e.Use(middleware.Recover())
 
-		router.GET("/", endpoint.HelloHandler)
-		router.GET("/error", endpoint.ErrorHandler)
-		router.GET("/rectangle-size", endpoint.RectangleSizeHandler)
+		e.GET("/", endpoint.HelloHandler)
+		e.GET("/error", endpoint.ErrorHandler)
+		e.GET("/rectangle-size", endpoint.RectangleSizeHandler)
 
 		srv := &http.Server{
 			Addr:         c.String("addr"),
-			Handler:      router,
+			Handler:      e,
 			ReadTimeout:  c.Duration("rw"),
 			WriteTimeout: c.Duration("rw"),
 		}

@@ -1,8 +1,12 @@
 package endpoint
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+)
 
 // HelloHandler returns a simple greeting as text.
-func HelloHandler(c *gin.Context) {
-	c.String(200, "Hello world")
+func HelloHandler(c echo.Context) error {
+	return c.String(http.StatusOK, "Hello world")
 }

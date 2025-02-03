@@ -1,12 +1,11 @@
 package endpoint
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
-	"github.com/gin-gonic/gin"
 	"github.com/huangsam/go-trial/pkg/abstraction"
+	"github.com/labstack/echo/v4"
 )
 
 type RectanglePayload struct {
@@ -20,16 +19,14 @@ type RectanglePayload struct {
 //
 // Accepts 'width' and 'height' query parameters (defaulting to 1.0).
 // Returns an error if width or height are not valid numbers.
-func RectangleSizeHandler(c *gin.Context) {
-	width, err := strconv.ParseFloat(c.DefaultQuery("width", "1.0"), 64)
-	if errors.Is(err, strconv.ErrSyntax) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+func RectangleSizeHandler(c echo.Context) error {
+	width, err := strconv.ParseFloat(c.QueryParam("width"), 64)
+	if err != nil {
+		width = 1.0
 	}
-	height, err := strconv.ParseFloat(c.DefaultQuery("height", "1.0"), 64)
-	if errors.Is(err, strconv.ErrSyntax) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+	height, err := strconv.ParseFloat(c.QueryParam("height"), 64)
+	if err != nil {
+		height = 1.0
 	}
 	rect := abstraction.Rectangle{Width: width, Height: height}
 	size := abstraction.Classify(&rect)
@@ -39,5 +36,5 @@ func RectangleSizeHandler(c *gin.Context) {
 		Dimensions: rect,
 		Size:       size.String(),
 	}
-	c.JSON(http.StatusOK, payload)
+	return c.JSON(http.StatusOK, payload)
 }
