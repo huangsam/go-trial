@@ -31,21 +31,21 @@ bash scripts/lint.sh
 
 To learn more, please consult the [user guide](USERGUIDE.md).
 
-## Goals
+## Learning path
 
-Here is a checklist of things I want to cover:
+Here is a checklist of things that are covered.
 
 ### Core concepts
 
-- [x] [Intro to functions, structs](pkg/basicintro/)
-- [x] [Data structures](pkg/datastructure/)
-- [x] [Goroutines, channels, sync primitives](pkg/concurrency/)
-- [x] [Interfaces, generics, mocking](pkg/abstraction/)
+- [Intro to functions, structs](pkg/basicintro/)
+- [Data structures](pkg/datastructure/)
+- [Goroutines, channels, sync primitives](pkg/concurrency/)
+- [Interfaces, generics, mocking](pkg/abstraction/)
 
 ### Applied concepts
 
-- [x] [Config, I/O, time](pkg/realworld/)
-- [x] [HTTP endpoints](pkg/endpoint/)
+- [Config, I/O, time](pkg/realworld/)
+- [HTTP endpoints](pkg/endpoint/)
 
 ## Useful resources
 
