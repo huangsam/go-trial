@@ -1,4 +1,4 @@
-# Developer User Guide
+# User guide
 
 This content is for developers who are want to experiment with the repository at
 a deeper level.
