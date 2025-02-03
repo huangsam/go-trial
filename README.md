@@ -116,7 +116,7 @@ Here is a checklist of things I want to cover:
 - [avelino/awesome-go](https://github.com/avelino/awesome-go): Awesome Go frameworks, libraries, software.
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout): Standard Go project layout.
 
-#### Tools
+#### Libraries, frameworks, tools
 
 - [gocolly/colly](https://github.com/gocolly/colly): Elegant and fast web scraping framework.
 - [gofiber/fiber](https://github.com/gofiber/fiber): Express.js inspired web framework.
