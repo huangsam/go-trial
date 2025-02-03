@@ -6,7 +6,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-// ZerologMiddleware emits a log event for each incoming HTTP request
+// ZerologMiddleware emits a log for each incoming HTTP request.
 var ZerologMiddleware echo.MiddlewareFunc = middleware.RequestLoggerWithConfig(middleware.RequestLoggerConfig{
 	LogURI:    true,
 	LogStatus: true,
