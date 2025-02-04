@@ -1,14 +1,12 @@
 # Compiled binaries
-**/bin
+bin/
 
 # Test results
-**/coverage.*
-**/test-results
+coverage.*
 
 # IDE and editor files
-.idea
-.vscode
-*.iml
+.idea/
+.vscode/
 
 # Hidden files
 .DS_Store
