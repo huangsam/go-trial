@@ -8,6 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// RectanglePayload is the JSON response for RectangleSizeHandler.
 type RectanglePayload struct {
 	Area       float64               `json:"area"`
 	Perimeter  float64               `json:"perimeter"`
