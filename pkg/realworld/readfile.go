@@ -20,9 +20,5 @@ func ReadLines(path string) ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return lines, nil
+	return lines, err
 }
