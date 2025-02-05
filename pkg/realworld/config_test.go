@@ -51,6 +51,12 @@ func TestYamlConfig(t *testing.T) {
 		assert.Nil(t, k.Unmarshal("", &cfg))
 		assertAppConfig(t, &cfg)
 	})
+
+	t.Run("Raw", func(t *testing.T) {
+		cfg, err := realworld.ReadYAMLConfigRaw(testYamlLocation)
+		assert.Nil(t, err)
+		assertAppConfig(t, cfg)
+	})
 }
 
 func BenchmarkJsonConfig(b *testing.B) {
@@ -77,6 +83,12 @@ func BenchmarkYamlConfig(b *testing.B) {
 			_ = k.Load(file.Provider(testYamlLocation), kjson.Parser())
 			var cfg realworld.AppConfig
 			_ = k.Unmarshal("", &cfg)
+		}
+	})
+
+	b.Run("Raw", func(b *testing.B) {
+		if _, err := realworld.ReadYAMLConfigRaw(testYamlLocation); err != nil {
+			b.Errorf("Unexpected error: %v", err)
 		}
 	})
 }

@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io"
 	"os"
+
+	"gopkg.in/yaml.v3"
 )
 
 // AppConfig represents the data model for app config.
@@ -26,6 +28,25 @@ func ReadJSONConfigRaw(path string) (*AppConfig, error) {
 	}
 	var cfg AppConfig
 	if err = json.Unmarshal(content, &cfg); err != nil {
+		return nil, err
+	} else {
+		return &cfg, nil
+	}
+}
+
+// ReadYAMLConfigRaw reads YAML config with the raw standard library.
+func ReadYAMLConfigRaw(path string) (*AppConfig, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	content, err := io.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
+	var cfg AppConfig
+	if err = yaml.Unmarshal(content, &cfg); err != nil {
 		return nil, err
 	} else {
 		return &cfg, nil
