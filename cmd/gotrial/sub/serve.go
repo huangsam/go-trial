@@ -41,6 +41,7 @@ var ServeCommand *cli.Command = &cli.Command{
 		e.GET("/", endpoint.HelloHandler)
 		e.GET("/error", endpoint.ErrorHandler)
 		e.GET("/rectangle-size", endpoint.RectangleSizeHandler)
+		e.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
 
 		srv := &http.Server{
 			Addr:         c.String("addr"),

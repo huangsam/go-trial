@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
@@ -67,4 +68,41 @@ func TestHandler(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestBasicAuthHandler(t *testing.T) {
+	router := echo.New()
+
+	t.Run("No auth header", func(t *testing.T) {
+		router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
+		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
+		w := httptest.NewRecorder()
+
+		router.ServeHTTP(w, req)
+
+		resp := w.Result()
+		assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
+
+		body, err := io.ReadAll(resp.Body)
+		assert.NoError(t, err)
+		assert.NotEmpty(t, string(body), "Body should not be empty")
+		assert.Contains(t, string(body), "Unauthorized")
+	})
+
+	t.Run("Valid auth header", func(t *testing.T) {
+		router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
+		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
+		req.Header.Set("Authorization", "Basic YWRtaW46YWRtaW4=") // base64 for "admin:admin"
+		w := httptest.NewRecorder()
+
+		router.ServeHTTP(w, req)
+
+		resp := w.Result()
+		assert.Equal(t, http.StatusOK, resp.StatusCode)
+
+		body, err := io.ReadAll(resp.Body)
+		assert.NoError(t, err)
+		assert.NotEmpty(t, string(body), "Body should not be empty")
+		assert.Contains(t, string(body), "Hello")
+	})
 }
