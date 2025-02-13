@@ -1,6 +1,6 @@
 module github.com/huangsam/go-trial
 
-go 1.24
+go 1.23
 
 require (
 	github.com/gocolly/colly/v2 v2.1.0
