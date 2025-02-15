@@ -8,5 +8,5 @@ coverage.*
 .idea/
 .vscode/
 
-# Hidden files
+# MacOS
 .DS_Store
