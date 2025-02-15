@@ -1,0 +1,5 @@
+Your car is a {{.Make}} {{.Model}}, made in {{.ModelYear}}.
+
+Your car has {{.WheelCount}} wheels.
+
+You have driven {{.MileCount}} miles.

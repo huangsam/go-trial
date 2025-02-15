@@ -17,13 +17,7 @@ type Car struct {
 
 // GetCarSimpleInfo returns simple info for a car.
 func GetCarSimpleInfo(car *Car) (string, error) {
-	tmpl, err := template.New("carSimpleTemplate").Parse(`
-Your car is a {{.Make}} {{.Model}}, made in {{.ModelYear}}.
-
-Your car has {{.WheelCount}} wheels.
-
-You have driven {{.MileCount}} miles.
-`)
+	tmpl, err := template.ParseFiles("testdata/car-simple.template")
 	if err != nil {
 		return "", err
 	}
