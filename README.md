@@ -34,7 +34,9 @@ To learn more, please consult the [user guide](USERGUIDE.md).
 
 ## Learning path
 
-Here is the path to getting proficient in a matter of weeks:
+This learning path is designed to take you from Go beginner to proficient
+in a matter of weeks. Each section contains practical examples to read
+and experiment with.
 
 ### Core concepts
 
