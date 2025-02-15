@@ -54,19 +54,8 @@ and experiment with.
 
 ### GitHub projects
 
-#### Content
-
 - [avelino/awesome-go](https://github.com/avelino/awesome-go): Awesome Go frameworks, libraries, software.
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout): Standard Go project layout.
-
-#### Libraries, frameworks, tools
-
-- [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner.
-- [knadh/koanf](https://github.com/knadh/koanf): Simple configuration management.
-- [labstack/echo](https://github.com/labstack/echo): High performance, minimalist Go web framework.
-- [rs/zerolog](https://github.com/rs/zerolog): Efficient JSON logger.
-- [urfave/cli](https://github.com/urfave/cli): Simple, fast, fun CLIs.
-- [vektra/mockery](https://github.com/vektra/mockery): Mock code autogenerator.
 
 ### Online tutorials
 
