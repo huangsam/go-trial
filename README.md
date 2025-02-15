@@ -45,7 +45,7 @@ Here is the path to getting proficient in a matter of weeks:
 
 ### Applied concepts
 
-- [Config, I/O, time](pkg/realworld/)
+- [General I/O, time](pkg/realworld/)
 - [HTTP endpoints](pkg/endpoint/)
 
 ## Useful resources
