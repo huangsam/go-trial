@@ -38,14 +38,14 @@ Here is the path to getting proficient in a matter of weeks:
 
 ### Core concepts
 
-- [Intro to functions, structs](pkg/basicintro/)
-- [Data structures](pkg/datastructure/)
-- [Goroutines, channels, sync primitives](pkg/concurrency/)
+- [Functions, structs, pointers](pkg/basicintro/)
+- [Common data structures](pkg/datastructure/)
+- [Goroutines, channels, synchronization](pkg/concurrency/)
 - [Interfaces, generics, mocking](pkg/abstraction/)
 
 ### Applied concepts
 
-- [General I/O, time](pkg/realworld/)
+- [Files, I/O, time](pkg/realworld/)
 - [HTTP endpoints](pkg/endpoint/)
 
 ## Useful resources
