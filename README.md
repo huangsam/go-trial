@@ -59,7 +59,6 @@ Here is the path to getting proficient in a matter of weeks:
 
 #### Libraries, frameworks, tools
 
-- [gocolly/colly](https://github.com/gocolly/colly): Elegant and fast web scraping framework.
 - [golangci/golangci-lint](https://github.com/golangci/golangci-lint): Fast linters runner.
 - [knadh/koanf](https://github.com/knadh/koanf): Simple configuration management.
 - [labstack/echo](https://github.com/labstack/echo): High performance, minimalist Go web framework.
