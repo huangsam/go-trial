@@ -17,7 +17,7 @@ type Car struct {
 
 // GetCarSimpleInfo returns simple info for a car.
 func GetCarSimpleInfo(car *Car) (string, error) {
-	tmpl, err := template.ParseFiles("testdata/car-simple.template")
+	tmpl, err := template.ParseFiles(TemplatePath + "/car-simple.template")
 	if err != nil {
 		return "", err
 	}
