@@ -72,9 +72,9 @@ func TestHandler(t *testing.T) {
 
 func TestBasicAuthHandler(t *testing.T) {
 	router := echo.New()
+	router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
 
 	t.Run("No auth header", func(t *testing.T) {
-		router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
 		w := httptest.NewRecorder()
 
@@ -90,7 +90,6 @@ func TestBasicAuthHandler(t *testing.T) {
 	})
 
 	t.Run("Valid auth header", func(t *testing.T) {
-		router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
 		req.Header.Set("Authorization", "Basic YWRtaW46YWRtaW4=") // base64 for "admin:admin"
 		w := httptest.NewRecorder()
