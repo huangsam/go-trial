@@ -1,7 +1,6 @@
 package basicintro_test
 
 import (
-	"errors"
 	"testing"
 
 	"github.com/huangsam/go-trial/pkg/basicintro"
@@ -90,7 +89,7 @@ func TestDivide(t *testing.T) {
 		{name: "Negative Numbers", args: args{num1: -10, num2: -2}, want: 5, wantErr: nil},
 		{name: "Positive and Negative", args: args{num1: 10, num2: -2}, want: -5, wantErr: nil},
 		{name: "Zero Dividend", args: args{num1: 0, num2: 5}, want: 0, wantErr: nil},
-		{name: "Division by Zero", args: args{num1: 5, num2: 0}, want: 0, wantErr: errors.New("division by zero")},
+		{name: "Division by Zero", args: args{num1: 5, num2: 0}, want: 0, wantErr: basicintro.ErrDivision},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

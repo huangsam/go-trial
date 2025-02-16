@@ -1,7 +1,5 @@
 package basicintro
 
-import "errors"
-
 // Add returns the sum of two integers.
 func Add(num1 int, num2 int) int {
 	return num1 + num2
@@ -20,7 +18,7 @@ func Multiply(num1 int, num2 int) int {
 // Divide returns the quotient of two integers and an error if division by zero occurs.
 func Divide(num1 int, num2 int) (int, error) {
 	if num2 == 0 {
-		return 0, errors.New("division by zero")
+		return 0, ErrDivision
 	}
 	return num1 / num2, nil
 }
