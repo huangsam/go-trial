@@ -37,6 +37,8 @@ func (s ShapeSize) String() string {
 //   - Small: Area <= 10
 //   - Medium: 10 < Area <= 100
 //   - Large: Area > 100
+//
+// Assume that shape area is greater than or equal to 0.
 func Classify[T Shape](shape T) ShapeSize {
 	area := shape.Area()
 	switch {
