@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/huangsam/go-trial/internal/model"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/rs/zerolog/log"
@@ -19,10 +20,13 @@ import (
 // Returns an Echo middleware function that checks the provided credentials against
 // predefined admin credentials (AdminUser and AdminPass).
 // If the credentials are valid, the request is allowed to proceed; otherwise, an error is returned.
-func SetupBasicAuth(username, password string) echo.MiddlewareFunc {
+func SetupBasicAuth(accounts ...model.UserAccount) echo.MiddlewareFunc {
 	return middleware.BasicAuth(func(u, p string, c echo.Context) (bool, error) {
-		if u == username && p == password {
-			return true, nil
+		// Use a cache or a database in production
+		for _, account := range accounts {
+			if u == account.Username && p == account.Password {
+				return true, nil
+			}
 		}
 		return false, errors.New("invalid user credentials")
 	})

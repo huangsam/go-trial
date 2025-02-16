@@ -8,6 +8,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/huangsam/go-trial/internal/model"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/labstack/echo/v4"
@@ -73,10 +74,10 @@ func TestHandler(t *testing.T) {
 
 func TestBasicAuthHandler(t *testing.T) {
 	router := echo.New()
-	user, pass := "foo", "bar"
-	basicAuth := base64.StdEncoding.EncodeToString([]byte(user + ":" + pass))
+	acc := model.UserAccount{Username: "foo", Password: "bar"}
+	basicAuth := base64.StdEncoding.EncodeToString([]byte(acc.Username + ":" + acc.Password))
 
-	router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth(user, pass))
+	router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth(acc))
 
 	t.Run("No auth header", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)

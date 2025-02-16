@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/huangsam/go-trial/internal/model"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/labstack/echo/v4"
@@ -48,7 +49,8 @@ var ServeCommand *cli.Command = &cli.Command{
 		e.Use(util.ZerologMiddleware)
 		e.Use(middleware.Recover())
 
-		authMiddleware := util.SetupBasicAuth(c.String("user"), c.String("pass"))
+		acc := model.UserAccount{Username: c.String("user"), Password: c.String("pass")}
+		authMiddleware := util.SetupBasicAuth(acc)
 
 		e.GET("/", endpoint.HelloHandler)
 		e.GET("/error", endpoint.ErrorHandler)
