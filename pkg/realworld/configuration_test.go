@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	testJsonLocation string = FixturePath + "/config.json"
-	testYamlLocation string = FixturePath + "/config.yml"
+	testJsonLocation string = fixturesPath + "/config.json"
+	testYamlLocation string = fixturesPath + "/config.yml"
 )
 
 func assertAppConfig(t *testing.T, cfg *realworld.AppConfig) {

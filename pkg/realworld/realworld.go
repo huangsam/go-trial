@@ -1,4 +1,4 @@
-// Package realworld has examples that involve data, time, etc.
+// Package realworld has examples with files, I/O, time.
 package realworld
 
-const TemplatePath = "templates"
+const templatesPath = "templates"

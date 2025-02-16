@@ -1,3 +1,3 @@
 package realworld_test
 
-const FixturePath = "fixtures"
+const fixturesPath = "fixtures"
