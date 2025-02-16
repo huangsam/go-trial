@@ -1,6 +1,7 @@
 package endpoint_test
 
 import (
+	"encoding/base64"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -72,7 +73,10 @@ func TestHandler(t *testing.T) {
 
 func TestBasicAuthHandler(t *testing.T) {
 	router := echo.New()
-	router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
+	user, pass := "foo", "bar"
+	basicAuth := base64.StdEncoding.EncodeToString([]byte(user + ":" + pass))
+
+	router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth(user, pass))
 
 	t.Run("No auth header", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
@@ -91,7 +95,7 @@ func TestBasicAuthHandler(t *testing.T) {
 
 	t.Run("Valid auth header", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
-		req.Header.Set("Authorization", "Basic YWRtaW46YWRtaW4=") // base64 for "admin:admin"
+		req.Header.Set("Authorization", "Basic "+basicAuth)
 		w := httptest.NewRecorder()
 
 		router.ServeHTTP(w, req)

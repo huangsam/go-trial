@@ -32,16 +32,28 @@ var ServeCommand *cli.Command = &cli.Command{
 			Value: 10 * time.Second,
 			Usage: "HTTP shutdown timeout",
 		},
+		&cli.StringFlag{
+			Name:  "user",
+			Value: "admin",
+			Usage: "Login username",
+		},
+		&cli.StringFlag{
+			Name:  "pass",
+			Value: "admin",
+			Usage: "Login password",
+		},
 	},
 	Action: func(c *cli.Context) error {
 		e := echo.New()
 		e.Use(util.ZerologMiddleware)
 		e.Use(middleware.Recover())
 
+		authMiddleware := util.SetupBasicAuth(c.String("user"), c.String("pass"))
+
 		e.GET("/", endpoint.HelloHandler)
 		e.GET("/error", endpoint.ErrorHandler)
 		e.GET("/rectangle-size", endpoint.RectangleSizeHandler)
-		e.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth())
+		e.GET("/secret", endpoint.HelloHandler, authMiddleware)
 
 		srv := &http.Server{
 			Addr:         c.String("addr"),
