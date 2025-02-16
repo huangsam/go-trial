@@ -8,5 +8,5 @@ coverage.*
 .idea/
 .vscode/
 
-# MacOS
+# OS
 .DS_Store
