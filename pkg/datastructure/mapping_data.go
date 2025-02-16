@@ -5,7 +5,7 @@ import (
 	"maps"
 )
 
-var fruitNumberMap map[string]int = map[string]int{
+var fruitNumberMap = map[string]int{
 	"apple":  1,
 	"banana": 2,
 	"cherry": 3,

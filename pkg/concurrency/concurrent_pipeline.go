@@ -4,10 +4,10 @@ import "github.com/huangsam/go-trial/internal/util"
 
 const (
 	// squareChannelCount is the number of square channels.
-	squareChannelCount int = 4
+	squareChannelCount = 4
 
 	// doubleChannelCount is the number of double channels.
-	doubleChannelCount int = 2
+	doubleChannelCount = 2
 )
 
 // square squares the input.

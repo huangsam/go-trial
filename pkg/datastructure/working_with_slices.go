@@ -2,7 +2,7 @@ package datastructure
 
 import "slices"
 
-var positiveSlice []int = []int{1, 2, 3, 4, 5}
+var positiveSlice = []int{1, 2, 3, 4, 5}
 
 // PositiveSliceContains checks if positiveSlice contains a specific value.
 func PositiveSliceContains(value int) bool {
