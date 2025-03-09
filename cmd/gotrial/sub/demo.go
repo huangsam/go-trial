@@ -1,9 +1,12 @@
 package sub
 
 import (
+	"fmt"
+
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/huangsam/go-trial/pkg/concurrency"
+	"github.com/huangsam/go-trial/pkg/realworld"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
 )
@@ -14,16 +17,21 @@ var DemoCommand *cli.Command = &cli.Command{
 	Usage:       "Run demo with some pkg functions",
 	Description: "This command runs functions from multiple packages.",
 	Action: func(c *cli.Context) error {
-		log.Debug().Msg(basicintro.GreetWorld())
-
-		log.Info().Msg(basicintro.GreetName("Peter"))
+		log.Info().Msg(basicintro.GreetWorld())
 
 		circle := abstraction.Circle{Radius: 6}
 		size := abstraction.Classify(circle)
-		log.Warn().Msgf("Circle size is %v", size)
+		log.Info().Msgf("Circle size is %v", size)
 
 		answers := concurrency.GetAnswersWithChannels()
-		log.Error().Interface("answers", answers).Msg("Got answers with channels")
+		log.Info().Interface("answers", answers).Msg("Got answers with channels")
+
+		car := realworld.Car{Make: "Honda", Model: "Civic", ModelYear: 2025, WheelCount: 4, MileCount: 1234}
+		content, err := realworld.RenderCarInfo(&car)
+		if err != nil {
+			return err
+		}
+		fmt.Println(content)
 
 		return nil
 	},
