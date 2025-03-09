@@ -7,12 +7,18 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var sampleAddress = basicintro.Address{Street: "1234 Magic Avenue", Zip: "12345-6789"}
+
 func TestPersonFields(t *testing.T) {
 	var expectedName string = "John"
 	var expectedAge int = 12
-	person := basicintro.Person{expectedName, expectedAge}
-	assert.Equal(t, expectedName, person.Name)
-	assert.Equal(t, expectedAge, person.Age)
+	var expectedStreet string = "1234 Magic Avenue"
+	var expectedZip string = "12345-6789"
+	person := basicintro.Person{expectedName, expectedAge, sampleAddress}
+	assert.Equal(t, expectedName, person.Name)       // Normal access
+	assert.Equal(t, expectedAge, person.Age)         // Normal access
+	assert.Equal(t, expectedStreet, person.Street)   // Embedded access
+	assert.Equal(t, expectedZip, person.Address.Zip) // Nested access
 }
 
 func TestPerson_IsOlderThan(t *testing.T) {
@@ -29,7 +35,7 @@ func TestPerson_IsOlderThan(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			person := basicintro.Person{"Jerry", tt.age}
+			person := basicintro.Person{"Jerry", tt.age, sampleAddress}
 			assert.Equal(t, tt.expected, person.IsOlderThan(tt.compare))
 		})
 	}

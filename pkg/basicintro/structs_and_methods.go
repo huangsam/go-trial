@@ -4,6 +4,13 @@ package basicintro
 type Person struct {
 	Name string
 	Age  int
+	Address
+}
+
+type Address struct {
+	Street string
+	City   string
+	Zip    string
 }
 
 // IsOlderThan returns true if the person's age is greater than or equal to the target age.
