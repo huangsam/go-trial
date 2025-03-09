@@ -17,11 +17,35 @@ var exampleCar = &realworld.Car{
 	MileCount:  15000,
 }
 
-func TestGetCarSimpleInfo(t *testing.T) {
-	info, err := realworld.GetCarSimpleInfo(exampleCar)
+// An example employee to use for testing purposes
+var exampleEmployee = &realworld.Employee{
+	FirstName: "John",
+	LastName:  "Doe",
+	Age:       20,
+	IsManager: false,
+	Skills:    []string{"Java", "Python", "JavaScript"},
+	Salary:    100000,
+}
+
+func TestRenderCarInfo(t *testing.T) {
+	info, err := realworld.RenderCarInfo(exampleCar)
 	assert.Nil(t, err)
 	assert.NotNil(t, info)
 	assert.Contains(t, info, exampleCar.Make)
 	assert.Contains(t, info, exampleCar.Model)
 	assert.Contains(t, info, "made in "+strconv.Itoa(exampleCar.ModelYear))
+}
+
+func TestRenderEmployeeInfo(t *testing.T) {
+	info, err := realworld.RenderEmployeeInfo(exampleEmployee)
+	assert.Nil(t, err)
+	assert.NotNil(t, info)
+	assert.Contains(t, info, exampleEmployee.FirstName)
+	assert.Contains(t, info, exampleEmployee.LastName)
+	for _, skill := range exampleEmployee.Skills {
+		assert.Contains(t, info, skill)
+	}
+	assert.Contains(t, info, strconv.Itoa(exampleEmployee.Age))
+	assert.Contains(t, info, "Role: Individual Contributor")
+	assert.Contains(t, info, strconv.Itoa(exampleEmployee.Salary))
 }

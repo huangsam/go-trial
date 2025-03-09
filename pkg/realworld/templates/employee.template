@@ -1,0 +1,25 @@
+Employee: {{.FirstName}} {{.LastName}}
+
+{{if .IsManager}}
+Role: Manager
+{{else}}
+Role: Individual Contributor
+{{end}}
+
+Age: {{.Age}}
+
+Skills:
+{{range .Skills}}
+- {{.}}
+{{end}}
+
+Salary: ${{printf "%.2f" .Salary}}
+
+{{if gt .Age 30}}
+This employee is over 30 years old.
+{{else}}
+This employee is 30 years old or younger.
+{{end}}
+
+{{$skillCount := len .Skills}}
+This employee has {{$skillCount}} skills.

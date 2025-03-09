@@ -10,7 +10,7 @@ import (
 //go:embed templates/*
 var templatesFS embed.FS
 
-// Car model
+// Car is a template-based model for cars.
 type Car struct {
 	Make       string // Car make
 	Model      string // Car model
@@ -19,11 +19,34 @@ type Car struct {
 	MileCount  int    // Number of miles driven
 }
 
-// GetCarSimpleInfo returns simple info for a car.
-func GetCarSimpleInfo(car *Car) (string, error) {
-	tmpl, err := template.ParseFS(templatesFS, "templates/car-simple.template")
+// Employee is a template-based model for employees.
+type Employee struct {
+	FirstName string
+	LastName  string
+	Age       int
+	IsManager bool
+	Skills    []string
+	Salary    int
+}
+
+// RenderCarInfo returns info for a car.
+//
+// The embedded template showcases simple template syntax.
+func RenderCarInfo(car *Car) (string, error) {
+	tmpl, err := template.ParseFS(templatesFS, "templates/car.template")
 	if err != nil {
 		return "", err
 	}
 	return util.RenderToString(tmpl, car)
+}
+
+// RenderEmployeeInfo returns info for an employee.
+//
+// The embedded template showcases complex template syntax.
+func RenderEmployeeInfo(emp *Employee) (string, error) {
+	tmpl, err := template.ParseFS(templatesFS, "templates/employee.template")
+	if err != nil {
+		return "", err
+	}
+	return util.RenderToString(tmpl, emp)
 }
