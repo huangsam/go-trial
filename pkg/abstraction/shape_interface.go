@@ -39,7 +39,7 @@ func (s ShapeSize) String() string {
 //   - Large: Area > 100
 //
 // Assume that shape area is greater than or equal to 0.
-func Classify[T Shape](shape T) ShapeSize {
+func Classify(shape Shape) ShapeSize {
 	area := shape.Area()
 	switch {
 	case area <= 10:
