@@ -1,8 +1,6 @@
 package abstraction
 
-import (
-	"math"
-)
+import "math"
 
 // Shape defines an interface for any geometric shape.
 type Shape interface {

@@ -10,10 +10,10 @@ import (
 
 // RectanglePayload is the JSON response for RectangleSizeHandler.
 type RectanglePayload struct {
-	Area       float64               `json:"area"`
-	Perimeter  float64               `json:"perimeter"`
-	Dimensions abstraction.Rectangle `json:"dimensions"`
-	Size       string                `json:"size"`
+	Area       float64           `json:"area"`
+	Perimeter  float64           `json:"perimeter"`
+	Dimensions abstraction.Shape `json:"dimensions"`
+	Size       string            `json:"size"`
 }
 
 // RectangleSizeHandler returns rectangle info as JSON.
@@ -29,8 +29,8 @@ func RectangleSizeHandler(c echo.Context) error {
 	if err != nil {
 		height = 1.0
 	}
-	rect := abstraction.Rectangle{Width: width, Height: height}
-	size := abstraction.Classify(&rect)
+	rect := abstraction.NewRectangle(width, height)
+	size := abstraction.Classify(rect)
 	payload := RectanglePayload{
 		Area:       rect.Area(),
 		Perimeter:  rect.Perimeter(),
