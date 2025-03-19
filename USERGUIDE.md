@@ -59,7 +59,7 @@ Here are the steps to run the `gotrial` CLI as a container:
 
 ```shell
 # Run Docker build
-bash scripts/docker.sh
+bash scripts/build.sh docker
 
 # Run Docker container
 docker run --rm -it huangsam/gotrial:latest
