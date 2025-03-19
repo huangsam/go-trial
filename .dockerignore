@@ -1,12 +1,14 @@
 # Compiled binaries
-bin/
+/bin/
+
+# IDE and editor settings
+/.vscode/
 
 # Test results
 coverage.*
 
-# IDE and editor files
-.idea/
-.vscode/
-
 # OS
 .DS_Store
+
+# Documentation
+*.md
