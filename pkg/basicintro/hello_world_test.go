@@ -29,14 +29,14 @@ func TestName(t *testing.T) {
 }
 
 func BenchmarkWorld(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		basicintro.GreetWorld()
 	}
 }
 
 func BenchmarkName(b *testing.B) {
 	name := "Alice"
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		basicintro.GreetName(name)
 	}
 }

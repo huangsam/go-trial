@@ -1,11 +1,32 @@
 package abstraction_test
 
 import (
+	"math"
 	"testing"
 
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestRectangleArea(t *testing.T) {
+	rect := abstraction.Rectangle{Width: 5, Height: 3}
+	assert.Equal(t, 15.0, rect.Area())
+}
+
+func TestRectanglePerimeter(t *testing.T) {
+	rect := abstraction.Rectangle{Width: 5, Height: 3}
+	assert.Equal(t, 16.0, rect.Perimeter())
+}
+
+func TestCircleArea(t *testing.T) {
+	circle := abstraction.Circle{Radius: 2}
+	assert.Equal(t, math.Pi*4, circle.Area())
+}
+
+func TestCirclePerimeter(t *testing.T) {
+	circle := abstraction.Circle{Radius: 2}
+	assert.Equal(t, 4*math.Pi, circle.Perimeter())
+}
 
 func TestShapeSize_String(t *testing.T) {
 	tests := []struct {
@@ -49,32 +70,32 @@ func TestClassify(t *testing.T) {
 	}{
 		{
 			name:  "Small rectangle",
-			shape: abstraction.Rectangle{Width: 2, Height: 2},
+			shape: abstraction.NewRectangle(2, 2),
 			want:  abstraction.SizeSmall,
 		},
 		{
 			name:  "Medium rectangle",
-			shape: abstraction.Rectangle{Width: 5, Height: 5},
+			shape: abstraction.NewRectangle(5, 5),
 			want:  abstraction.SizeMedium,
 		},
 		{
 			name:  "Large rectangle",
-			shape: abstraction.Rectangle{Width: 11, Height: 11},
+			shape: abstraction.NewRectangle(11, 11),
 			want:  abstraction.SizeLarge,
 		},
 		{
 			name:  "Small circle",
-			shape: abstraction.Circle{Radius: 1},
+			shape: abstraction.NewCircle(1),
 			want:  abstraction.SizeSmall,
 		},
 		{
 			name:  "Medium circle",
-			shape: abstraction.Circle{Radius: 5},
+			shape: abstraction.NewCircle(5),
 			want:  abstraction.SizeMedium,
 		},
 		{
 			name:  "Large circle",
-			shape: abstraction.Circle{Radius: 6},
+			shape: abstraction.NewCircle(6),
 			want:  abstraction.SizeLarge,
 		},
 	}
@@ -88,14 +109,14 @@ func TestClassify(t *testing.T) {
 
 func BenchmarkClassify(b *testing.B) {
 	b.Run("Rectangle", func(b *testing.B) {
-		rect := abstraction.Rectangle{Width: 5, Height: 5}
-		for i := 0; i < b.N; i++ {
+		rect := abstraction.NewRectangle(5, 5)
+		for b.Loop() {
 			abstraction.Classify(rect)
 		}
 	})
 	b.Run("Circle", func(b *testing.B) {
-		circle := abstraction.Circle{Radius: 5}
-		for i := 0; i < b.N; i++ {
+		circle := abstraction.NewCircle(5)
+		for b.Loop() {
 			abstraction.Classify(circle)
 		}
 	})

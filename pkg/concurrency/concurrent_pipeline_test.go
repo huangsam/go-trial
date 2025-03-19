@@ -32,12 +32,12 @@ func TestMultiStagePipeline(t *testing.T) {
 func BenchmarkMultiStagePipeline(b *testing.B) {
 	from, to := 1, 1000
 	b.Run("Simple", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			_ = concurrency.MultiStagePipelineSimple(from, to)
 		}
 	})
 	b.Run("Merge", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			_ = concurrency.MultiStagePipelineMerge(from, to)
 		}
 	})

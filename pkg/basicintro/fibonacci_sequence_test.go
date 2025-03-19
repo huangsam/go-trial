@@ -35,12 +35,12 @@ func TestFibonacci(t *testing.T) {
 func BenchmarkFibonacci(b *testing.B) {
 	n := 40
 	b.Run("Iterative", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			basicintro.FibonacciIterative(n)
 		}
 	})
 	b.Run("Recursive", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			basicintro.FibonacciRecursive(n)
 		}
 	})

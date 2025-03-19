@@ -59,7 +59,7 @@ func TestYamlConfig(t *testing.T) {
 func BenchmarkJsonConfig(b *testing.B) {
 	b.Run("Koanf", func(b *testing.B) {
 		k := koanf.New(".")
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			_ = k.Load(file.Provider(testJsonPath), kjson.Parser())
 			var cfg realworld.AppConfig
 			_ = k.Unmarshal("", &cfg)
@@ -76,7 +76,7 @@ func BenchmarkJsonConfig(b *testing.B) {
 func BenchmarkYamlConfig(b *testing.B) {
 	b.Run("Koanf", func(b *testing.B) {
 		k := koanf.New(".")
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			_ = k.Load(file.Provider(testYamlPath), kjson.Parser())
 			var cfg realworld.AppConfig
 			_ = k.Unmarshal("", &cfg)

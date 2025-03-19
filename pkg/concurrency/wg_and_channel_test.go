@@ -37,7 +37,7 @@ func BenchmarkGetAnswers(b *testing.B) {
 
 	for _, bb := range benchmarks {
 		b.Run(bb.name, func(b *testing.B) {
-			for i := 0; i < b.N; i++ {
+			for b.Loop() {
 				_ = bb.function()
 			}
 		})
