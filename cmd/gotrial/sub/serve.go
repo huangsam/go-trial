@@ -44,6 +44,6 @@ var ServeCommand *cli.Command = &cli.Command{
 		e.GET("/rectangle-size", endpoint.RectangleSizeHandler)
 		e.GET("/secret", endpoint.HelloHandler, authMiddleware)
 
-		return util.GracefulShutdown(e, c.String("addr"))
+		return util.RunEcho(e, c.String("addr"))
 	},
 }

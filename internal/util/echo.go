@@ -16,6 +16,11 @@ import (
 
 const shutdownWait = 10 * time.Second
 
+var (
+	ErrBadPassword = errors.New("bad password")
+	ErrMissingUser = errors.New("missing user")
+)
+
 // ZerologMiddleware emits a log for each incoming HTTP request.
 var ZerologMiddleware echo.MiddlewareFunc = middleware.RequestLoggerWithConfig(
 	middleware.RequestLoggerConfig{
@@ -28,7 +33,6 @@ var ZerologMiddleware echo.MiddlewareFunc = middleware.RequestLoggerWithConfig(
 				Int("status", v.Status).
 				Dur("latency", v.Latency).
 				Msg("Got request")
-
 			return nil
 		},
 	})
@@ -40,19 +44,24 @@ var ZerologMiddleware echo.MiddlewareFunc = middleware.RequestLoggerWithConfig(
 // predefined admin credentials (AdminUser and AdminPass).
 // If the credentials are valid, the request is allowed to proceed; otherwise, an error is returned.
 func SetupBasicAuth(accounts ...model.UserAccount) echo.MiddlewareFunc {
+	accountSet := map[string]string{}
+	for _, account := range accounts {
+		accountSet[account.Username] = account.Password
+	}
 	return middleware.BasicAuth(func(u, p string, c echo.Context) (bool, error) {
-		// Use a cache or a database in production
-		for _, account := range accounts {
-			if u == account.Username && p == account.Password {
-				return true, nil
-			}
+		pass, ok := accountSet[u]
+		if !ok {
+			return false, ErrMissingUser
 		}
-		return false, errors.New("invalid user credentials")
+		if pass != p {
+			return false, ErrBadPassword
+		}
+		return true, nil
 	})
 }
 
-// GracefulShutdown shuts down the HTTP server gracefully.
-func GracefulShutdown(echo *echo.Echo, addr string) error {
+// RunEcho runs an Echo server until an interrupt shuts it down.
+func RunEcho(echo *echo.Echo, addr string) error {
 	go func() {
 		if err := echo.Start(addr); !errors.Is(err, http.ErrServerClosed) {
 			log.Fatal().Err(err).Msg("HTTP server error")
