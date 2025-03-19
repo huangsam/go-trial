@@ -1,9 +1,6 @@
 package sub
 
 import (
-	"net/http"
-	"time"
-
 	"github.com/huangsam/go-trial/internal/model"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
@@ -23,16 +20,6 @@ var ServeCommand *cli.Command = &cli.Command{
 			Value: ":8080",
 			Usage: "HTTP address",
 		},
-		&cli.DurationFlag{
-			Name:  "rw",
-			Value: 5 * time.Second,
-			Usage: "HTTP read/write timeout",
-		},
-		&cli.DurationFlag{
-			Name:  "shutdown",
-			Value: 10 * time.Second,
-			Usage: "HTTP shutdown timeout",
-		},
 		&cli.StringFlag{
 			Name:  "user",
 			Value: "admin",
@@ -46,8 +33,8 @@ var ServeCommand *cli.Command = &cli.Command{
 	},
 	Action: func(c *cli.Context) error {
 		e := echo.New()
-		e.Use(util.ZerologMiddleware)
 		e.Use(middleware.Recover())
+		e.Use(util.ZerologMiddleware)
 
 		acc := model.UserAccount{Username: c.String("user"), Password: c.String("pass")}
 		authMiddleware := util.SetupBasicAuth(acc)
@@ -57,13 +44,6 @@ var ServeCommand *cli.Command = &cli.Command{
 		e.GET("/rectangle-size", endpoint.RectangleSizeHandler)
 		e.GET("/secret", endpoint.HelloHandler, authMiddleware)
 
-		srv := &http.Server{
-			Addr:         c.String("addr"),
-			Handler:      e,
-			ReadTimeout:  c.Duration("rw"),
-			WriteTimeout: c.Duration("rw"),
-		}
-
-		return util.GracefulShutdown(srv, c.Duration("shutdown"))
+		return util.GracefulShutdown(e, c.String("addr"))
 	},
 }

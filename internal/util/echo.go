@@ -14,6 +14,25 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+const shutdownWait = 10 * time.Second
+
+// ZerologMiddleware emits a log for each incoming HTTP request.
+var ZerologMiddleware echo.MiddlewareFunc = middleware.RequestLoggerWithConfig(
+	middleware.RequestLoggerConfig{
+		LogURI:     true,
+		LogStatus:  true,
+		LogLatency: true,
+		LogValuesFunc: func(c echo.Context, v middleware.RequestLoggerValues) error {
+			log.Info().
+				Str("uri", v.URI).
+				Int("status", v.Status).
+				Dur("latency", v.Latency).
+				Msg("Got request")
+
+			return nil
+		},
+	})
+
 // SetupBasicAuth sets up basic authentication middleware for an Echo web server.
 //
 // It uses the provided username and password to authenticate requests.
@@ -33,9 +52,9 @@ func SetupBasicAuth(accounts ...model.UserAccount) echo.MiddlewareFunc {
 }
 
 // GracefulShutdown shuts down the HTTP server gracefully.
-func GracefulShutdown(server *http.Server, timeout time.Duration) error {
+func GracefulShutdown(echo *echo.Echo, addr string) error {
 	go func() {
-		if err := server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
+		if err := echo.Start(addr); !errors.Is(err, http.ErrServerClosed) {
 			log.Fatal().Err(err).Msg("HTTP server error")
 		}
 	}()
@@ -43,24 +62,7 @@ func GracefulShutdown(server *http.Server, timeout time.Duration) error {
 	signal.Notify(quit, os.Interrupt)
 	<-quit
 	log.Info().Msg("Stop HTTP server")
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	ctx, cancel := context.WithTimeout(context.Background(), shutdownWait)
 	defer cancel()
-	return server.Shutdown(ctx)
+	return echo.Shutdown(ctx)
 }
-
-// ZerologMiddleware emits a log for each incoming HTTP request.
-var ZerologMiddleware echo.MiddlewareFunc = middleware.RequestLoggerWithConfig(
-	middleware.RequestLoggerConfig{
-		LogURI:     true,
-		LogStatus:  true,
-		LogLatency: true,
-		LogValuesFunc: func(c echo.Context, v middleware.RequestLoggerValues) error {
-			log.Info().
-				Str("uri", v.URI).
-				Int("status", v.Status).
-				Dur("latency", v.Latency).
-				Msg("Got request")
-
-			return nil
-		},
-	})
