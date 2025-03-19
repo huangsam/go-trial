@@ -45,10 +45,15 @@ and experiment with.
 - [Goroutines, channels, synchronization](pkg/concurrency/)
 - [Interfaces, generics, mocking](pkg/abstraction/)
 
-### Applied concepts
+### Practical concepts
 
 - [Files, I/O, time](pkg/realworld/)
 - [HTTP endpoints](pkg/endpoint/)
+
+### Apply your knowledge!
+
+Ready to showcase your Go skills? Dive into a side project and create something amazing!
+Check out [Namigo](https://github.com/huangsam/namigo) for inspiration. 🚀
 
 ## Useful resources
 
