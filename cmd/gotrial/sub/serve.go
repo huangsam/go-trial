@@ -13,7 +13,7 @@ import (
 var ServeCommand *cli.Command = &cli.Command{
 	Name:        "serve",
 	Usage:       "Run simple HTTP server",
-	Description: "This command runs an HTTP server with one endpoint.",
+	Description: "This command runs an HTTP server.",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "addr",
