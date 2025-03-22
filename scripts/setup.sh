@@ -1,21 +1,37 @@
 #!/bin/bash
 set -eu
 
-declare -a brew_queue
-declare -a go_queue
+brew_packages=()
+go_packages=()
 
-check_and_queue_brew () {
-    [[ -n "$(which "$1")" ]] || brew_queue+=("$1")
+install_brew_if_missing() {
+    local package="$1"
+    if ! command -v "$package" &> /dev/null; then
+        brew_packages+=("$package")
+    fi
 }
 
-check_and_queue_go () {
-    [[ -n "$(which "$1")" ]] || go_queue+=("$2")
+install_go_if_missing() {
+    local command="$1"
+    local package="$2"
+    if ! command -v "$command" &> /dev/null; then
+        go_packages+=("$package")
+    fi
 }
 
-check_and_queue_brew "golangci-lint"
-check_and_queue_brew "mockery"
-check_and_queue_go "godoc" "golang.org/x/tools/cmd/godoc@latest"
+# Define packages to install
+install_brew_if_missing "golangci-lint"
+install_brew_if_missing "mockery"
+install_go_if_missing "godoc" "golang.org/x/tools/cmd/godoc@latest"
 
-# https://stackoverflow.com/a/15780028/2748860
-[[ -z "${brew_queue[*]:-}" ]] || brew install "${brew_queue[@]}"
-[[ -z "${go_queue[*]:-}" ]] || go install "${go_queue[@]}"
+if [[ ${#brew_packages[@]} -gt 0 ]]; then
+    echo "Install brew packages: ${brew_packages[*]}"
+    brew install "${brew_packages[@]}"
+fi
+
+if [[ ${#go_packages[@]} -gt 0 ]]; then
+    echo "Install go packages: ${go_packages[*]}"
+    go install "${go_packages[@]}"
+fi
+
+echo "Installation checks completed."

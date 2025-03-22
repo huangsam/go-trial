@@ -1,6 +1,3 @@
-# Compiled binaries
-/bin/
-
 # IDE and editor settings
 /.vscode/
 
@@ -11,4 +8,14 @@ coverage.*
 .DS_Store
 
 # Documentation
+images/
+README.md
 *.md
+
+# Developer
+.git/
+.github/
+bin/
+builds/
+mock/
+.mockery.yaml

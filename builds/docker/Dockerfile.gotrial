@@ -9,14 +9,14 @@ ENV GOOS=linux
 
 USER root
 
-RUN bash scripts/build.sh
+RUN go build -o ./gotrial github.com/huangsam/go-trial/cmd/gotrial
 
 # Phase 2: Host binary
 FROM alpine:latest
 
 WORKDIR /
-COPY --from=build /app/bin/gotrial /bin/gotrial
+COPY --from=build /app/gotrial /gotrial
 
 EXPOSE 8080
 
-ENTRYPOINT ["/bin/gotrial"]
+ENTRYPOINT ["/gotrial"]
