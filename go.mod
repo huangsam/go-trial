@@ -8,7 +8,7 @@ require (
 	github.com/knadh/koanf/providers/file v1.1.2
 	github.com/knadh/koanf/v2 v2.1.2
 	github.com/labstack/echo/v4 v4.13.3
-	github.com/rs/zerolog v1.33.0
+	github.com/rs/zerolog v1.34.0
 	github.com/stretchr/testify v1.10.0
 	github.com/urfave/cli/v2 v2.27.6
 	gopkg.in/yaml.v3 v3.0.1
