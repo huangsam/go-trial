@@ -10,15 +10,15 @@ import (
 var sampleAddress = basicintro.Address{Street: "1234 Magic Avenue", Zip: "12345-6789"}
 
 func TestPersonFields(t *testing.T) {
-	var expectedName string = "John"
-	var expectedAge int = 12
-	var expectedStreet string = "1234 Magic Avenue"
-	var expectedZip string = "12345-6789"
+	var expectedName = "John"
+	var expectedAge = 12
+	var expectedStreet = "1234 Magic Avenue"
+	var expectedZip = "12345-6789"
 	person := basicintro.Person{expectedName, expectedAge, sampleAddress}
-	assert.Equal(t, expectedName, person.Name)       // Normal access
-	assert.Equal(t, expectedAge, person.Age)         // Normal access
-	assert.Equal(t, expectedStreet, person.Street)   // Embedded access
-	assert.Equal(t, expectedZip, person.Address.Zip) // Nested access
+	assert.Equal(t, expectedName, person.Name)     // Normal access
+	assert.Equal(t, expectedAge, person.Age)       // Normal access
+	assert.Equal(t, expectedStreet, person.Street) // Embedded access
+	assert.Equal(t, expectedZip, person.Zip)       // Embedded access
 }
 
 func TestPerson_IsOlderThan(t *testing.T) {
