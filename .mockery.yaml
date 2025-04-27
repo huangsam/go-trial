@@ -1,16 +1,7 @@
-# https://vektra.github.io/mockery/v2.51/configuration/
+# https://vektra.github.io/mockery/v3/configuration/
 
-# Settings to avoid deprecation warnings
-with-expecter: true
-resolve-type-alias: false
-issue-845-fix: true
-
-# Settings for mock layout
-dir: "mock/{{.PackageName}}"
-outpkg: "{{.PackageName}}_mock"
-
+template: testify
 packages:
-  # Generate mocks for interface(s) in the abstraction package
   github.com/huangsam/go-trial/pkg/abstraction:
     interfaces:
-      UserRepository:
+      UserRepository: {}
