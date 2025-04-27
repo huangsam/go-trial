@@ -55,14 +55,14 @@ func MultiStagePipelineMerge(from int, to int) int {
 	for i := range squareChans {
 		squareChans[i] = square(in)
 	}
-	squareOut := util.Merge(squareChans)
+	squareOut := util.Merge(squareChans...)
 
 	// Create an array of double channels
 	doubleChans := make([]<-chan int, doubleChannelCount)
 	for i := range doubleChans {
 		doubleChans[i] = double(squareOut)
 	}
-	doubleOut := util.Merge(doubleChans)
+	doubleOut := util.Merge(doubleChans...)
 
 	for n := range doubleOut {
 		sum += n

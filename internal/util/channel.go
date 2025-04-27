@@ -3,7 +3,7 @@ package util
 import "sync"
 
 // Merge combines multiple channels into a single channel.
-func Merge(cs []<-chan int) <-chan int {
+func Merge(cs ...<-chan int) <-chan int {
 	var wg sync.WaitGroup
 	out := make(chan int)
 

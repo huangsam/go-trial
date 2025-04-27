@@ -31,7 +31,7 @@ func TestMerge(t *testing.T) {
 		ch3 <- 6
 	}()
 
-	merged := util.Merge([]<-chan int{ch1, ch2, ch3})
+	merged := util.Merge(ch1, ch2, ch3)
 
 	var result []int
 	for val := range merged {
@@ -54,7 +54,7 @@ func TestMergeEmptyChannels(t *testing.T) {
 		defer close(ch2)
 	}()
 
-	merged := util.Merge([]<-chan int{ch1, ch2})
+	merged := util.Merge(ch1, ch2)
 
 	var result []int
 	for val := range merged {
@@ -82,7 +82,7 @@ func TestMergeWithDelay(t *testing.T) {
 		ch2 <- 4
 	}()
 
-	merged := util.Merge([]<-chan int{ch1, ch2})
+	merged := util.Merge(ch1, ch2)
 
 	var result []int
 	for val := range merged {
