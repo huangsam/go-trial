@@ -17,21 +17,21 @@ func TestRenderToString(t *testing.T) {
 		valid    bool
 	}{
 		{
-			name:     "simple template",
+			name:     "SimpleTemplate",
 			template: "Hello, {{.Name}}!",
 			data:     map[string]string{"Name": "World"},
 			expected: "Hello, World!",
 			valid:    true,
 		},
 		{
-			name:     "missing data",
+			name:     "MissingData",
 			template: "Hello, {{.Name}}!",
 			data:     map[string]string{},
 			expected: "Hello, <no value>!",
 			valid:    true,
 		},
 		{
-			name:     "invalid template",
+			name:     "InvalidTemplate",
 			template: "Hello, {{.Name",
 			data:     map[string]string{"Name": "World"},
 			expected: "",

@@ -41,7 +41,7 @@ func TestHandler(t *testing.T) {
 			expectedContains: []string{"generic", "error"},
 		},
 		{
-			name:             "Rectangle with query",
+			name:             "RectangleWithQuery",
 			path:             "/rectangle-size",
 			query:            "?width=3.14&height=3.14",
 			handler:          endpoint.RectangleSizeHandler,
@@ -79,7 +79,7 @@ func TestBasicAuthHandler(t *testing.T) {
 
 	router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth(acc))
 
-	t.Run("No auth header", func(t *testing.T) {
+	t.Run("NoAuthHeader", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
 		w := httptest.NewRecorder()
 
@@ -94,7 +94,7 @@ func TestBasicAuthHandler(t *testing.T) {
 		assert.Contains(t, string(body), "Unauthorized")
 	})
 
-	t.Run("Valid auth header", func(t *testing.T) {
+	t.Run("ValidAuthHeader", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
 		req.Header.Set("Authorization", "Basic "+basicAuth)
 		w := httptest.NewRecorder()

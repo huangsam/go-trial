@@ -35,22 +35,22 @@ func TestShapeSize_String(t *testing.T) {
 		want string
 	}{
 		{
-			name: "Small string",
+			name: "SmallString",
 			size: abstraction.SizeSmall,
 			want: "Small",
 		},
 		{
-			name: "Medium string",
+			name: "MediumString",
 			size: abstraction.SizeMedium,
 			want: "Medium",
 		},
 		{
-			name: "Large string",
+			name: "LargeString",
 			size: abstraction.SizeLarge,
 			want: "Large",
 		},
 		{
-			name: "Unknown string",
+			name: "UnknownString",
 			size: abstraction.ShapeSize(999), // Invalid ShapeSize value
 			want: "Unknown",
 		},
@@ -69,32 +69,32 @@ func TestClassify(t *testing.T) {
 		want  abstraction.ShapeSize
 	}{
 		{
-			name:  "Small rectangle",
+			name:  "SmallRectangle",
 			shape: abstraction.NewRectangle(2, 2),
 			want:  abstraction.SizeSmall,
 		},
 		{
-			name:  "Medium rectangle",
+			name:  "MediumRectangle",
 			shape: abstraction.NewRectangle(5, 5),
 			want:  abstraction.SizeMedium,
 		},
 		{
-			name:  "Large rectangle",
+			name:  "LargeRectangle",
 			shape: abstraction.NewRectangle(11, 11),
 			want:  abstraction.SizeLarge,
 		},
 		{
-			name:  "Small circle",
+			name:  "SmallCircle",
 			shape: abstraction.NewCircle(1),
 			want:  abstraction.SizeSmall,
 		},
 		{
-			name:  "Medium circle",
+			name:  "MediumCircle",
 			shape: abstraction.NewCircle(5),
 			want:  abstraction.SizeMedium,
 		},
 		{
-			name:  "Large circle",
+			name:  "LargeCircle",
 			shape: abstraction.NewCircle(6),
 			want:  abstraction.SizeLarge,
 		},

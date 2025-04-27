@@ -8,7 +8,7 @@ import (
 )
 
 func TestUserAccount(t *testing.T) {
-	t.Run("Create user account", func(t *testing.T) {
+	t.Run("CreateUserAccount", func(t *testing.T) {
 		user := model.UserAccount{
 			Username: "testuser",
 			Password: "password123",
@@ -18,7 +18,7 @@ func TestUserAccount(t *testing.T) {
 		assert.Equal(t, "password123", user.Password)
 	})
 
-	t.Run("Update user account", func(t *testing.T) {
+	t.Run("UpdateUserAccount", func(t *testing.T) {
 		user := model.UserAccount{
 			Username: "testuser",
 			Password: "password123",

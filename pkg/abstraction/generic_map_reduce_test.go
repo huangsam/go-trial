@@ -21,7 +21,7 @@ func TestMapReducer_Map(t *testing.T) {
 	}
 	tests := []testCase[int]{
 		{
-			name: "double ints",
+			name: "DoubleInts",
 			mp:   abstraction.MapReducer[int]{},
 			args: args[int]{
 				mapper: func(x int) int { return x * 2 },
@@ -30,7 +30,7 @@ func TestMapReducer_Map(t *testing.T) {
 			want: []int{2, 4, 6, 8},
 		},
 		{
-			name: "empty input",
+			name: "EmptyInput",
 			mp:   abstraction.MapReducer[int]{},
 			args: args[int]{
 				mapper: func(x int) int { return x * 2 },
@@ -41,7 +41,7 @@ func TestMapReducer_Map(t *testing.T) {
 	}
 	testsString := []testCase[string]{
 		{
-			name: "add suffix",
+			name: "AddSuffix",
 			mp:   abstraction.MapReducer[string]{},
 			args: args[string]{
 				mapper: func(x string) string { return x + "_suffix" },
@@ -78,7 +78,7 @@ func TestMapReducer_Reduce(t *testing.T) {
 	}
 	tests := []testCase[int]{
 		{
-			name: "sum ints",
+			name: "SumInts",
 			mp:   abstraction.MapReducer[int]{},
 			args: args[int]{
 				reducer: func(x, y int) int { return x + y },
@@ -87,7 +87,7 @@ func TestMapReducer_Reduce(t *testing.T) {
 			want: 10,
 		},
 		{
-			name: "empty input",
+			name: "EmptyInput",
 			mp:   abstraction.MapReducer[int]{},
 			args: args[int]{
 				reducer: func(x, y int) int { return x + y },
@@ -96,7 +96,7 @@ func TestMapReducer_Reduce(t *testing.T) {
 			want: 0,
 		},
 		{
-			name: "one input",
+			name: "OneInput",
 			mp:   abstraction.MapReducer[int]{},
 			args: args[int]{
 				reducer: func(x, y int) int { return x + y },
@@ -107,7 +107,7 @@ func TestMapReducer_Reduce(t *testing.T) {
 	}
 	testsString := []testCase[string]{
 		{
-			name: "concat strings",
+			name: "ConcatStrings",
 			mp:   abstraction.MapReducer[string]{},
 			args: args[string]{
 				reducer: func(x, y string) string { return x + y },
