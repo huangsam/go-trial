@@ -5,16 +5,17 @@ import (
 
 	"github.com/huangsam/go-trial/pkg/realworld"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestReadLinesSuccess(t *testing.T) {
 	lines, err := realworld.ReadLines(fixturesPath + "/test.txt")
-	assert.Nil(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, []string{"Hello, world!", "This is a test file."}, lines)
 }
 
 func TestReadLinesFailure(t *testing.T) {
 	lines, err := realworld.ReadLines(fixturesPath + "/nonexistent.txt")
-	assert.NotNil(t, err)
+	require.Error(t, err)
 	assert.Nil(t, lines)
 }

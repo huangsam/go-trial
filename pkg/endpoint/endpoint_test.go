@@ -5,7 +5,6 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 
 	"github.com/huangsam/go-trial/internal/model"
@@ -13,6 +12,7 @@ import (
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestHandler(t *testing.T) {
@@ -62,11 +62,11 @@ func TestHandler(t *testing.T) {
 			assert.Equal(t, tc.expectedStatus, resp.StatusCode)
 
 			body, err := io.ReadAll(resp.Body)
-			assert.NoError(t, err)
+			require.NoError(t, err)
 			assert.NotEmpty(t, string(body), "Body should not be empty")
 			responseBody := string(body)
 			for _, substring := range tc.expectedContains {
-				assert.True(t, strings.Contains(responseBody, substring), "Body should contain %s", substring)
+				assert.Contains(t, responseBody, substring, "Body should contain %s", substring)
 			}
 		})
 	}
@@ -89,7 +89,7 @@ func TestBasicAuthHandler(t *testing.T) {
 		assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
 
 		body, err := io.ReadAll(resp.Body)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		assert.NotEmpty(t, string(body), "Body should not be empty")
 		assert.Contains(t, string(body), "Unauthorized")
 	})
@@ -105,7 +105,7 @@ func TestBasicAuthHandler(t *testing.T) {
 		assert.Equal(t, http.StatusOK, resp.StatusCode)
 
 		body, err := io.ReadAll(resp.Body)
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		assert.NotEmpty(t, string(body), "Body should not be empty")
 		assert.Contains(t, string(body), "Hello")
 	})

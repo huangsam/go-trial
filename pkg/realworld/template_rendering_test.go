@@ -6,6 +6,7 @@ import (
 
 	"github.com/huangsam/go-trial/pkg/realworld"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // An example car to use for testing purposes
@@ -29,7 +30,7 @@ var exampleEmployee = &realworld.Employee{
 
 func TestRenderCarInfo(t *testing.T) {
 	info, err := realworld.RenderCarInfo(exampleCar)
-	assert.Nil(t, err)
+	require.NoError(t, err)
 	assert.NotNil(t, info)
 	assert.Contains(t, info, exampleCar.Make)
 	assert.Contains(t, info, exampleCar.Model)
@@ -38,7 +39,7 @@ func TestRenderCarInfo(t *testing.T) {
 
 func TestRenderEmployeeInfo(t *testing.T) {
 	info, err := realworld.RenderEmployeeInfo(exampleEmployee)
-	assert.Nil(t, err)
+	require.NoError(t, err)
 	assert.NotNil(t, info)
 	assert.Contains(t, info, exampleEmployee.FirstName)
 	assert.Contains(t, info, exampleEmployee.LastName)

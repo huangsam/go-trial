@@ -9,6 +9,7 @@ import (
 	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/v2"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -25,16 +26,16 @@ func assertAppConfig(t *testing.T, cfg *realworld.AppConfig) {
 func TestJsonConfig(t *testing.T) {
 	t.Run("Koanf", func(t *testing.T) {
 		k := koanf.New(".")
-		assert.Nil(t, k.Load(file.Provider(testJsonPath), kjson.Parser()))
+		require.NoError(t, k.Load(file.Provider(testJsonPath), kjson.Parser()))
 		assert.Equal(t, "jenkins", k.String("app"))
 		var cfg realworld.AppConfig
-		assert.Nil(t, k.Unmarshal("", &cfg))
+		require.NoError(t, k.Unmarshal("", &cfg))
 		assertAppConfig(t, &cfg)
 	})
 
 	t.Run("Raw", func(t *testing.T) {
 		cfg, err := realworld.ReadJSONConfigRaw(testJsonPath)
-		assert.Nil(t, err)
+		require.NoError(t, err)
 		assertAppConfig(t, cfg)
 	})
 }
@@ -42,16 +43,16 @@ func TestJsonConfig(t *testing.T) {
 func TestYamlConfig(t *testing.T) {
 	t.Run("Koanf", func(t *testing.T) {
 		k := koanf.New(".")
-		assert.Nil(t, k.Load(file.Provider(testYamlPath), kyaml.Parser()))
+		require.NoError(t, k.Load(file.Provider(testYamlPath), kyaml.Parser()))
 		assert.Equal(t, "jenkins", k.String("app"))
 		var cfg realworld.AppConfig
-		assert.Nil(t, k.Unmarshal("", &cfg))
+		require.NoError(t, k.Unmarshal("", &cfg))
 		assertAppConfig(t, &cfg)
 	})
 
 	t.Run("Raw", func(t *testing.T) {
 		cfg, err := realworld.ReadYAMLConfigRaw(testYamlPath)
-		assert.Nil(t, err)
+		require.NoError(t, err)
 		assertAppConfig(t, cfg)
 	})
 }

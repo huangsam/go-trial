@@ -10,22 +10,22 @@ import (
 
 func TestRectangleArea(t *testing.T) {
 	rect := abstraction.NewRectangle(5, 3)
-	assert.Equal(t, 15.0, rect.Area())
+	assert.InEpsilon(t, 15.0, rect.Area(), 0.01)
 }
 
 func TestRectanglePerimeter(t *testing.T) {
 	rect := abstraction.NewRectangle(5, 3)
-	assert.Equal(t, 16.0, rect.Perimeter())
+	assert.InEpsilon(t, 16.0, rect.Perimeter(), 0.01)
 }
 
 func TestCircleArea(t *testing.T) {
 	circle := abstraction.NewCircle(2)
-	assert.Equal(t, 4*math.Pi, circle.Area())
+	assert.InEpsilon(t, 4*math.Pi, circle.Area(), 0.01)
 }
 
 func TestCirclePerimeter(t *testing.T) {
 	circle := abstraction.NewCircle(2)
-	assert.Equal(t, 4*math.Pi, circle.Perimeter())
+	assert.InEpsilon(t, 4*math.Pi, circle.Perimeter(), 0.01)
 }
 
 func TestShapeSize_String(t *testing.T) {

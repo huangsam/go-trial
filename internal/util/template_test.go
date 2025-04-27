@@ -6,6 +6,7 @@ import (
 
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestRenderToString(t *testing.T) {
@@ -43,13 +44,13 @@ func TestRenderToString(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tmpl, err := template.New("test").Parse(tt.template)
 			if !tt.valid {
-				assert.NotNil(t, err)
+				assert.Error(t, err)
 				return
 			}
-			assert.Nil(t, err)
+			require.NoError(t, err)
 
 			result, err := util.RenderToString(tmpl, tt.data)
-			assert.Nil(t, err)
+			require.NoError(t, err)
 			assert.Equal(t, tt.expected, result)
 		})
 	}

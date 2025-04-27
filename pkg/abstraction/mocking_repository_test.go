@@ -6,6 +6,7 @@ import (
 	abstraction_mock "github.com/huangsam/go-trial/mock/abstraction"
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestGetUserByID(t *testing.T) {
@@ -15,7 +16,7 @@ func TestGetUserByID(t *testing.T) {
 	mockRepo.On("GetUserByID", 1).Return(user, nil)
 
 	result, err := mockRepo.GetUserByID(1)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, user, result)
 
 	mockRepo.AssertExpectations(t)
@@ -28,7 +29,7 @@ func TestCreateUser(t *testing.T) {
 	mockRepo.On("CreateUser", user).Return(nil)
 
 	err := mockRepo.CreateUser(user)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	mockRepo.AssertExpectations(t)
 }

@@ -5,6 +5,7 @@ import (
 
 	"github.com/huangsam/go-trial/pkg/basicintro"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestAdd(t *testing.T) {
@@ -95,9 +96,9 @@ func TestDivide(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := basicintro.Divide(tt.args.num1, tt.args.num2)
 			if tt.wantErr != nil {
-				assert.EqualError(t, err, tt.wantErr.Error())
+				require.EqualError(t, err, tt.wantErr.Error())
 			} else {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			}
 			assert.Equal(t, tt.want, got)
 		})
