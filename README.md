@@ -18,8 +18,18 @@ There's no better time to master Golang than now! 🔥
 # Run build
 bash scripts/build.sh
 
-# Run binary
-./bin/gotrial
+# Run tests
+bash scripts/test.sh
+```
+
+After the build runs successfully, run `./bin/gotrial` as a CLI:
+
+```shell
+# See options for the CLI
+./bin/gotrial help
+
+# Run the demo command
+./bin/gotrial demo
 ```
 
 To learn more, please consult the [user guide](USERGUIDE.md).

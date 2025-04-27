@@ -5,16 +5,14 @@ a deeper level.
 
 ## Setup the developer environment
 
+After you have Homebrew and Go installed, run the following script:
+
 ```shell
 # Setup tools
 bash scripts/setup.sh
-
-# Run tests
-bash scripts/test.sh
-
-# Run linters
-bash scripts/lint.sh
 ```
+
+This step is useful if you plan to file a PR or contribute to the project.
 
 ## See the docs
 
