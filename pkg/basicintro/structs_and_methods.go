@@ -1,12 +1,13 @@
 package basicintro
 
-// Person represents a person with a name and age.
+// Person represents a person with a name, age, and address.
 type Person struct {
 	Name string
 	Age  int
 	Address
 }
 
+// Address represents a person's address with street, city, and zip code.
 type Address struct {
 	Street string
 	City   string
