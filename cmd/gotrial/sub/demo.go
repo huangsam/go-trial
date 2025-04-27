@@ -17,15 +17,19 @@ var DemoCommand *cli.Command = &cli.Command{
 	Usage:       "Run demo with some pkg functions",
 	Description: "This command runs functions from multiple packages.",
 	Action: func(c *cli.Context) error {
+		// basicintro
 		log.Info().Msg(basicintro.GreetWorld())
 
+		// abstraction
 		circle := abstraction.Circle{Radius: 6}
 		size := abstraction.Classify(circle)
 		log.Info().Msgf("Circle size is %v", size)
 
+		// concurrency
 		answers := concurrency.GetAnswersWithChannels()
 		log.Info().Interface("answers", answers).Msg("Got answers with channels")
 
+		// realworld
 		car := realworld.Car{Make: "Honda", Model: "Civic", ModelYear: 2025, WheelCount: 4, MileCount: 1234}
 		content, err := realworld.RenderCarInfo(&car)
 		if err != nil {
