@@ -27,8 +27,7 @@ func TestCreateUser(t *testing.T) {
 
 	mockRepo.On("CreateUser", user).Return(nil)
 
-	err := mockRepo.CreateUser(user)
-	require.NoError(t, err)
+	require.NoError(t, mockRepo.CreateUser(user))
 
 	mockRepo.AssertExpectations(t)
 }
