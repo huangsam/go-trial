@@ -78,6 +78,7 @@ Check out [Namigo](https://github.com/huangsam/namigo) for inspiration. 🚀
 - [Structured Logging with slog](https://go.dev/blog/slog): Structured logging using slog.
 - [4 Mocking Approaches for Go](https://www.twilio.com/en-us/blog/4-mocking-approaches-go): Different mocking techniques.
 - [Proper HTTP shutdown in Go](https://dev.to/mokiat/proper-http-shutdown-in-go-3fji): Graceful HTTP shutdown.
+- [Nil comparisons and Go interface](https://rednafi.com/go/nil_interface_comparison/): Nil comparisons in Go.
 
 [Python]: https://github.com/huangsam/ultimate-python
 [Java]: https://github.com/huangsam/java-trial
