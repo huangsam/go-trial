@@ -19,9 +19,9 @@ func GetAnswersWithWaitGroup() [100]int {
 		}
 	}
 	wg.Add(answersRoutineCount)
-	for i := 0; i < answersRoutineCount; i++ {
+	for i := range answersRoutineCount {
 		go func(i int) {
-			update(i*10, (i+1)*10) // Skip mutex due to isolation
+			update(i*10, (i+1)*10) // Skip mutex since writes are isolated
 			wg.Done()              // Signal that the goroutine has finished
 		}(i)
 	}
@@ -40,10 +40,10 @@ func GetAnswersWithChannels() [100]int {
 		}
 		done <- struct{}{} // Signal completion
 	}
-	for i := 0; i < answersRoutineCount; i++ {
+	for i := range answersRoutineCount {
 		go update(i*10, (i+1)*10)
 	}
-	for i := 0; i < answersRoutineCount; i++ {
+	for range answersRoutineCount {
 		<-done
 	}
 	return answers
