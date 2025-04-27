@@ -1,5 +1,10 @@
 package basicintro
 
+import "errors"
+
+// ErrDivision is returned when a division by zero is attempted.
+var ErrDivision = errors.New("division error")
+
 // Add returns the sum of two integers.
 func Add(num1 int, num2 int) int {
 	return num1 + num2
