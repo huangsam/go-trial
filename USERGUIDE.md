@@ -3,7 +3,7 @@
 This content is for developers who are want to experiment with the repository at
 a deeper level.
 
-## Setup the developer environment
+## Setup the environment
 
 After you have Homebrew and Go installed, run the following script:
 
