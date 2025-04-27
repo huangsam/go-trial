@@ -6,3 +6,8 @@ linters:
     - testifylint
     - unconvert
     - unparam
+formatters:
+  enable:
+    - gofmt
+    - gofumpt
+    - goimports
