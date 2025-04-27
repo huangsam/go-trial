@@ -14,20 +14,12 @@ There's no better time to master Golang than now! 🔥
 
 ## Getting started
 
-Here are the commands you need to know:
-
 ```shell
-# Setup tools
-bash scripts/setup.sh
-
 # Run build
 bash scripts/build.sh
 
-# Run tests
-bash scripts/test.sh
-
-# Run linters
-bash scripts/lint.sh
+# Run binary
+./bin/gotrial
 ```
 
 To learn more, please consult the [user guide](USERGUIDE.md).

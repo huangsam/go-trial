@@ -3,20 +3,17 @@
 This content is for developers who are want to experiment with the repository at
 a deeper level.
 
-## Run the binary
-
-After the build runs successfully, the `gotrial` binary should exist at the
-`bin` directory of this repo. Here are some commands to start with:
+## Setup the developer environment
 
 ```shell
-# Get help for global command
-./bin/gotrial help
+# Setup tools
+bash scripts/setup.sh
 
-# Get help for subcommand
-./bin/gotrial help demo
+# Run tests
+bash scripts/test.sh
 
-# Run a command
-./bin/gotrial demo
+# Run linters
+bash scripts/lint.sh
 ```
 
 ## See the docs
