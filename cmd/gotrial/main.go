@@ -15,7 +15,7 @@ func main() {
 		Description: "This binary has multiple commands to choose from.",
 		Commands: [](*cli.Command){
 			sub.DemoCommand,
-			sub.ServeCommand,
+			sub.HttpCommand,
 		},
 	}
 

@@ -9,9 +9,9 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// ServeCommand is a command to run an HTTP server.
-var ServeCommand *cli.Command = &cli.Command{
-	Name:        "serve",
+// HttpCommand is a command to run an HTTP server.
+var HttpCommand *cli.Command = &cli.Command{
+	Name:        "http",
 	Usage:       "Run simple HTTP server",
 	Description: "This command runs an HTTP server.",
 	Flags: []cli.Flag{
