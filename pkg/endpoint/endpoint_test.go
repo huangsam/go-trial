@@ -7,22 +7,22 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/huangsam/go-trial/internal/model"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
-	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestHandler(t *testing.T) {
-	router := echo.New()
+	router := chi.NewRouter()
 
 	testCases := []struct {
 		name             string
 		path             string
 		query            string
-		handler          echo.HandlerFunc
+		handler          http.HandlerFunc
 		expectedStatus   int
 		expectedContains []string
 	}{
@@ -52,7 +52,7 @@ func TestHandler(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			router.GET(tc.path, tc.handler)
+			router.Get(tc.path, tc.handler)
 			req := httptest.NewRequest(http.MethodGet, tc.path+tc.query, nil)
 			w := httptest.NewRecorder()
 
@@ -73,11 +73,11 @@ func TestHandler(t *testing.T) {
 }
 
 func TestBasicAuthHandler(t *testing.T) {
-	router := echo.New()
+	router := chi.NewRouter()
 	acc := model.UserAccount{Username: "foo", Password: "bar"}
 	basicAuth := base64.StdEncoding.EncodeToString([]byte(acc.Username + ":" + acc.Password))
 
-	router.GET("/secret", endpoint.HelloHandler, util.SetupBasicAuth(acc))
+	router.With(util.BasicAuth(acc)).Get("/secret", endpoint.HelloHandler)
 
 	t.Run("NoAuthHeader", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)

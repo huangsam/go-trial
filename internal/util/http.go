@@ -1,0 +1,90 @@
+package util
+
+import (
+	"context"
+	"errors"
+	"net/http"
+	"os"
+	"os/signal"
+	"time"
+
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/huangsam/go-trial/internal/model"
+	"github.com/rs/zerolog/log"
+)
+
+// RunServer runs an HTTP server until an interrupt shuts it down.
+func RunServer(addr string, handler http.Handler) error {
+	log.Info().Str("addr", addr).Msg("Start HTTP server")
+	server := &http.Server{
+		Addr:    addr,
+		Handler: handler,
+	}
+
+	go func() {
+		if err := server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
+			log.Fatal().Err(err).Msg("HTTP server error")
+		}
+	}()
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+
+	log.Info().Msg("Stop HTTP server")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	return server.Shutdown(ctx)
+}
+
+// ZeroLogger emits a log for each incoming HTTP request.
+func ZeroLogger(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
+		next.ServeHTTP(ww, r)
+		latency := time.Since(start)
+
+		log.Info().
+			Str("uri", r.RequestURI).
+			Int("status", ww.Status()).
+			Dur("latency", latency).
+			Msg("Got request")
+	})
+}
+
+// BasicAuth sets up basic authentication middleware for a Chi web server.
+//
+// It uses the provided username and password to authenticate requests.
+// Returns a Chi middleware function that checks the provided credentials against
+// the provided accounts. If the credentials are valid, the request is allowed
+// to proceed; otherwise, an error is returned.
+func BasicAuth(accounts ...model.UserAccount) func(http.Handler) http.Handler {
+	accountSet := map[string]string{}
+	for _, account := range accounts {
+		accountSet[account.Username] = account.Password
+	}
+
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			user, pass, ok := r.BasicAuth()
+			if !ok {
+				w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
+				http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
+				return
+			}
+
+			storedPass, exists := accountSet[user]
+			if !exists {
+				http.Error(w, "missing user", http.StatusUnauthorized)
+				return
+			}
+			if storedPass != pass {
+				http.Error(w, "bad password", http.StatusUnauthorized)
+				return
+			}
+
+			next.ServeHTTP(w, r)
+		})
+	}
+}

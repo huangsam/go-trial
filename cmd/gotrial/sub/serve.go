@@ -1,11 +1,11 @@
 package sub
 
 import (
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/huangsam/go-trial/internal/model"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 	"github.com/urfave/cli/v2"
 )
 
@@ -32,18 +32,18 @@ var ServeCommand *cli.Command = &cli.Command{
 		},
 	},
 	Action: func(c *cli.Context) error {
-		e := echo.New()
-		e.Use(middleware.Recover())
-		e.Use(util.ZerologMiddleware)
+		r := chi.NewRouter()
+		r.Use(util.ZeroLogger)
+		r.Use(middleware.Recoverer)
 
 		acc := model.UserAccount{Username: c.String("user"), Password: c.String("pass")}
-		authMiddleware := util.SetupBasicAuth(acc)
+		authMiddleware := util.BasicAuth(acc)
 
-		e.GET("/", endpoint.HelloHandler)
-		e.GET("/error", endpoint.ErrorHandler)
-		e.GET("/rectangle-size", endpoint.RectangleSizeHandler)
-		e.GET("/secret", endpoint.HelloHandler, authMiddleware)
+		r.Get("/", endpoint.HelloHandler)
+		r.Get("/error", endpoint.ErrorHandler)
+		r.Get("/rectangle-size", endpoint.RectangleSizeHandler)
+		r.With(authMiddleware).Get("/secret", endpoint.HelloHandler)
 
-		return util.RunEcho(e, c.String("addr"))
+		return util.RunServer(c.String("addr"), r)
 	},
 }
