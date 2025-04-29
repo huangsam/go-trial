@@ -15,7 +15,9 @@ import (
 
 // RunServer runs an HTTP server until an interrupt shuts it down.
 func RunServer(addr string, handler http.Handler) error {
-	log.Info().Str("addr", addr).Msg("Start HTTP server")
+	hlog := log.With().Str("addr", addr).Logger()
+	hlog.Info().Msg("Start HTTP server")
+
 	server := &http.Server{
 		Addr:    addr,
 		Handler: handler,
@@ -23,7 +25,7 @@ func RunServer(addr string, handler http.Handler) error {
 
 	go func() {
 		if err := server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
-			log.Fatal().Err(err).Msg("HTTP server error")
+			hlog.Fatal().Err(err).Msg("HTTP server error")
 		}
 	}()
 
@@ -31,7 +33,7 @@ func RunServer(addr string, handler http.Handler) error {
 	signal.Notify(quit, os.Interrupt)
 	<-quit
 
-	log.Info().Msg("Stop HTTP server")
+	hlog.Info().Msg("Stop HTTP server")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	return server.Shutdown(ctx)
@@ -53,10 +55,9 @@ func ZeroLogger(next http.Handler) http.Handler {
 	})
 }
 
-// BasicAuth sets up basic authentication middleware for a Chi web server.
+// BasicAuth sets up basic authentication middleware.
 //
-// It uses the provided username and password to authenticate requests.
-// Returns a Chi middleware function that checks the provided credentials against
+// Returns an HTTP middleware function that checks the provided credentials against
 // the provided accounts. If the credentials are valid, the request is allowed
 // to proceed; otherwise, an error is returned.
 func BasicAuth(accounts ...model.UserAccount) func(http.Handler) http.Handler {
