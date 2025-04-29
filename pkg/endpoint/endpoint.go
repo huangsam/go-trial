@@ -21,8 +21,8 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte("Generic error"))
 }
 
-// RectanglePayload is the JSON response for RectangleSizeHandler.
-type RectanglePayload struct {
+// ShapePayload is the JSON response for any handler that deals with shapes.
+type ShapePayload struct {
 	Area       float64           `json:"area"`
 	Perimeter  float64           `json:"perimeter"`
 	Dimensions abstraction.Shape `json:"dimensions"`
@@ -44,7 +44,7 @@ func RectangleSizeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	rect := abstraction.NewRectangle(width, height)
 	size := abstraction.Classify(rect)
-	payload := RectanglePayload{
+	payload := ShapePayload{
 		Area:       rect.Area(),
 		Perimeter:  rect.Perimeter(),
 		Dimensions: rect,
