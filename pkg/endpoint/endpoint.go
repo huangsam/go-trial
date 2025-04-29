@@ -3,7 +3,6 @@ package endpoint
 
 import (
 	"encoding/json"
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -19,7 +18,7 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 // ErrorHandler returns a generic error as text.
 func ErrorHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
-	_, _ = w.Write([]byte(errors.New("generic error").Error()))
+	_, _ = w.Write([]byte("Generic error"))
 }
 
 // RectanglePayload is the JSON response for RectangleSizeHandler.

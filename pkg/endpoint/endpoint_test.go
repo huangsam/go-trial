@@ -16,7 +16,7 @@ import (
 )
 
 func TestHandler(t *testing.T) {
-	router := chi.NewRouter()
+	r := chi.NewRouter()
 
 	testCases := []struct {
 		name             string
@@ -38,7 +38,7 @@ func TestHandler(t *testing.T) {
 			path:             "/error",
 			handler:          endpoint.ErrorHandler,
 			expectedStatus:   http.StatusInternalServerError,
-			expectedContains: []string{"generic", "error"},
+			expectedContains: []string{"Generic", "error"},
 		},
 		{
 			name:             "RectangleWithQuery",
@@ -52,11 +52,11 @@ func TestHandler(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			router.Get(tc.path, tc.handler)
+			r.Get(tc.path, tc.handler)
 			req := httptest.NewRequest(http.MethodGet, tc.path+tc.query, nil)
 			w := httptest.NewRecorder()
 
-			router.ServeHTTP(w, req)
+			r.ServeHTTP(w, req)
 
 			resp := w.Result()
 			assert.Equal(t, tc.expectedStatus, resp.StatusCode)
@@ -73,17 +73,17 @@ func TestHandler(t *testing.T) {
 }
 
 func TestBasicAuthHandler(t *testing.T) {
-	router := chi.NewRouter()
+	r := chi.NewRouter()
 	acc := model.UserAccount{Username: "foo", Password: "bar"}
 	basicAuth := base64.StdEncoding.EncodeToString([]byte(acc.Username + ":" + acc.Password))
 
-	router.With(util.BasicAuth(acc)).Get("/secret", endpoint.HelloHandler)
+	r.With(util.BasicAuth(acc)).Get("/secret", endpoint.HelloHandler)
 
 	t.Run("NoAuthHeader", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
 		w := httptest.NewRecorder()
 
-		router.ServeHTTP(w, req)
+		r.ServeHTTP(w, req)
 
 		resp := w.Result()
 		assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
@@ -99,7 +99,7 @@ func TestBasicAuthHandler(t *testing.T) {
 		req.Header.Set("Authorization", "Basic "+basicAuth)
 		w := httptest.NewRecorder()
 
-		router.ServeHTTP(w, req)
+		r.ServeHTTP(w, req)
 
 		resp := w.Result()
 		assert.Equal(t, http.StatusOK, resp.StatusCode)

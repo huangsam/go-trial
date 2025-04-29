@@ -69,18 +69,13 @@ func BasicAuth(accounts ...model.UserAccount) func(http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			user, pass, ok := r.BasicAuth()
 			if !ok {
-				w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
 				http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 				return
 			}
 
 			storedPass, exists := accountSet[user]
-			if !exists {
-				http.Error(w, "missing user", http.StatusUnauthorized)
-				return
-			}
-			if storedPass != pass {
-				http.Error(w, "bad password", http.StatusUnauthorized)
+			if !exists || storedPass != pass {
+				http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 				return
 			}
 
