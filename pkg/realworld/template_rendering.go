@@ -33,10 +33,7 @@ type Employee struct {
 //
 // The embedded template showcases simple template syntax.
 func RenderCarInfo(car *Car) (string, error) {
-	tmpl, err := template.ParseFS(templatesFS, "templates/car.template")
-	if err != nil {
-		return "", err
-	}
+	tmpl, _ := template.ParseFS(templatesFS, "templates/car.template")
 	return util.RenderToString(tmpl, car)
 }
 
@@ -44,9 +41,6 @@ func RenderCarInfo(car *Car) (string, error) {
 //
 // The embedded template showcases complex template syntax.
 func RenderEmployeeInfo(emp *Employee) (string, error) {
-	tmpl, err := template.ParseFS(templatesFS, "templates/employee.template")
-	if err != nil {
-		return "", err
-	}
+	tmpl, _ := template.ParseFS(templatesFS, "templates/employee.template")
 	return util.RenderToString(tmpl, emp)
 }
