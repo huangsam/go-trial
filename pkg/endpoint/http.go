@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/huangsam/go-trial/internal/model"
 	"github.com/huangsam/go-trial/pkg/abstraction"
 )
 
@@ -20,14 +21,6 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte("Generic error"))
 }
 
-// ShapePayload is the JSON response for any handler that deals with shapes.
-type ShapePayload struct {
-	Area       float64           `json:"area"`
-	Perimeter  float64           `json:"perimeter"`
-	Dimensions abstraction.Shape `json:"dimensions"`
-	Size       string            `json:"size"`
-}
-
 // RectangleSizeHandler returns rectangle info as JSON.
 func RectangleSizeHandler(w http.ResponseWriter, r *http.Request) {
 	width, err := strconv.ParseFloat(r.URL.Query().Get("width"), 64)
@@ -39,16 +32,9 @@ func RectangleSizeHandler(w http.ResponseWriter, r *http.Request) {
 		height = 1.0
 	}
 	rect := abstraction.NewRectangle(width, height)
-	size := abstraction.Classify(rect)
-	payload := ShapePayload{
-		Area:       rect.Area(),
-		Perimeter:  rect.Perimeter(),
-		Dimensions: rect,
-		Size:       size.String(),
-	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	_ = json.NewEncoder(w).Encode(payload)
+	_ = json.NewEncoder(w).Encode(model.NewShapePayload(rect))
 }
 
 // CircleSizeHandler returns circle info as JSON.
@@ -58,14 +44,7 @@ func CircleSizeHandler(w http.ResponseWriter, r *http.Request) {
 		radius = 1.0
 	}
 	circle := abstraction.NewCircle(radius)
-	size := abstraction.Classify(circle)
-	payload := ShapePayload{
-		Area:       circle.Area(),
-		Perimeter:  circle.Perimeter(),
-		Dimensions: circle,
-		Size:       size.String(),
-	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	_ = json.NewEncoder(w).Encode(payload)
+	_ = json.NewEncoder(w).Encode(model.NewShapePayload(circle))
 }
