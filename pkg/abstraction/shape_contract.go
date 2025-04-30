@@ -11,13 +11,15 @@ type Shape interface {
 	Perimeter() float64
 }
 
+var _ Shape = &Rectangle{} // Rectangle implements Shape
+
 // Rectangle represents a rectangle with width and height.
 type Rectangle struct {
 	Width  float64 `json:"width"`
 	Height float64 `json:"height"`
 }
 
-func NewRectangle(width, height float64) Shape {
+func NewRectangle(width, height float64) *Rectangle {
 	return &Rectangle{Width: width, Height: height}
 }
 
@@ -36,7 +38,9 @@ type Circle struct {
 	Radius float64 `json:"radius"`
 }
 
-func NewCircle(radius float64) Shape {
+var _ Shape = &Circle{} // Circle implements Shape
+
+func NewCircle(radius float64) *Circle {
 	return &Circle{Radius: radius}
 }
 
