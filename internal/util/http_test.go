@@ -23,7 +23,7 @@ func TestBasicAuthMiddleware(t *testing.T) {
 
 	r.With(util.BasicAuth(validAccount)).Get("/protected", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Protected content"))
+		_, _ = w.Write([]byte("Protected content"))
 	})
 
 	t.Run("NoAuthHeader", func(t *testing.T) {
