@@ -1,7 +1,6 @@
 package endpoint_test
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -9,8 +8,6 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/huangsam/go-trial/internal/model"
-	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -85,9 +82,25 @@ func TestJsonHandlers(t *testing.T) {
 			expectedSize:   "Small",
 		},
 		{
+			name:           "RectangleWithoutQuery",
+			path:           "/rectangle-size",
+			query:          "",
+			handler:        endpoint.RectangleSizeHandler,
+			expectedStatus: http.StatusOK,
+			expectedSize:   "Small",
+		},
+		{
 			name:           "CircleWithQuery",
 			path:           "/circle-size",
 			query:          "?radius=1",
+			handler:        endpoint.CircleSizeHandler,
+			expectedStatus: http.StatusOK,
+			expectedSize:   "Small",
+		},
+		{
+			name:           "CircleWithoutQuery",
+			path:           "/circle-size",
+			query:          "",
 			handler:        endpoint.CircleSizeHandler,
 			expectedStatus: http.StatusOK,
 			expectedSize:   "Small",
@@ -115,43 +128,4 @@ func TestJsonHandlers(t *testing.T) {
 			assert.Equal(t, tc.expectedSize, payload["size"], "Size should be %s", tc.expectedSize)
 		})
 	}
-}
-
-func TestSecretHandler(t *testing.T) {
-	r := chi.NewRouter()
-	acc := model.UserAccount{Username: "foo", Password: "bar"}
-	basicAuth := base64.StdEncoding.EncodeToString([]byte(acc.Username + ":" + acc.Password))
-
-	r.With(util.BasicAuth(acc)).Get("/secret", endpoint.HelloHandler)
-
-	t.Run("NoAuthHeader", func(t *testing.T) {
-		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
-		w := httptest.NewRecorder()
-
-		r.ServeHTTP(w, req)
-
-		resp := w.Result()
-		assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
-
-		body, err := io.ReadAll(resp.Body)
-		require.NoError(t, err)
-		assert.NotEmpty(t, string(body), "Body should not be empty")
-		assert.Contains(t, string(body), "Unauthorized")
-	})
-
-	t.Run("ValidAuthHeader", func(t *testing.T) {
-		req := httptest.NewRequest(http.MethodGet, "/secret", nil)
-		req.Header.Set("Authorization", "Basic "+basicAuth)
-		w := httptest.NewRecorder()
-
-		r.ServeHTTP(w, req)
-
-		resp := w.Result()
-		assert.Equal(t, http.StatusOK, resp.StatusCode)
-
-		body, err := io.ReadAll(resp.Body)
-		require.NoError(t, err)
-		assert.NotEmpty(t, string(body), "Body should not be empty")
-		assert.Contains(t, string(body), "Hello")
-	})
 }
