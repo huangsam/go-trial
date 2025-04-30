@@ -2,6 +2,7 @@ package endpoint_test
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -15,7 +16,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestHandler(t *testing.T) {
+func TestRawHandlers(t *testing.T) {
 	r := chi.NewRouter()
 
 	testCases := []struct {
@@ -39,22 +40,6 @@ func TestHandler(t *testing.T) {
 			handler:          endpoint.ErrorHandler,
 			expectedStatus:   http.StatusInternalServerError,
 			expectedContains: []string{"Generic", "error"},
-		},
-		{
-			name:             "RectangleWithQuery",
-			path:             "/rectangle-size",
-			query:            "?width=3.14&height=3.14",
-			handler:          endpoint.RectangleSizeHandler,
-			expectedStatus:   http.StatusOK,
-			expectedContains: []string{"width", "height"},
-		},
-		{
-			name:             "CircleWithQuery",
-			path:             "/circle-size",
-			query:            "?radius=3",
-			handler:          endpoint.CircleSizeHandler,
-			expectedStatus:   http.StatusOK,
-			expectedContains: []string{"radius"},
 		},
 	}
 
@@ -80,7 +65,59 @@ func TestHandler(t *testing.T) {
 	}
 }
 
-func TestBasicAuthHandler(t *testing.T) {
+func TestJsonHandlers(t *testing.T) {
+	r := chi.NewRouter()
+
+	testCases := []struct {
+		name           string
+		path           string
+		query          string
+		handler        http.HandlerFunc
+		expectedStatus int
+		expectedSize   string
+	}{
+		{
+			name:           "RectangleWithQuery",
+			path:           "/rectangle-size",
+			query:          "?width=1&height=1",
+			handler:        endpoint.RectangleSizeHandler,
+			expectedStatus: http.StatusOK,
+			expectedSize:   "Small",
+		},
+		{
+			name:           "CircleWithQuery",
+			path:           "/circle-size",
+			query:          "?radius=1",
+			handler:        endpoint.CircleSizeHandler,
+			expectedStatus: http.StatusOK,
+			expectedSize:   "Small",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			r.Get(tc.path, tc.handler)
+			req := httptest.NewRequest(http.MethodGet, tc.path+tc.query, nil)
+			w := httptest.NewRecorder()
+
+			r.ServeHTTP(w, req)
+
+			resp := w.Result()
+			assert.Equal(t, tc.expectedStatus, resp.StatusCode)
+
+			body, err := io.ReadAll(resp.Body)
+			require.NoError(t, err)
+			assert.NotEmpty(t, body, "Body should not be empty")
+			var payload map[string]any
+			require.NoError(t, json.Unmarshal(body, &payload), "Failed to unmarshal JSON response")
+			assert.Greater(t, payload["area"], 0.0, "Area should be positive")
+			assert.Greater(t, payload["perimeter"], 0.0, "Perimeter should be positive")
+			assert.Equal(t, tc.expectedSize, payload["size"], "Size should be %s", tc.expectedSize)
+		})
+	}
+}
+
+func TestSecretHandler(t *testing.T) {
 	r := chi.NewRouter()
 	acc := model.UserAccount{Username: "foo", Password: "bar"}
 	basicAuth := base64.StdEncoding.EncodeToString([]byte(acc.Username + ":" + acc.Password))
