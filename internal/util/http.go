@@ -15,8 +15,8 @@ import (
 
 // RunServer runs an HTTP server until an interrupt shuts it down.
 func RunServer(addr string, handler http.Handler) error {
-	hlog := log.With().Str("addr", addr).Logger()
-	hlog.Info().Msg("Start HTTP server")
+	alog := log.With().Str("addr", addr).Logger()
+	alog.Info().Msg("Start HTTP server")
 
 	server := &http.Server{
 		Addr:    addr,
@@ -25,7 +25,7 @@ func RunServer(addr string, handler http.Handler) error {
 
 	go func() {
 		if err := server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
-			hlog.Fatal().Err(err).Msg("HTTP server error")
+			alog.Fatal().Err(err).Msg("HTTP server error")
 		}
 	}()
 
@@ -33,7 +33,7 @@ func RunServer(addr string, handler http.Handler) error {
 	signal.Notify(quit, os.Interrupt)
 	<-quit
 
-	hlog.Info().Msg("Stop HTTP server")
+	alog.Info().Msg("Stop HTTP server")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	return server.Shutdown(ctx)
