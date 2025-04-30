@@ -48,6 +48,14 @@ func TestHandler(t *testing.T) {
 			expectedStatus:   http.StatusOK,
 			expectedContains: []string{"width", "height"},
 		},
+		{
+			name:             "CircleWithQuery",
+			path:             "/circle-size",
+			query:            "?radius=3",
+			handler:          endpoint.CircleSizeHandler,
+			expectedStatus:   http.StatusOK,
+			expectedContains: []string{"radius"},
+		},
 	}
 
 	for _, tc := range testCases {

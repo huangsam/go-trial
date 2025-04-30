@@ -29,9 +29,6 @@ type ShapePayload struct {
 }
 
 // RectangleSizeHandler returns rectangle info as JSON.
-//
-// Accepts 'width' and 'height' query parameters (defaulting to 1.0).
-// Returns an error if width or height are not valid numbers.
 func RectangleSizeHandler(w http.ResponseWriter, r *http.Request) {
 	width, err := strconv.ParseFloat(r.URL.Query().Get("width"), 64)
 	if err != nil {
@@ -47,6 +44,25 @@ func RectangleSizeHandler(w http.ResponseWriter, r *http.Request) {
 		Area:       rect.Area(),
 		Perimeter:  rect.Perimeter(),
 		Dimensions: rect,
+		Size:       size.String(),
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	_ = json.NewEncoder(w).Encode(payload)
+}
+
+// CircleSizeHandler returns circle info as JSON.
+func CircleSizeHandler(w http.ResponseWriter, r *http.Request) {
+	radius, err := strconv.ParseFloat(r.FormValue("radius"), 64)
+	if err != nil {
+		radius = 1.0
+	}
+	circle := abstraction.NewCircle(radius)
+	size := abstraction.Classify(circle)
+	payload := ShapePayload{
+		Area:       circle.Area(),
+		Perimeter:  circle.Perimeter(),
+		Dimensions: circle,
 		Size:       size.String(),
 	}
 	w.Header().Set("Content-Type", "application/json")

@@ -33,7 +33,7 @@ func (r Rectangle) Perimeter() float64 {
 
 // Circle represents a circle with a given radius.
 type Circle struct {
-	Radius float64
+	Radius float64 `json:"radius"`
 }
 
 func NewCircle(radius float64) Shape {

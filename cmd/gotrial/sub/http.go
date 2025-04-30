@@ -42,6 +42,7 @@ var HttpCommand *cli.Command = &cli.Command{
 		r.Get("/", endpoint.HelloHandler)
 		r.Get("/error", endpoint.ErrorHandler)
 		r.Get("/rectangle-size", endpoint.RectangleSizeHandler)
+		r.Get("/circle-size", endpoint.CircleSizeHandler)
 		r.With(authMiddleware).Get("/secret", endpoint.HelloHandler)
 
 		return util.RunServer(c.String("addr"), r)
