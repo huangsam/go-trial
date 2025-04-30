@@ -121,6 +121,7 @@ func TestJsonHandlers(t *testing.T) {
 			body, err := io.ReadAll(resp.Body)
 			require.NoError(t, err)
 			assert.NotEmpty(t, body, "Body should not be empty")
+
 			var payload map[string]any
 			require.NoError(t, json.Unmarshal(body, &payload), "Failed to unmarshal JSON response")
 			assert.Greater(t, payload["area"], 0.0, "Area should be positive")
