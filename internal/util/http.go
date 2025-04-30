@@ -70,6 +70,7 @@ func BasicAuth(accounts ...model.UserAccount) func(http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			user, pass, ok := r.BasicAuth()
 			if !ok {
+				w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`) // Prompt for credentials
 				http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 				return
 			}
