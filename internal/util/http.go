@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/go-chi/chi/v5/middleware"
@@ -14,6 +15,10 @@ import (
 )
 
 // RunServer runs an HTTP server until an interrupt shuts it down.
+//
+// Specifically, it waits for a SIGINT or SIGTERM signal to be received.
+// When such a signal is received, it gracefully shuts down the server
+// within a reasonable timeout period.
 func RunServer(addr string, handler http.Handler) error {
 	alog := log.With().Str("addr", addr).Logger()
 	alog.Info().Msg("Start HTTP server")
@@ -30,7 +35,7 @@ func RunServer(addr string, handler http.Handler) error {
 	}()
 
 	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, os.Interrupt)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 
 	alog.Info().Msg("Stop HTTP server")
@@ -40,6 +45,8 @@ func RunServer(addr string, handler http.Handler) error {
 }
 
 // ZeroLogger emits a log for each incoming HTTP request.
+//
+// It logs the request URI, status code, and latency.
 func ZeroLogger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
