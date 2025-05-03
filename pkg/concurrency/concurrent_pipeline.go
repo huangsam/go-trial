@@ -49,6 +49,7 @@ func MultiStagePipelineSimple(from int, to int) int {
 // MultiStagePipelineMerge extends the simple pipeline by using merged channels.
 //
 // It creates multiple square and double channels, merges them, and then sums the output.
+// The number of square and double channels can be adjusted to control the level of concurrency.
 // This demonstrates the flexibility of the pipeline approach.
 func MultiStagePipelineMerge(from int, to int) int {
 	sum := 0
