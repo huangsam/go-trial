@@ -38,6 +38,8 @@ func double(in <-chan int) <-chan int {
 //
 // It generates a range of integers, squares them, doubles them, and sums the results.
 // This shows the basic form of a pipeline with a single input and a final output.
+//
+// Kudos to https://go.dev/blog/pipelines for the original code!
 func MultiStagePipelineSimple(from int, to int) int {
 	sum := 0
 	for n := range double(square(util.Range(from, to))) {
