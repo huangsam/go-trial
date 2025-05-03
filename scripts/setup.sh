@@ -20,5 +20,8 @@ case "$mode" in
         echo "Invalid mode '$mode' detected" && exit 1 ;;
 esac
 
+# Install dependencies
+go mod download
+
 # Generate protobuf files
 protoc --go_out=. --go-grpc_out=. pkg/endpoint/proto/echo.proto
