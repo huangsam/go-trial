@@ -6,6 +6,11 @@ import (
 )
 
 // SumUntil sums numbers until the timeout is reached.
+//
+// It sends the numbers to a channel every 100ms and adds them to the sum.
+// The function returns the sum when the timeout is reached.
+// The function takes a timeout and a factor as arguments.
+// The factor is used to multiply the numbers before adding them to the sum.
 func SumUntil(timeout time.Duration, factor int) int {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	ticker := time.NewTicker(100 * time.Millisecond)
