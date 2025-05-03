@@ -19,7 +19,7 @@ func SumUntil(timeout time.Duration, factor int) int {
 			select {
 			case <-ctx.Done(): // Return when timeout is reached
 				return
-			case <-ticker.C:
+			case <-ticker.C: // Send the number to the channel every 100ms
 				ch <- factor * input
 			}
 			input += 1
