@@ -34,8 +34,10 @@ func double(in <-chan int) <-chan int {
 	return out
 }
 
-// MultiStagePipelineSimple creates a multi-stage pipeline that generates a range of integers,
-// squares them, and then doubles them. It then sums the output.
+// MultiStagePipelineSimple creates a multi-stage pipeline by using chained channels.
+//
+// It generates a range of integers, squares them, doubles them, and sums the results.
+// This shows the basic form of a pipeline with a single input and a final output.
 func MultiStagePipelineSimple(from int, to int) int {
 	sum := 0
 	for n := range double(square(util.Range(from, to))) {
