@@ -19,3 +19,4 @@ bin/
 builds/
 mock/
 .mockery.yaml
+*.pb.go

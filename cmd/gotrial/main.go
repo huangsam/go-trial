@@ -16,6 +16,7 @@ func main() {
 		Commands: [](*cli.Command){
 			sub.DemoCommand,
 			sub.HttpCommand,
+			sub.GrpcCommand,
 		},
 	}
 
