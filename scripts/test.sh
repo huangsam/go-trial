@@ -32,16 +32,16 @@ testout="coverage.out"
 testhtml="coverage.html"
 
 case "$mode" in
-    "default")
+    default)
         go test "${selector[@]}" ;;
-    "bench")
+    bench)
         go test -bench=. "${selector[@]}" ;;
-    "cover")
+    cover)
         go test -cover "${selector[@]}" ;;
-    "html")
+    html)
         go test -cover -coverprofile="$testout" "${selector[@]}"
         go tool cover -html="$testout" -o "$testhtml" ;;
-    "race")
+    race)
         go test -race github.com/huangsam/go-trial/pkg/concurrency ;;
     *)
         echo "Invalid mode '$mode' detected" && exit 1 ;;

@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.24'
+      - name: Run setup
+        run: bash ./scripts/setup.sh ci
       - name: Run linters
         uses: golangci/golangci-lint-action@v7
         with:
