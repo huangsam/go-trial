@@ -7,16 +7,18 @@ coverage.*
 # OS
 .DS_Store
 
-# Documentation
-images/
-README.md
-*.md
+# Project
+/gotrial
+*.pb.go
+coverage.*
 
-# Developer
+# Docker
 .git/
 .github/
 bin/
 builds/
+images/
 mock/
+*.md
 .mockery.yaml
-*.pb.go
+README.md
