@@ -19,6 +19,7 @@ case "$mode" in
             curl -L "$PB_REL/download/v$PB_VER/protoc-$PB_VER-$PB_ARC.zip" -o protoc.zip
             unzip protoc.zip -d "$PB_DST"
         fi
+        echo "Link $PB_DST/bin to PATH variable"
         export PATH="$PB_DST/bin:$PATH"
         go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
         go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
