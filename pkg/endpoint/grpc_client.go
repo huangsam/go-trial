@@ -3,6 +3,7 @@ package endpoint
 import (
 	"context"
 
+	"github.com/huangsam/go-trial/internal/util"
 	pb "github.com/huangsam/go-trial/pkg/endpoint/proto"
 	"github.com/rs/zerolog/log"
 )
@@ -26,6 +27,7 @@ func EchoManyWithClient(ctx context.Context, client pb.EchoerClient) error {
 	if err != nil {
 		return err
 	}
+	defer util.Dismiss(stream.CloseSend)
 	err = stream.Send(&pb.EchoRequest{Message: HelloValue})
 	if err != nil {
 		return err
