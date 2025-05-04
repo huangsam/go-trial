@@ -39,7 +39,11 @@ func EchoManyWithClient(ctx context.Context, client pb.EchoerClient) error {
 		}
 		log.Info().Msgf("Echo response: %s", resp.Message)
 		if resp.Message == DoneValue {
-			return nil
+			break
 		}
 	}
+	if err := stream.Send(&pb.EchoRequest{Message: DoneValue}); err != nil {
+		return err
+	}
+	return nil
 }

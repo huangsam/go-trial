@@ -28,6 +28,9 @@ func (s *EchoerServer) EchoStream(stream grpc.BidiStreamingServer[pb.EchoRequest
 		if err != nil {
 			return err
 		}
+		if req.Message == DoneValue {
+			continue
+		}
 		for range 3 {
 			resp := &pb.EchoResponse{Message: req.Message}
 			if err := stream.Send(resp); err != nil {

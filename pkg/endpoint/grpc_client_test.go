@@ -12,6 +12,13 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
+var (
+	helloReq  = &pb.EchoRequest{Message: endpoint.HelloValue}
+	helloResp = &pb.EchoResponse{Message: endpoint.HelloValue}
+	doneReq   = &pb.EchoRequest{Message: endpoint.DoneValue}
+	doneResp  = &pb.EchoResponse{Message: endpoint.DoneValue}
+)
+
 type mockEchoerClient struct {
 	mock.Mock
 }
@@ -28,8 +35,7 @@ func (m *mockEchoerClient) EchoStream(ctx context.Context, opts ...grpc.CallOpti
 
 func TestEchoOnceWithClient(t *testing.T) {
 	client := new(mockEchoerClient)
-	resp := &pb.EchoResponse{Message: endpoint.HelloValue}
-	client.On("EchoOnce", mock.Anything, &pb.EchoRequest{Message: endpoint.HelloValue}).Return(resp, nil)
+	client.On("EchoOnce", mock.Anything, helloReq).Return(helloResp, nil)
 
 	err := endpoint.EchoOnceWithClient(context.Background(), client)
 	require.NoError(t, err)
@@ -83,13 +89,12 @@ func (c *mockBidiStreamingClient) Trailer() metadata.MD {
 func TestEchoManyWithClient(t *testing.T) {
 	client := new(mockEchoerClient)
 	stream := new(mockBidiStreamingClient)
-	helloResp := &pb.EchoResponse{Message: endpoint.HelloValue}
-	doneResp := &pb.EchoResponse{Message: endpoint.DoneValue}
 	client.On("EchoStream", mock.Anything, mock.Anything).Return(stream, nil)
 	stream.On("CloseSend").Return(nil)
 	stream.On("Recv").Return(helloResp, nil).Times(3) // 3 hello from server
 	stream.On("Recv").Return(doneResp, nil).Once()    // done from server
-	stream.On("Send", &pb.EchoRequest{Message: endpoint.HelloValue}).Return(nil)
+	stream.On("Send", helloReq).Once().Return(nil)    // 1 hello to server
+	stream.On("Send", doneReq).Once().Return(nil)     // done to server
 	err := endpoint.EchoManyWithClient(context.Background(), client)
 	require.NoError(t, err)
 	client.AssertExpectations(t)
