@@ -12,10 +12,12 @@ case "$mode" in
         ;;
     ci)
         PB_REL="https://github.com/protocolbuffers/protobuf/releases"
-        curl -L "$PB_REL/download/v30.2/protoc-30.2-linux-x86_64.zip" -o protoc.zip
-        unzip protoc.zip -d "$HOME/.protoc"
-        chmod +x "$HOME/.protoc/bin/protoc"
-        export PATH="$HOME/.protoc/bin:$PATH"
+        PB_DST="$HOME/.protoc"
+        if [[ ! -d "$PB_DST" ]]; then
+            curl -L "$PB_REL/download/v30.2/protoc-30.2-linux-x86_64.zip" -o protoc.zip
+            unzip protoc.zip -d "$PB_DST"
+        fi
+        export PATH="$PB_DST/bin:$PATH"
         go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
         go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
         ;;
