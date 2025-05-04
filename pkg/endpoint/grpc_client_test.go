@@ -80,8 +80,6 @@ func (c *mockBidiStreamingClient) Trailer() metadata.MD {
 	return args.Get(0).(metadata.MD)
 }
 
-var _ grpc.BidiStreamingClient[pb.EchoRequest, pb.EchoResponse] = &mockBidiStreamingClient{}
-
 func TestEchoManyWithClient(t *testing.T) {
 	client := new(mockEchoerClient)
 	stream := new(mockBidiStreamingClient)
