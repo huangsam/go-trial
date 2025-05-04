@@ -19,6 +19,11 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.24'
+      - name: Cache protoc
+        uses: actions/cache@v3
+        with:
+          path: ~/.protoc
+          key: protoc-${{ runner.os }}-${{ hashFiles('scripts/setup.sh') }}
       - name: Run setup
         run: bash ./scripts/setup.sh ci
       - name: Run linters
