@@ -14,7 +14,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-// GrpcCommand is a command to run a GRPC server.
+// GrpcCommand is a command to run a gRPC server.
 var GrpcCommand *cli.Command = &cli.Command{
 	Name:        "grpc",
 	Usage:       "Play with gRPC",
@@ -33,7 +33,7 @@ var GrpcCommand *cli.Command = &cli.Command{
 	},
 }
 
-// GrpcServeCommand is a command to run a GRPC server.
+// GrpcServeCommand is a command to run a gRPC server.
 var GrpcServeCommand *cli.Command = &cli.Command{
 	Name:        "serve",
 	Usage:       "Run gRPC server",
