@@ -51,6 +51,9 @@ var GrpcServeCommand *cli.Command = &cli.Command{
 	},
 }
 
+// requestTimeout is the timeout for gRPC requests.
+var requestTimeout = time.Second
+
 // GrpcEchoOnceCommand is a command to run a gRPC client.
 var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 	Name:        "echo-once",
@@ -62,9 +65,9 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
 		}
-		util.Dismiss(conn.Close)
+		defer util.Dismiss(conn.Close)
 		client := pb.NewEchoerClient(conn)
-		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
 		defer cancel()
 		return endpoint.EchoOnceWithClient(ctx, client)
 	},
@@ -81,9 +84,9 @@ var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
 		}
-		util.Dismiss(conn.Close)
+		defer util.Dismiss(conn.Close)
 		client := pb.NewEchoerClient(conn)
-		ctx, cancel := context.WithCancel(context.Background())
+		ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
 		defer cancel()
 		return endpoint.EchoManyWithClient(ctx, client)
 	},

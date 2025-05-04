@@ -30,7 +30,7 @@ func (s *EchoerServer) EchoStream(stream grpc.BidiStreamingServer[pb.EchoRequest
 			if err := stream.Send(resp); err != nil {
 				return err
 			}
-			time.Sleep(250 * time.Millisecond)
-		}
+			time.Sleep(100 * time.Millisecond)
+		} // this runs within 1 second
 	}
 }

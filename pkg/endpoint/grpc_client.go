@@ -28,12 +28,9 @@ func EchoManyWithClient(ctx context.Context, client pb.EchoerClient) error {
 		return err
 	}
 	for {
-		if ctx.Err() != nil {
-			return ctx.Err()
-		}
 		resp, err := stream.Recv()
 		if err != nil {
-			return err
+			return nil // EOF
 		}
 		log.Info().Msgf("Echo response: %s", resp.Message)
 	}
