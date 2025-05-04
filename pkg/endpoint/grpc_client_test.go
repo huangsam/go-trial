@@ -92,9 +92,9 @@ func TestEchoManyWithClient(t *testing.T) {
 	client.On("EchoStream", mock.Anything, mock.Anything).Return(stream, nil)
 	stream.On("CloseSend").Return(nil)
 	stream.On("Recv").Return(helloResp, nil).Times(3) // 3 hello from server
-	stream.On("Recv").Return(doneResp, nil).Once()    // done from server
+	stream.On("Recv").Return(doneResp, nil).Once()    // 1 done from server
 	stream.On("Send", helloReq).Once().Return(nil)    // 1 hello to server
-	stream.On("Send", doneReq).Once().Return(nil)     // done to server
+	stream.On("Send", doneReq).Once().Return(nil)     // 1 done to server
 	err := endpoint.EchoManyWithClient(context.Background(), client)
 	require.NoError(t, err)
 	client.AssertExpectations(t)
