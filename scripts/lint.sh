@@ -4,11 +4,11 @@ set -eu
 mode="${1:-default}"
 
 case "$mode" in
-    "default")
+    default)
         golangci-lint run ;;
-    "fix")
+    fix)
         golangci-lint run --fix ;;
-    "format")
+    format)
         golangci-lint fmt ;;
     *)
         echo "Invalid mode '$mode' detected" && exit 1 ;;

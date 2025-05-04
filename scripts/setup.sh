@@ -1,37 +1,27 @@
 #!/bin/bash
 set -eu
 
-brew_packages=()
-go_packages=()
+mode="${1:-default}"
 
-install_brew_if_missing() {
-    local package="$1"
-    if ! command -v "$package" &> /dev/null; then
-        brew_packages+=("$package")
-    fi
-}
+case "$mode" in
+    default)
+        brew install golangci-lint mockery protobuf
+        go install golang.org/x/tools/cmd/godoc@latest
+        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+        go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+        ;;
+    ci)
+        sudo apt-get update
+        sudo apt-get install -y protobuf-compiler protoc-gen-go
+        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+        go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+        ;;
+    *)
+        echo "Invalid mode '$mode' detected" && exit 1 ;;
+esac
 
-install_go_if_missing() {
-    local command="$1"
-    local package="$2"
-    if ! command -v "$command" &> /dev/null; then
-        go_packages+=("$package")
-    fi
-}
+# Install dependencies
+go mod download
 
-# Define packages to install
-install_brew_if_missing "golangci-lint"
-install_brew_if_missing "mockery"
-install_go_if_missing "godoc" "golang.org/x/tools/cmd/godoc@latest"
-
-if [[ ${#brew_packages[@]} -gt 0 ]]; then
-    echo "Install brew packages: ${brew_packages[*]}"
-    brew install "${brew_packages[@]}"
-fi
-
-if [[ ${#go_packages[@]} -gt 0 ]]; then
-    echo "Install go packages: ${go_packages[*]}"
-    go install "${go_packages[@]}"
-fi
-
-echo "Installation checks completed."
+# Generate protobuf files
+protoc --go_out=. --go-grpc_out=. pkg/endpoint/proto/echo.proto
