@@ -53,7 +53,7 @@ and experiment with.
 ### Practical concepts
 
 - [Files, I/O, time](pkg/realworld/)
-- [HTTP endpoints](pkg/endpoint/)
+- [gRPC, HTTP](pkg/endpoint/)
 
 ### Apply your knowledge
 
