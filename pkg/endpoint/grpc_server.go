@@ -25,12 +25,12 @@ func (s *EchoerServer) EchoStream(stream grpc.BidiStreamingServer[pb.EchoRequest
 		if err != nil {
 			return err
 		}
-		for range 3 {
+		for range 4 {
 			resp := &pb.EchoResponse{Message: req.Message}
 			if err := stream.Send(resp); err != nil {
 				return err
 			}
-			time.Sleep(100 * time.Millisecond)
-		} // this runs within 1 second
+			time.Sleep(50 * time.Millisecond)
+		}
 	}
 }
