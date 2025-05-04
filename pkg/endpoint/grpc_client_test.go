@@ -83,10 +83,12 @@ func (c *mockBidiStreamingClient) Trailer() metadata.MD {
 func TestEchoManyWithClient(t *testing.T) {
 	client := new(mockEchoerClient)
 	stream := new(mockBidiStreamingClient)
-	resp := &pb.EchoResponse{Message: endpoint.DoneValue}
+	helloResp := &pb.EchoResponse{Message: endpoint.HelloValue}
+	doneResp := &pb.EchoResponse{Message: endpoint.DoneValue}
 	client.On("EchoStream", mock.Anything, mock.Anything).Return(stream, nil)
 	stream.On("CloseSend").Return(nil)
-	stream.On("Recv").Return(resp, nil)
+	stream.On("Recv").Return(helloResp, nil).Times(3) // 3 hello from server
+	stream.On("Recv").Return(doneResp, nil).Once()    // done from server
 	stream.On("Send", &pb.EchoRequest{Message: endpoint.HelloValue}).Return(nil)
 	err := endpoint.EchoManyWithClient(context.Background(), client)
 	require.NoError(t, err)
