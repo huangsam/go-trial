@@ -37,7 +37,7 @@ var GrpcCommand *cli.Command = &cli.Command{
 var GrpcServeCommand *cli.Command = &cli.Command{
 	Name:        "serve",
 	Usage:       "Run gRPC server",
-	Description: "This command runs a gRPC server.",
+	Description: "This command runs the Echoer gRPC server.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
 		lis, err := net.Listen("tcp", addr)
@@ -58,7 +58,7 @@ var requestTimeout = 5 * time.Second
 var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 	Name:        "echo-once",
 	Usage:       "Echo once",
-	Description: "This command makes a call against the server once.",
+	Description: "This command calls the Echoer gRPC server once.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
 		conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -77,7 +77,7 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 	Name:        "echo-stream",
 	Usage:       "Echo stream",
-	Description: "This command makes a call against the server in a stream.",
+	Description: "This command calls the Echoer gRPC server with a stream.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
 		conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
