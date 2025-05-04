@@ -23,7 +23,7 @@ jobs:
         id: cache-protoc
         uses: actions/cache@v3
         with:
-          path: $HOME/.protoc
+          path: ~/.protoc
           key: protoc-${{ runner.os }}-${{ hashFiles('scripts/setup.sh') }}
       - name: Run setup
         run: bash ./scripts/setup.sh ci
