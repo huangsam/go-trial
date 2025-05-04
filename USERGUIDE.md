@@ -3,17 +3,6 @@
 This content is for developers who are want to experiment with the repository at
 a deeper level.
 
-## Setup the environment
-
-After you have Homebrew and Go installed, run the following script:
-
-```shell
-# Setup tools
-bash scripts/setup.sh
-```
-
-This step is useful if you plan to file a PR or contribute to the project.
-
 ## See the docs
 
 To see the codebase docs via CLI:

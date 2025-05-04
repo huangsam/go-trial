@@ -15,6 +15,9 @@ There's no better time to master Golang than now! 🔥
 ## Getting started
 
 ```shell
+# Run setup
+bash scripts/setup.sh
+
 # Run build
 bash scripts/build.sh
 
