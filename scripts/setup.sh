@@ -11,10 +11,12 @@ case "$mode" in
         go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
         ;;
     ci)
-        PB_REL="https://github.com/protocolbuffers/protobuf/releases"
+        PB_REL='https://github.com/protocolbuffers/protobuf/releases'
+        PB_VER='30.2'
+        PB_ARC='linux-x86_64'
         PB_DST="$HOME/.protoc"
         if [[ ! -d "$PB_DST" ]]; then
-            curl -L "$PB_REL/download/v30.2/protoc-30.2-linux-x86_64.zip" -o protoc.zip
+            curl -L "$PB_REL/download/v$PB_VER/protoc-$PB_VER-$PB_ARC.zip" -o protoc.zip
             unzip protoc.zip -d "$PB_DST"
         fi
         export PATH="$PB_DST/bin:$PATH"
