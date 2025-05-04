@@ -44,7 +44,7 @@ func TestRenderToString(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tmpl, err := template.New("test").Parse(tt.template)
 			if !tt.valid {
-				assert.Error(t, err)
+				require.Error(t, err)
 				return
 			}
 			require.NoError(t, err)
