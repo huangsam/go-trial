@@ -12,7 +12,7 @@ import (
 func main() {
 	cmd := &cli.App{
 		Usage:       "Try Go in action! 🔥",
-		Description: "This binary has multiple commands to choose from.",
+		Description: "This binary supports ad-hoc runs and client/server interactions.",
 		Commands: [](*cli.Command){
 			sub.DemoCommand,
 			sub.HttpCommand,
