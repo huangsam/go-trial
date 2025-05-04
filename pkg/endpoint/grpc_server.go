@@ -8,9 +8,6 @@ import (
 	"google.golang.org/grpc"
 )
 
-// DoneValue is a value used to indicate the end of a stream.
-const DoneValue = "Done"
-
 // EchoerServer is a struct that implements the Echoer service defined in the proto file.
 type EchoerServer struct {
 	pb.UnimplementedEchoerServer

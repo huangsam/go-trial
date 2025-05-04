@@ -8,9 +8,6 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-// HelloValue is a value used in the EchoOnce and EchoStream methods.
-const HelloValue = "Hello"
-
 // EchoOnceWithClient demonstrates how to use a gRPC client to call the EchoOnce method.
 func EchoOnceWithClient(ctx context.Context, client pb.EchoerClient) error {
 	resp, err := client.EchoOnce(ctx, &pb.EchoRequest{Message: HelloValue})
