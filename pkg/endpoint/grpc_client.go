@@ -37,7 +37,7 @@ func EchoManyWithClient(ctx context.Context, client pb.EchoerClient) error {
 		}
 		log.Info().Msgf("Echo response: %s", resp.Message)
 		if resp.Message == DoneValue {
-			return nil // All done, exit the loop
+			return nil
 		}
 	}
 }

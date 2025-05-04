@@ -35,6 +35,8 @@ func (s *EchoerServer) EchoStream(stream grpc.BidiStreamingServer[pb.EchoRequest
 			}
 			time.Sleep(50 * time.Millisecond)
 		}
-		stream.Send(&pb.EchoResponse{Message: DoneValue}) // End the stream with "Done"
+		if err := stream.Send(&pb.EchoResponse{Message: DoneValue}); err != nil {
+			return err
+		}
 	}
 }
