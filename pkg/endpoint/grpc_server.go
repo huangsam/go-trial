@@ -8,6 +8,9 @@ import (
 	"google.golang.org/grpc"
 )
 
+// DoneValue is a value used to indicate the end of a stream.
+const DoneValue = "Done"
+
 // EchoerServer is a struct that implements the Echoer service defined in the proto file.
 type EchoerServer struct {
 	pb.UnimplementedEchoerServer
@@ -32,5 +35,6 @@ func (s *EchoerServer) EchoStream(stream grpc.BidiStreamingServer[pb.EchoRequest
 			}
 			time.Sleep(50 * time.Millisecond)
 		}
+		stream.Send(&pb.EchoResponse{Message: DoneValue}) // End the stream with "Done"
 	}
 }
