@@ -52,7 +52,7 @@ var GrpcServeCommand *cli.Command = &cli.Command{
 }
 
 // requestTimeout is the timeout for gRPC requests.
-var requestTimeout = time.Second
+var requestTimeout = 5 * time.Second
 
 // GrpcEchoOnceCommand is a command to run a gRPC client.
 var GrpcEchoOnceCommand *cli.Command = &cli.Command{
