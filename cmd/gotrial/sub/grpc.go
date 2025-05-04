@@ -14,11 +14,11 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-// GrpcCommand is a command to run a gRPC server.
+// GrpcCommand is a catch-all command for gRPC.
 var GrpcCommand *cli.Command = &cli.Command{
 	Name:        "grpc",
 	Usage:       "Play with gRPC",
-	Description: "This command supports gRPC server and client interaction.",
+	Description: "This command supports gRPC server and client interactions.",
 	Subcommands: []*cli.Command{
 		GrpcServeCommand,      // run in first terminal
 		GrpcEchoOnceCommand,   // run in second terminal
@@ -58,7 +58,7 @@ var requestTimeout = 5 * time.Second
 var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 	Name:        "echo-once",
 	Usage:       "Echo once",
-	Description: "This command pings the server once.",
+	Description: "This command makes a call against the server once.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
 		conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -77,7 +77,7 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 	Name:        "echo-stream",
 	Usage:       "Echo stream",
-	Description: "This command pings the server in a stream.",
+	Description: "This command makes a call against the server in a stream.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
 		conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
