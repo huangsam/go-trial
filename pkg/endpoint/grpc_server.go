@@ -46,9 +46,7 @@ func (s *EchoerServer) EchoStream(stream grpc.BidiStreamingServer[pb.EchoRequest
 var LogServerUnaryInfo grpc.UnaryServerInterceptor = func(
 	ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler,
 ) (resp any, err error) {
-	log.Debug().
-		Str("method", info.FullMethod).
-		Msg("gRPC unary request received")
+	log.Debug().Str("method", info.FullMethod).Msg("Handle gRPC unary request")
 	return handler(ctx, req)
 }
 
@@ -56,8 +54,6 @@ var LogServerUnaryInfo grpc.UnaryServerInterceptor = func(
 var LogServerStreamInfo grpc.StreamServerInterceptor = func(
 	srv any, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler,
 ) error {
-	log.Debug().
-		Str("method", info.FullMethod).
-		Msg("gRPC stream request received")
+	log.Debug().Str("method", info.FullMethod).Msg("Handle gRPC stream request")
 	return handler(srv, ss)
 }
