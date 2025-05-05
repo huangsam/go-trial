@@ -60,7 +60,7 @@ var requestTimeout = 5 * time.Second
 // GrpcEchoOnceCommand is a command to run a gRPC client.
 var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 	Name:        "echo-once",
-	Usage:       "Echo once",
+	Usage:       "Call Echoer server once",
 	Description: "This command calls the Echoer gRPC server once.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
@@ -82,7 +82,7 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 // GrpcEchoStreamCommand is a command to run a gRPC client.
 var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 	Name:        "echo-stream",
-	Usage:       "Echo stream",
+	Usage:       "Call Echoer server with stream",
 	Description: "This command calls the Echoer gRPC server with a stream.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
