@@ -95,8 +95,35 @@ func TestEchoManyWithClient(t *testing.T) {
 	stream.On("Recv").Return(doneResp, nil).Once()    // 1 done from server
 	stream.On("Send", helloReq).Once().Return(nil)    // 1 hello to server
 	stream.On("Send", doneReq).Once().Return(nil)     // 1 done to server
+
 	err := endpoint.EchoManyWithClient(context.Background(), client)
 	require.NoError(t, err)
 	client.AssertExpectations(t)
 	stream.AssertExpectations(t)
+}
+
+func TestLogClientUnaryInfo(t *testing.T) {
+	cc := new(grpc.ClientConn)
+	invoker := func(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, opts ...grpc.CallOption) error {
+		return nil
+	}
+	ctx := context.Background()
+	method := "/test.Service/TestMethod"
+
+	err := endpoint.LogClientUnaryInfo(ctx, method, helloReq, helloResp, cc, invoker)
+	require.NoError(t, err)
+}
+
+func TestLogClientStreamInfo(t *testing.T) {
+	desc := &grpc.StreamDesc{StreamName: "TestStream"}
+	cc := new(grpc.ClientConn)
+	streamer := func(ctx context.Context, desc *grpc.StreamDesc, cc *grpc.ClientConn, method string, opts ...grpc.CallOption) (grpc.ClientStream, error) {
+		return new(mockBidiStreamingClient), nil
+	}
+	ctx := context.Background()
+	method := "/test.Service/TestMethod"
+
+	clientStream, err := endpoint.LogClientStreamInfo(ctx, desc, cc, method, streamer)
+	require.NoError(t, err)
+	require.NotNil(t, clientStream)
 }

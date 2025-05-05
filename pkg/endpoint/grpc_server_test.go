@@ -68,3 +68,36 @@ func TestEchoStream(t *testing.T) {
 
 	assert.Equal(t, expectedMessages, mock.sendMessages)
 }
+
+func TestLogServerUnaryInfo(t *testing.T) {
+	expectedMessage := "Test Message"
+	mockHandler := func(ctx context.Context, req any) (any, error) {
+		return &pb.EchoResponse{Message: expectedMessage}, nil
+	}
+	info := &grpc.UnaryServerInfo{
+		FullMethod: "/pkg.endpoint.Echoer/EchoOnce",
+	}
+	req := &pb.EchoRequest{Message: "Test Message"}
+	ctx := context.Background()
+
+	resp, err := endpoint.LogServerUnaryInfo(ctx, req, info, mockHandler)
+	require.NoError(t, err)
+	echoResp, ok := resp.(*pb.EchoResponse)
+	require.True(t, ok)
+	assert.Equal(t, expectedMessage, echoResp.Message)
+}
+
+func TestLogServerStreamInfo(t *testing.T) {
+	mockHandler := func(srv any, stream grpc.ServerStream) error {
+		return nil
+	}
+	info := &grpc.StreamServerInfo{
+		FullMethod:     "/pkg.endpoint.Echoer/EchoStream",
+		IsClientStream: true,
+		IsServerStream: true,
+	}
+	mockStream := &mockStream{}
+
+	err := endpoint.LogServerStreamInfo(nil, mockStream, info, mockHandler)
+	require.NoError(t, err)
+}
