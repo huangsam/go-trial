@@ -2,6 +2,7 @@ package sub
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/huangsam/go-trial/pkg/abstraction"
 	"github.com/huangsam/go-trial/pkg/basicintro"
@@ -28,6 +29,8 @@ var DemoCommand *cli.Command = &cli.Command{
 		// concurrency
 		answers := concurrency.GetAnswersWithChannels()
 		log.Info().Interface("answers", answers).Msg("Got answers with channels")
+		count := concurrency.RateLimitCounter(10, 200*time.Millisecond)
+		log.Info().Int("count", count).Msg("Got rate limit count")
 
 		// realworld
 		car := realworld.Car{Make: "Honda", Model: "Civic", ModelYear: 2025, WheelCount: 4, MileCount: 1234}
