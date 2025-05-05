@@ -43,17 +43,13 @@ func (s *EchoerServer) EchoStream(stream grpc.BidiStreamingServer[pb.EchoRequest
 }
 
 // LogServerUnaryInfo is a gRPC unary server interceptor that logs request info.
-var LogServerUnaryInfo grpc.UnaryServerInterceptor = func(
-	ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler,
-) (resp any, err error) {
+func LogServerUnaryInfo(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp any, err error) {
 	log.Debug().Str("method", info.FullMethod).Msg("Handle gRPC unary request")
 	return handler(ctx, req)
 }
 
 // LogServerStreamInfo is a gRPC stream server interceptor that logs request info.
-var LogServerStreamInfo grpc.StreamServerInterceptor = func(
-	srv any, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler,
-) error {
+func LogServerStreamInfo(srv any, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 	log.Debug().Str("method", info.FullMethod).Msg("Handle gRPC stream request")
 	return handler(srv, ss)
 }
