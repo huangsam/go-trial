@@ -64,7 +64,10 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 	Description: "This command calls the Echoer gRPC server once.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
-		conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+		conn, err := grpc.NewClient(addr,
+			grpc.WithTransportCredentials(insecure.NewCredentials()),
+			grpc.WithUnaryInterceptor(endpoint.LogClientUnaryInfo),
+		)
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
 		}
@@ -83,7 +86,10 @@ var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 	Description: "This command calls the Echoer gRPC server with a stream.",
 	Action: func(c *cli.Context) error {
 		addr := c.String("addr")
-		conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+		conn, err := grpc.NewClient(addr,
+			grpc.WithTransportCredentials(insecure.NewCredentials()),
+			grpc.WithStreamInterceptor(endpoint.LogClientStreamInfo),
+		)
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
 		}
