@@ -49,13 +49,11 @@ func EchoManyWithClient(ctx context.Context, client pb.EchoerClient) error {
 // LogClientUnaryInfo is a gRPC unary client interceptor that logs request info.
 func LogClientUnaryInfo(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 	log.Debug().Str("method", method).Msg("Send gRPC unary client request")
-	err := invoker(ctx, method, req, reply, cc, opts...)
-	return err
+	return invoker(ctx, method, req, reply, cc, opts...)
 }
 
 // LogClientStreamInfo is a gRPC stream client interceptor that logs request info.
 func LogClientStreamInfo(ctx context.Context, desc *grpc.StreamDesc, cc *grpc.ClientConn, method string, streamer grpc.Streamer, opts ...grpc.CallOption) (grpc.ClientStream, error) {
 	log.Debug().Str("method", method).Msg("Send gRPC stream client request")
-	stream, err := streamer(ctx, desc, cc, method, opts...)
-	return stream, err
+	return streamer(ctx, desc, cc, method, opts...)
 }
