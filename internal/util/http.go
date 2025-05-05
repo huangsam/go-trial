@@ -54,7 +54,7 @@ func ZeroLogger(next http.Handler) http.Handler {
 		next.ServeHTTP(ww, r)
 		latency := time.Since(start)
 
-		log.Info().
+		log.Debug().
 			Str("uri", r.RequestURI).
 			Int("status", ww.Status()).
 			Dur("latency", latency).
