@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eu
 
+# default: Install dependencies for local development.
+# ci: Install dependencies for CI/CD.
 mode="${1:-default}"
 
 case "$mode" in

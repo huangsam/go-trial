@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eu
 
+# default: Build the binary for local development.
+# docker: Build the Docker image for the binary.
 mode="${1:-default}"
 
 root="$(git rev-parse --show-toplevel)"

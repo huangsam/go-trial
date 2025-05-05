@@ -1,26 +1,11 @@
 #!/bin/bash
 set -eu
 
-display_help () {
-    cat <<'EOF'
-Usage: [mode]
-
-mode:
-    default: Run tests for all packages with caching.
-    bench: Run benchmarks for all packages.
-    cover: Run tests and report coverage for all packages.
-    html: Run tests and report coverage in HTML format.
-    race: Run tests with race detection for the concurrency package.
-EOF
-}
-
-help="${1:-none}"
-
-if [[ "$help" == "-h" || "$help" == "--help" ]]; then
-    display_help
-    exit 0
-fi
-
+# default: Run tests for all packages with caching.
+# bench: Run benchmarks for all packages.
+# cover: Run tests and report coverage for all packages.
+# html: Run tests and report coverage in HTML format.
+# race: Run tests with race detection for the concurrency package.
 mode="${1:-default}"
 
 selector=(
