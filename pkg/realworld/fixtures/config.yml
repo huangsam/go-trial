@@ -1,7 +1,7 @@
 ---
 app: jenkins
 roles:
-- ci
-- cd
+  - ci
+  - cd
 extra:
-  jvmopt: "-Xms256m -Xmx2048m"
+  jvmopt: -Xms256m -Xmx2048m
