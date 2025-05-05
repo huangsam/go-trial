@@ -44,10 +44,13 @@ var GrpcServeCommand *cli.Command = &cli.Command{
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to listen")
 		}
-		s := grpc.NewServer()
-		pb.RegisterEchoerServer(s, &endpoint.EchoerServer{})
+		server := grpc.NewServer(
+			grpc.UnaryInterceptor(endpoint.LogUnaryRequest),
+			grpc.StreamInterceptor(endpoint.LogStreamRequest),
+		)
+		pb.RegisterEchoerServer(server, &endpoint.EchoerServer{})
 		log.Info().Msgf("gRPC server listening on %s", addr)
-		return s.Serve(lis)
+		return server.Serve(lis)
 	},
 }
 
