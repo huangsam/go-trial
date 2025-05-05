@@ -88,7 +88,7 @@ func TestLogServerUnaryInfo(t *testing.T) {
 }
 
 func TestLogServerStreamInfo(t *testing.T) {
-	mockHandler := func(srv any, stream grpc.ServerStream) error {
+	mockHandler := func(any, grpc.ServerStream) error {
 		return nil
 	}
 	info := &grpc.StreamServerInfo{
