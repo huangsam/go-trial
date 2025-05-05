@@ -45,8 +45,8 @@ var GrpcServeCommand *cli.Command = &cli.Command{
 			log.Fatal().Err(err).Msg("Failed to listen")
 		}
 		server := grpc.NewServer(
-			grpc.UnaryInterceptor(endpoint.LogUnaryRequest),
-			grpc.StreamInterceptor(endpoint.LogStreamRequest),
+			grpc.UnaryInterceptor(endpoint.LogServerUnaryInfo),
+			grpc.StreamInterceptor(endpoint.LogServerStreamInfo),
 		)
 		pb.RegisterEchoerServer(server, &endpoint.EchoerServer{})
 		log.Info().Msgf("gRPC server listening on %s", addr)
