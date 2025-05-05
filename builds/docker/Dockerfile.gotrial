@@ -17,6 +17,7 @@ FROM alpine:latest
 WORKDIR /
 COPY --from=build /app/gotrial /gotrial
 
-EXPOSE 8080
+EXPOSE 8080/tcp
+EXPOSE 50051/tcp
 
 ENTRYPOINT ["/gotrial"]
