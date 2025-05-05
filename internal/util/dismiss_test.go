@@ -9,9 +9,8 @@ import (
 )
 
 func TestDismiss(t *testing.T) {
-	var called bool
-
 	// Test case where the function succeeds
+	called := false
 	util.Dismiss(func() error {
 		called = true
 		return nil
