@@ -1,6 +1,6 @@
 # User guide
 
-This content is for developers who are want to experiment with the repository at
+This content is for developers who want to experiment with the repository at
 a deeper level.
 
 ## See the docs
@@ -47,4 +47,10 @@ bash scripts/build.sh docker
 
 # Run Docker container
 docker run --rm -it huangsam/gotrial:latest
+
+# Run Docker container as an HTTP server
+docker run --rm -it -p 8080:8080/tcp huangsam/gotrial:latest http
+
+# Run Docker container as a gRPC server
+docker run --rm -it -p 50051:50051/tcp huangsam/gotrial:latest grpc serve
 ```
