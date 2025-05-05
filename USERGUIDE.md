@@ -49,8 +49,8 @@ bash scripts/build.sh docker
 docker run --rm -it huangsam/gotrial:latest
 
 # Run Docker container as an HTTP server
-docker run --rm -it -p 8080:8080/tcp huangsam/gotrial:latest http
+docker run --rm -it -p 8080:8080 huangsam/gotrial:latest http
 
 # Run Docker container as a gRPC server
-docker run --rm -it -p 50051:50051/tcp huangsam/gotrial:latest grpc serve
+docker run --rm -it -p 50051:50051 huangsam/gotrial:latest grpc serve
 ```
