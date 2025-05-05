@@ -27,7 +27,7 @@ var GrpcCommand *cli.Command = &cli.Command{
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "addr",
-			Value: ":50051", // default gRPC address
+			Value: ":50051",
 			Usage: "gRPC address",
 		},
 	},
