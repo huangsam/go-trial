@@ -20,7 +20,7 @@ func SumUntil(ctx context.Context, factor int) int {
 		input := 1
 		for {
 			select {
-			case <-ctx.Done(): // Return when timeout is reached
+			case <-ctx.Done(): // Return when context is done
 				return
 			case <-ticker.C: // Send the number to the channel every 100ms
 				ch <- factor * input
@@ -30,7 +30,7 @@ func SumUntil(ctx context.Context, factor int) int {
 	}()
 	for {
 		select {
-		case <-ctx.Done(): // Return sum when timeout is reached
+		case <-ctx.Done(): // Return sum when context is done
 			return sum
 		case num := <-ch: // Add the number received from the channel to the sum
 			sum += num
