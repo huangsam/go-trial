@@ -15,25 +15,23 @@ func SumUntil(ctx context.Context, factor int) int {
 	ticker := time.NewTicker(100 * time.Millisecond)
 	ch := make(chan int)
 	sum := 0
+
+	// Fill the channel with a value on every tick
 	go func() {
-		defer close(ch) // Close the channel when goroutine ends
+		defer close(ch)
 		input := 1
-		for {
-			select {
-			case <-ctx.Done(): // Return when context is done
-				return
-			case <-ticker.C: // Send the number to the channel every 100ms
-				ch <- factor * input
-			}
+		for range ticker.C {
+			ch <- input * factor
 			input += 1
 		}
 	}()
-	for {
-		select {
-		case <-ctx.Done(): // Return sum when context is done
-			return sum
-		case num := <-ch: // Add the number received from the channel to the sum
-			sum += num
+
+	// Sum the numbers from the channel until the context is done
+	for num := range ch {
+		if ctx.Err() != nil {
+			break
 		}
+		sum += num
 	}
+	return sum
 }
