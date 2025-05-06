@@ -10,6 +10,7 @@ import (
 	"github.com/huangsam/go-trial/pkg/realworld"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
+	"golang.org/x/net/context"
 )
 
 // DemoCommand is a command to run a demo.
@@ -29,7 +30,9 @@ var DemoCommand *cli.Command = &cli.Command{
 		// concurrency
 		answers := concurrency.GetAnswersWithChannels()
 		log.Info().Interface("answers", answers).Msg("Got answers with channels")
-		count := concurrency.RateLimitCounter(10, 200*time.Millisecond)
+		ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
+		defer cancel()
+		count := concurrency.RateLimitCounter(ctx, 10, 50*time.Millisecond)
 		log.Info().Int("count", count).Msg("Got rate limit count")
 
 		// realworld

@@ -1,6 +1,7 @@
 package concurrency_test
 
 import (
+	"context"
 	"testing"
 	"time"
 
@@ -9,38 +10,36 @@ import (
 )
 
 func TestRateLimitCounter(t *testing.T) {
-	limit := 5 // Burst of up to 5 increments
+	limit := 5                         // Fixed burst limit
+	duration := 400 * time.Millisecond // Fixed duration
 
 	// Since the function runs for 1 second, we expect the result to be approximately
 	// the number of increments possible within that time frame.
 
-	t.Run("Limit5Rate50ms", func(t *testing.T) {
-		rate := 50 * time.Millisecond
-		result := concurrency.RateLimitCounter(limit, rate)
+	t.Run("Rate50ms", func(t *testing.T) {
+		ctx, cancel := context.WithTimeout(context.Background(), duration)
+		defer cancel()
+		result := concurrency.RateLimitCounter(ctx, limit, 50*time.Millisecond)
 
-		expectedMin := 20 // 1 second / 50ms = 20 increments
-		expectedMax := 25 // Allow for some buffer due to timing variations
-		assert.GreaterOrEqual(t, result, expectedMin)
-		assert.LessOrEqual(t, result, expectedMax)
+		assert.GreaterOrEqual(t, result, 8)    // 400ms / 50ms = 8 increments
+		assert.LessOrEqual(t, result, 8+limit) // allow for some buffer
 	})
 
-	t.Run("Limit5Rate100ms", func(t *testing.T) {
-		rate := 100 * time.Millisecond
-		result := concurrency.RateLimitCounter(limit, rate)
+	t.Run("Rate100ms", func(t *testing.T) {
+		ctx, cancel := context.WithTimeout(context.Background(), duration)
+		defer cancel()
+		result := concurrency.RateLimitCounter(ctx, limit, 100*time.Millisecond)
 
-		expectedMin := 10 // 1 second / 100ms = 10 increments
-		expectedMax := 15 // Allow for some buffer due to timing variations
-		assert.GreaterOrEqual(t, result, expectedMin)
-		assert.LessOrEqual(t, result, expectedMax)
+		assert.GreaterOrEqual(t, result, 4)    // 400ms / 100ms = 4 increments
+		assert.LessOrEqual(t, result, 4+limit) // allow for some buffer
 	})
 
-	t.Run("Limit5Rate200ms", func(t *testing.T) {
-		rate := 200 * time.Millisecond
-		result := concurrency.RateLimitCounter(limit, rate)
+	t.Run("Rate200ms", func(t *testing.T) {
+		ctx, cancel := context.WithTimeout(context.Background(), duration)
+		defer cancel()
+		result := concurrency.RateLimitCounter(ctx, limit, 200*time.Millisecond)
 
-		expectedMin := 5  // 1 second / 200ms = 5 increments
-		expectedMax := 10 // Allow for some buffer due to timing variations
-		assert.GreaterOrEqual(t, result, expectedMin)
-		assert.LessOrEqual(t, result, expectedMax)
+		assert.GreaterOrEqual(t, result, 2)    // 400ms / 200ms = 2 increments
+		assert.LessOrEqual(t, result, 2+limit) // allow for some buffer
 	})
 }
