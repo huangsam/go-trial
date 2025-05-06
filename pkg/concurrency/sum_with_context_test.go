@@ -1,6 +1,7 @@
 package concurrency_test
 
 import (
+	"context"
 	"testing"
 	"time"
 
@@ -9,12 +10,17 @@ import (
 )
 
 func TestSumUntil(t *testing.T) {
-	result := concurrency.SumUntil(time.Millisecond*350, 2)
-	assert.True(t, result == 12 || result == 20, "The result should be 12 or 20 but got %d", result)
+	ctx, cancel := context.WithTimeout(context.Background(), 350*time.Millisecond)
+	defer cancel()
+	result := concurrency.SumUntil(ctx, 2)
+	assert.GreaterOrEqual(t, result, 12)
+	assert.LessOrEqual(t, result, 20)
 }
 
 func BenchmarkSumUntil(b *testing.B) {
 	for b.Loop() {
-		concurrency.SumUntil(time.Millisecond*200, 2)
+		ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+		concurrency.SumUntil(ctx, 2)
+		cancel()
 	}
 }

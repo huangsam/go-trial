@@ -11,12 +11,10 @@ import (
 // The function returns the sum when the timeout is reached.
 // The function takes a timeout and a factor as arguments.
 // The factor is used to multiply the numbers before adding them to the sum.
-func SumUntil(timeout time.Duration, factor int) int {
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+func SumUntil(ctx context.Context, factor int) int {
 	ticker := time.NewTicker(100 * time.Millisecond)
 	ch := make(chan int)
 	sum := 0
-	defer cancel()
 	go func() {
 		defer close(ch) // Close the channel when goroutine ends
 		input := 1
