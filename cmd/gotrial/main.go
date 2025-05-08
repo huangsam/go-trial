@@ -18,7 +18,7 @@ func init() {
 func main() {
 	cmd := &cli.App{
 		Usage:       "Try Go in action! 🔥",
-		Description: "This binary supports ad-hoc runs and client/server interactions.",
+		Description: "This command supports ad-hoc runs and client/server interactions.",
 		Commands: [](*cli.Command){
 			sub.DemoCommand,
 			sub.HttpCommand,
