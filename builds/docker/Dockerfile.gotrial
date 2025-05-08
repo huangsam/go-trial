@@ -11,7 +11,7 @@ USER root
 
 RUN go build -o ./gotrial github.com/huangsam/go-trial/cmd/gotrial
 
-# Phase 2: Host binary
+# Phase 2: Store binary
 FROM alpine:latest
 
 WORKDIR /
