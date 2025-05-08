@@ -45,7 +45,7 @@ Here are the steps to run the `gotrial` CLI as a container:
 # Run Docker build
 bash scripts/build.sh docker
 
-# Run Docker container
+# Run Docker container as a CLI
 docker run --rm -it huangsam/gotrial:latest
 
 # Run Docker container as an HTTP server
