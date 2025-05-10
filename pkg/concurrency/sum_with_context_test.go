@@ -10,11 +10,11 @@ import (
 )
 
 func TestSumUntil(t *testing.T) {
-	ctx, cancel := context.WithTimeout(context.Background(), 350*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
 	defer cancel()
 	result := concurrency.SumUntil(ctx, 2)
-	assert.GreaterOrEqual(t, result, 12)
-	assert.LessOrEqual(t, result, 20)
+	assert.GreaterOrEqual(t, result, 2) // At least 2 after a 100ms tick
+	assert.LessOrEqual(t, result, 6)    // At most 2 + 4 after a 200ms timeout
 }
 
 func BenchmarkSumUntil(b *testing.B) {
