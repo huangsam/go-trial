@@ -19,6 +19,7 @@ type Rectangle struct {
 	Height float64 `json:"height"`
 }
 
+// NewRectangle creates a new Rectangle instance with the given width and height.
 func NewRectangle(width, height float64) *Rectangle {
 	return &Rectangle{Width: width, Height: height}
 }
@@ -40,6 +41,7 @@ type Circle struct {
 
 var _ Shape = &Circle{} // Circle implements Shape
 
+// NewCircle creates a new Circle instance with the given radius.
 func NewCircle(radius float64) *Circle {
 	return &Circle{Radius: radius}
 }
@@ -58,8 +60,13 @@ func (c Circle) Perimeter() float64 {
 type ShapeSize int
 
 const (
+	// SizeSmall represents a small shape.
 	SizeSmall ShapeSize = iota
+
+	// SizeMedium represents a medium shape.
 	SizeMedium
+
+	// SizeLarge represents a large shape.
 	SizeLarge
 )
 

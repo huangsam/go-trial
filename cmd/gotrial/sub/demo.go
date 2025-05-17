@@ -18,7 +18,7 @@ var DemoCommand *cli.Command = &cli.Command{
 	Name:        "demo",
 	Usage:       "Run demo with some pkg functions",
 	Description: "This command runs functions from multiple packages.",
-	Action: func(c *cli.Context) error {
+	Action: func(*cli.Context) error {
 		// basicintro
 		log.Info().Msg(basicintro.GreetWorld())
 

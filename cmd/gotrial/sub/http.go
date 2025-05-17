@@ -9,8 +9,8 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// HttpCommand is a command to run an HTTP server.
-var HttpCommand *cli.Command = &cli.Command{
+// HTTPCommand is a command to run an HTTP server.
+var HTTPCommand *cli.Command = &cli.Command{
 	Name:        "http",
 	Usage:       "Run simple HTTP server",
 	Description: "This command runs an HTTP server.",

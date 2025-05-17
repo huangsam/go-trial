@@ -1,3 +1,4 @@
+// Package main is the entry point for the go-trial application.
 package main
 
 import (
@@ -21,7 +22,7 @@ func main() {
 		Description: "This command supports ad-hoc runs and client/server interactions.",
 		Commands: [](*cli.Command){
 			sub.DemoCommand,
-			sub.HttpCommand,
+			sub.HTTPCommand,
 			sub.GrpcCommand,
 		},
 	}

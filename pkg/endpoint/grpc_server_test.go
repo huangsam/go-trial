@@ -71,7 +71,7 @@ func TestEchoStream(t *testing.T) {
 
 func TestLogServerUnaryInfo(t *testing.T) {
 	expectedMessage := "Test Message"
-	mockHandler := func(ctx context.Context, req any) (any, error) {
+	mockHandler := func(context.Context, any) (any, error) {
 		return &pb.EchoResponse{Message: expectedMessage}, nil
 	}
 	info := &grpc.UnaryServerInfo{

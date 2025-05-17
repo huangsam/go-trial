@@ -23,7 +23,7 @@ type mockEchoerClient struct {
 	mock.Mock
 }
 
-func (m *mockEchoerClient) EchoOnce(ctx context.Context, req *pb.EchoRequest, opts ...grpc.CallOption) (*pb.EchoResponse, error) {
+func (m *mockEchoerClient) EchoOnce(ctx context.Context, req *pb.EchoRequest, _ ...grpc.CallOption) (*pb.EchoResponse, error) {
 	args := m.Called(ctx, req)
 	return args.Get(0).(*pb.EchoResponse), args.Error(1)
 }
@@ -104,7 +104,7 @@ func TestEchoManyWithClient(t *testing.T) {
 
 func TestLogClientUnaryInfo(t *testing.T) {
 	cc := new(grpc.ClientConn)
-	invoker := func(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, opts ...grpc.CallOption) error {
+	invoker := func(context.Context, string, any, any, *grpc.ClientConn, ...grpc.CallOption) error {
 		return nil
 	}
 	ctx := context.Background()
@@ -117,7 +117,7 @@ func TestLogClientUnaryInfo(t *testing.T) {
 func TestLogClientStreamInfo(t *testing.T) {
 	desc := &grpc.StreamDesc{StreamName: "TestStream"}
 	cc := new(grpc.ClientConn)
-	streamer := func(ctx context.Context, desc *grpc.StreamDesc, cc *grpc.ClientConn, method string, opts ...grpc.CallOption) (grpc.ClientStream, error) {
+	streamer := func(context.Context, *grpc.StreamDesc, *grpc.ClientConn, string, ...grpc.CallOption) (grpc.ClientStream, error) {
 		return new(mockBidiStreamingClient), nil
 	}
 	ctx := context.Background()

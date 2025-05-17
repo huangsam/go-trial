@@ -15,7 +15,7 @@ type EchoerServer struct {
 }
 
 // EchoOnce implements the unary RPC method.
-func (s *EchoerServer) EchoOnce(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
+func (s *EchoerServer) EchoOnce(_ context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
 	return &pb.EchoResponse{Message: req.Message}, nil
 }
 

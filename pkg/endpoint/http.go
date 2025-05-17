@@ -10,13 +10,13 @@ import (
 )
 
 // HelloHandler returns a simple greeting as text.
-func HelloHandler(w http.ResponseWriter, r *http.Request) {
+func HelloHandler(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write([]byte("Hello world"))
 }
 
 // ErrorHandler returns a generic error as text.
-func ErrorHandler(w http.ResponseWriter, r *http.Request) {
+func ErrorHandler(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
 	_, _ = w.Write([]byte("Generic error"))
 }
