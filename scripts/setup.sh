@@ -9,8 +9,6 @@ case "$mode" in
     default)
         brew install golangci-lint mockery protobuf
         go install golang.org/x/tools/cmd/godoc@latest
-        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-        go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
         ;;
     ci)
         PB_REL='https://github.com/protocolbuffers/protobuf/releases'
@@ -23,15 +21,17 @@ case "$mode" in
         fi
         echo "Link $PB_DST/bin to PATH variable"
         export PATH="$PB_DST/bin:$PATH"
-        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-        go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
         ;;
     *)
         echo "Invalid mode '$mode' detected" && exit 1 ;;
 esac
 
+# Install gRPC tools
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
 # Install dependencies
 go mod download
 
-# Generate protobuf files
+# Generate Go code
 go generate ./api
