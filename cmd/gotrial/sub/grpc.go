@@ -5,9 +5,9 @@ import (
 	"net"
 	"time"
 
+	pb "github.com/huangsam/go-trial/api/protobuf"
 	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
-	pb "github.com/huangsam/go-trial/pkg/endpoint/proto"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
 	"google.golang.org/grpc"

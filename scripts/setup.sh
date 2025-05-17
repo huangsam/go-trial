@@ -34,4 +34,4 @@ esac
 go mod download
 
 # Generate protobuf files
-protoc --go_out=. --go-grpc_out=. pkg/endpoint/proto/echo.proto
+go generate ./api

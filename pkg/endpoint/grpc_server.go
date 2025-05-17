@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	pb "github.com/huangsam/go-trial/pkg/endpoint/proto"
+	pb "github.com/huangsam/go-trial/api/protobuf"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 )

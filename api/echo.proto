@@ -3,7 +3,7 @@ syntax = "proto3";
 package proto;
 
 // Generate code at the path specified
-option go_package = "pkg/endpoint/proto";
+option go_package = "./protobuf";
 
 // Echoer is a simple service that echoes back the message sent to it.
 // It demonstrates the use of both unary and server streaming RPCs.

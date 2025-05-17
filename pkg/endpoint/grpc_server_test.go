@@ -5,8 +5,8 @@ import (
 	"io"
 	"testing"
 
+	pb "github.com/huangsam/go-trial/api/protobuf"
 	"github.com/huangsam/go-trial/pkg/endpoint"
-	pb "github.com/huangsam/go-trial/pkg/endpoint/proto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
