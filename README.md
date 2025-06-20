@@ -1,6 +1,7 @@
 # Go Trial
 
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/huangsam/go-trial/ci.yml)](https://github.com/huangsam/go-trial/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/huangsam/go-trial)](https://goreportcard.com/report/github.com/huangsam/go-trial)
 [![License](https://img.shields.io/github/license/huangsam/go-trial)](https://github.com/huangsam/go-trial/blob/main/LICENSE)
 
 Curated learning designed for Software Engineers proficient in [Python] / [Java] / [C++]
