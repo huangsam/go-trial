@@ -1,4 +1,5 @@
 # IDE and editor settings
+/.idea/
 /.vscode/
 
 # Test results
