@@ -1,10 +1,10 @@
-package util_test
+package lesson_test
 
 import (
 	"testing"
 	"time"
 
-	"github.com/huangsam/go-trial/internal/util"
+	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,7 +31,7 @@ func TestMerge(t *testing.T) {
 		ch3 <- 6
 	}()
 
-	merged := util.Merge(ch1, ch2, ch3)
+	merged := lesson.Merge(ch1, ch2, ch3)
 
 	var result []int
 	for val := range merged {
@@ -54,7 +54,7 @@ func TestMergeEmptyChannels(t *testing.T) {
 		defer close(ch2)
 	}()
 
-	merged := util.Merge(ch1, ch2)
+	merged := lesson.Merge(ch1, ch2)
 
 	var result []int
 	for val := range merged {
@@ -82,7 +82,7 @@ func TestMergeWithDelay(t *testing.T) {
 		ch2 <- 4
 	}()
 
-	merged := util.Merge(ch1, ch2)
+	merged := lesson.Merge(ch1, ch2)
 
 	var result []int
 	for val := range merged {
@@ -97,7 +97,7 @@ func TestRange(t *testing.T) {
 	t.Run("Range from 1 to 5", func(t *testing.T) {
 		expected := []int{1, 2, 3, 4, 5}
 		var result []int
-		for n := range util.Range(1, 5) {
+		for n := range lesson.Range(1, 5) {
 			result = append(result, n)
 		}
 		assert.Equal(t, expected, result)
@@ -106,7 +106,7 @@ func TestRange(t *testing.T) {
 	t.Run("Range from -2 to 2", func(t *testing.T) {
 		expected := []int{-2, -1, 0, 1, 2}
 		var result []int
-		for n := range util.Range(-2, 2) {
+		for n := range lesson.Range(-2, 2) {
 			result = append(result, n)
 		}
 		assert.Equal(t, expected, result)
@@ -115,7 +115,7 @@ func TestRange(t *testing.T) {
 	t.Run("Range from 5 to 5", func(t *testing.T) {
 		expected := []int{5}
 		var result []int
-		for n := range util.Range(5, 5) {
+		for n := range lesson.Range(5, 5) {
 			result = append(result, n)
 		}
 		assert.Equal(t, expected, result)
@@ -123,7 +123,7 @@ func TestRange(t *testing.T) {
 
 	t.Run("Range from 5 to 1", func(t *testing.T) {
 		var result []int
-		for n := range util.Range(5, 1) {
+		for n := range lesson.Range(5, 1) {
 			result = append(result, n)
 		}
 		assert.Empty(t, result)

@@ -1,10 +1,10 @@
-package util_test
+package lesson_test
 
 import (
 	"testing"
 	"text/template"
 
-	"github.com/huangsam/go-trial/internal/util"
+	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -49,7 +49,7 @@ func TestRenderToString(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			result, err := util.RenderToString(tmpl, tt.data)
+			result, err := lesson.RenderToString(tmpl, tt.data)
 			require.NoError(t, err)
 			assert.Equal(t, tt.expected, result)
 		})

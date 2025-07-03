@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"os"
 
-	"github.com/huangsam/go-trial/internal/util"
+	"github.com/huangsam/go-trial/internal/lesson"
 )
 
 // ReadLines reads a file and returns its content as a slice of strings.
@@ -13,7 +13,7 @@ func ReadLines(path string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer util.Dismiss(file.Close)
+	defer lesson.Dismiss(file.Close)
 	var lines []string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {

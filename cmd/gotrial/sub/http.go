@@ -3,8 +3,8 @@ package sub
 import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/huangsam/go-trial/internal/model"
-	"github.com/huangsam/go-trial/internal/util"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/urfave/cli/v2"
 )
@@ -33,11 +33,11 @@ var HTTPCommand *cli.Command = &cli.Command{
 	},
 	Action: func(c *cli.Context) error {
 		r := chi.NewRouter()
-		r.Use(util.ZeroLogger)
+		r.Use(lesson.ZeroLogger)
 		r.Use(middleware.Recoverer)
 
 		acc := model.UserAccount{Username: c.String("user"), Password: c.String("pass")}
-		authMiddleware := util.BasicAuth(acc)
+		authMiddleware := lesson.BasicAuth(acc)
 
 		r.Get("/", endpoint.HelloHandler)
 		r.Get("/error", endpoint.ErrorHandler)
@@ -45,6 +45,6 @@ var HTTPCommand *cli.Command = &cli.Command{
 		r.Get("/circle-size", endpoint.CircleSizeHandler)
 		r.With(authMiddleware).Get("/secret", endpoint.HelloHandler)
 
-		return util.RunServer(c.String("addr"), r)
+		return lesson.RunServer(c.String("addr"), r)
 	},
 }

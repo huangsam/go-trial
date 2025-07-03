@@ -1,4 +1,4 @@
-package util_test
+package lesson_test
 
 import (
 	"encoding/base64"
@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/huangsam/go-trial/internal/model"
-	"github.com/huangsam/go-trial/internal/util"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -21,7 +21,7 @@ func TestBasicAuthMiddleware(t *testing.T) {
 	basicAuthHeader := base64.StdEncoding.EncodeToString([]byte(validAccount.Username + ":" + validAccount.Password))
 	invalidAuthHeader := base64.StdEncoding.EncodeToString([]byte(invalidAccount.Username + ":" + invalidAccount.Password))
 
-	r.With(util.BasicAuth(validAccount)).Get("/protected", func(w http.ResponseWriter, _ *http.Request) {
+	r.With(lesson.BasicAuth(validAccount)).Get("/protected", func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte("Protected content"))
 	})

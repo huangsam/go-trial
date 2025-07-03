@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/huangsam/go-trial/internal/util"
+	"github.com/huangsam/go-trial/internal/lesson"
 	"gopkg.in/yaml.v3"
 )
 
@@ -22,7 +22,7 @@ func ReadJSONConfigRaw(path string) (*AppConfig, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer util.Dismiss(file.Close)
+	defer lesson.Dismiss(file.Close)
 	content, err := io.ReadAll(file)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func ReadYAMLConfigRaw(path string) (*AppConfig, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer util.Dismiss(file.Close)
+	defer lesson.Dismiss(file.Close)
 	content, err := io.ReadAll(file)
 	if err != nil {
 		return nil, err

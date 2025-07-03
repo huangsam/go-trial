@@ -4,7 +4,7 @@ import (
 	"embed"
 	"text/template"
 
-	"github.com/huangsam/go-trial/internal/util"
+	"github.com/huangsam/go-trial/internal/lesson"
 )
 
 //go:embed templates/*
@@ -34,7 +34,7 @@ type Employee struct {
 // The embedded template showcases simple template syntax.
 func RenderCarInfo(car *Car) (string, error) {
 	tmpl, _ := template.ParseFS(templatesFS, "templates/car.template")
-	return util.RenderToString(tmpl, car)
+	return lesson.RenderToString(tmpl, car)
 }
 
 // RenderEmployeeInfo returns info for an employee.
@@ -42,5 +42,5 @@ func RenderCarInfo(car *Car) (string, error) {
 // The embedded template showcases complex template syntax.
 func RenderEmployeeInfo(emp *Employee) (string, error) {
 	tmpl, _ := template.ParseFS(templatesFS, "templates/employee.template")
-	return util.RenderToString(tmpl, emp)
+	return lesson.RenderToString(tmpl, emp)
 }

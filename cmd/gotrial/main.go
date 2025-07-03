@@ -5,14 +5,14 @@ import (
 	"os"
 
 	"github.com/huangsam/go-trial/cmd/gotrial/sub"
-	"github.com/huangsam/go-trial/internal/util"
+	"github.com/huangsam/go-trial/internal/cmd"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
 )
 
 // init initializes the logger for the application.
 func init() {
-	log.Logger = util.NewLogger()
+	log.Logger = cmd.NewLogger()
 }
 
 // main is the entry point of the application.

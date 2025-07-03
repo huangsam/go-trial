@@ -1,4 +1,4 @@
-package util
+package lesson
 
 // Dismiss calls a function and ignores its error.
 //

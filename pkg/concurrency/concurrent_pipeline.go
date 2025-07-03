@@ -1,6 +1,6 @@
 package concurrency
 
-import "github.com/huangsam/go-trial/internal/util"
+import "github.com/huangsam/go-trial/internal/lesson"
 
 const (
 	// squareChannelCount is the number of square channels.
@@ -42,7 +42,7 @@ func double(in <-chan int) <-chan int {
 // Kudos to https://go.dev/blog/pipelines for the original code!
 func MultiStagePipelineSimple(from int, to int) int {
 	sum := 0
-	for n := range double(square(util.Range(from, to))) {
+	for n := range double(square(lesson.Range(from, to))) {
 		sum += n
 	}
 	return sum
@@ -56,21 +56,21 @@ func MultiStagePipelineSimple(from int, to int) int {
 func MultiStagePipelineMerge(from int, to int) int {
 	sum := 0
 
-	in := util.Range(from, to)
+	in := lesson.Range(from, to)
 
 	// Create a merged channel of square channels
 	squareChans := make([]<-chan int, squareChannelCount)
 	for i := range squareChans {
 		squareChans[i] = square(in)
 	}
-	squareMergedChan := util.Merge(squareChans...)
+	squareMergedChan := lesson.Merge(squareChans...)
 
 	// Create a merged channel of double channels
 	doubleChans := make([]<-chan int, doubleChannelCount)
 	for i := range doubleChans {
 		doubleChans[i] = double(squareMergedChan)
 	}
-	doubleMergedChan := util.Merge(doubleChans...)
+	doubleMergedChan := lesson.Merge(doubleChans...)
 
 	// Sum the results from the merged double channels
 	for n := range doubleMergedChan {
