@@ -12,7 +12,7 @@ case "$mode" in
         ;;
     ci)
         PB_REL='https://github.com/protocolbuffers/protobuf/releases'
-        PB_VER='31.0'
+        PB_VER='31.1'
         PB_ARC='linux-x86_64'
         PB_DST="$HOME/.protoc"
         if [[ ! -d "$PB_DST" ]]; then
