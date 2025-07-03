@@ -27,6 +27,6 @@ jobs:
       - name: Run setup
         run: bash ./scripts/setup.sh ci
       - name: Run linters
-        uses: golangci/golangci-lint-action@v7
+        uses: golangci/golangci-lint-action@v8
         with:
-          version: v2.0
+          version: v2.2
