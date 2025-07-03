@@ -6,7 +6,7 @@ import (
 	"time"
 
 	pb "github.com/huangsam/go-trial/api/protobuf"
-	"github.com/huangsam/go-trial/internal/lesson"
+	"github.com/huangsam/go-trial/internal/cmd"
 	"github.com/huangsam/go-trial/pkg/endpoint"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
@@ -71,7 +71,7 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
 		}
-		defer lesson.Dismiss(conn.Close)
+		defer cmd.Dismiss(conn.Close)
 		client := pb.NewEchoerClient(conn)
 		ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
 		defer cancel()
@@ -93,7 +93,7 @@ var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
 		}
-		defer lesson.Dismiss(conn.Close)
+		defer cmd.Dismiss(conn.Close)
 		client := pb.NewEchoerClient(conn)
 		ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
 		defer cancel()

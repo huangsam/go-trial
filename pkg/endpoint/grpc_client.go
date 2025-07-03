@@ -4,7 +4,7 @@ import (
 	"context"
 
 	pb "github.com/huangsam/go-trial/api/protobuf"
-	"github.com/huangsam/go-trial/internal/lesson"
+	"github.com/huangsam/go-trial/internal/cmd"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 )
@@ -25,7 +25,7 @@ func EchoManyWithClient(ctx context.Context, client pb.EchoerClient) error {
 	if err != nil {
 		return err
 	}
-	defer lesson.Dismiss(stream.CloseSend)
+	defer cmd.Dismiss(stream.CloseSend)
 	err = stream.Send(&pb.EchoRequest{Message: HelloValue})
 	if err != nil {
 		return err

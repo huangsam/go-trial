@@ -1,4 +1,4 @@
-package lesson
+package cmd
 
 // Dismiss calls a function and ignores its error.
 //
