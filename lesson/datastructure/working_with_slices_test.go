@@ -3,7 +3,7 @@ package datastructure_test
 import (
 	"testing"
 
-	"github.com/huangsam/go-trial/pkg/datastructure"
+	"github.com/huangsam/go-trial/lesson/datastructure"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/huangsam/go-trial/pkg/abstraction"
-	"github.com/huangsam/go-trial/pkg/basicintro"
-	"github.com/huangsam/go-trial/pkg/concurrency"
-	"github.com/huangsam/go-trial/pkg/realworld"
+	"github.com/huangsam/go-trial/lesson/abstraction"
+	"github.com/huangsam/go-trial/lesson/basicintro"
+	"github.com/huangsam/go-trial/lesson/concurrency"
+	"github.com/huangsam/go-trial/lesson/realworld"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/net/context"
@@ -16,7 +16,7 @@ import (
 // DemoCommand is a command to run a demo.
 var DemoCommand *cli.Command = &cli.Command{
 	Name:        "demo",
-	Usage:       "Run demo with some pkg functions",
+	Usage:       "Run demo with some functions",
 	Description: "This command runs functions from multiple packages.",
 	Action: func(*cli.Context) error {
 		// basicintro

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/huangsam/go-trial/pkg/realworld"
+	"github.com/huangsam/go-trial/lesson/realworld"
 )
 
 func TestCompareTime(t *testing.T) {

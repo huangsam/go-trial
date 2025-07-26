@@ -5,7 +5,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/huangsam/go-trial/internal/model"
-	"github.com/huangsam/go-trial/pkg/endpoint"
+	"github.com/huangsam/go-trial/lesson/endpoint"
 	"github.com/urfave/cli/v2"
 )
 

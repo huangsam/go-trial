@@ -46,15 +46,15 @@ and experiment with.
 
 ### Core concepts
 
-- [Functions, structs, pointers](pkg/basicintro/)
-- [Common data structures](pkg/datastructure/)
-- [Goroutines, channels, synchronization](pkg/concurrency/)
-- [Interfaces, generics, mocking](pkg/abstraction/)
+- [Functions, structs, pointers](lessons/basicintro/)
+- [Common data structures](lessons/datastructure/)
+- [Goroutines, channels, synchronization](lessons/concurrency/)
+- [Interfaces, generics, mocking](lessons/abstraction/)
 
 ### Practical concepts
 
-- [Files, I/O, time](pkg/realworld/)
-- [gRPC, HTTP](pkg/endpoint/)
+- [Files, I/O, time](lessons/realworld/)
+- [gRPC, HTTP](lessons/endpoint/)
 
 ### Apply your knowledge
 

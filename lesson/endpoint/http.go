@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/huangsam/go-trial/internal/model"
-	"github.com/huangsam/go-trial/pkg/abstraction"
+	"github.com/huangsam/go-trial/lesson/abstraction"
 )
 
 // HelloHandler returns a simple greeting as text.

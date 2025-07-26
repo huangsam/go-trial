@@ -7,7 +7,7 @@ import (
 
 	pb "github.com/huangsam/go-trial/api/protobuf"
 	"github.com/huangsam/go-trial/internal/cmd"
-	"github.com/huangsam/go-trial/pkg/endpoint"
+	"github.com/huangsam/go-trial/lesson/endpoint"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
 	"google.golang.org/grpc"

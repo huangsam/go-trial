@@ -4,7 +4,7 @@ import (
 	"cmp"
 	"testing"
 
-	"github.com/huangsam/go-trial/pkg/abstraction"
+	"github.com/huangsam/go-trial/lesson/abstraction"
 	"github.com/stretchr/testify/assert"
 )
 

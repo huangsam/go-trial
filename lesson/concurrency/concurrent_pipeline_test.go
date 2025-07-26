@@ -3,7 +3,7 @@ package concurrency_test
 import (
 	"testing"
 
-	"github.com/huangsam/go-trial/pkg/concurrency"
+	"github.com/huangsam/go-trial/lesson/concurrency"
 	"github.com/stretchr/testify/assert"
 )
 

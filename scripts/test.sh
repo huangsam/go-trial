@@ -9,7 +9,7 @@ set -eu
 mode="${1:-default}"
 
 selector=(
-    "github.com/huangsam/go-trial/pkg/..."
+    "github.com/huangsam/go-trial/lesson/..."
     "github.com/huangsam/go-trial/internal/..."
 )
 

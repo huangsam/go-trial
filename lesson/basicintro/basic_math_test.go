@@ -3,7 +3,7 @@ package basicintro_test
 import (
 	"testing"
 
-	"github.com/huangsam/go-trial/pkg/basicintro"
+	"github.com/huangsam/go-trial/lesson/basicintro"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

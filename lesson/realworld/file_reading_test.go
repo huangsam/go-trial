@@ -3,7 +3,7 @@ package realworld_test
 import (
 	"testing"
 
-	"github.com/huangsam/go-trial/pkg/realworld"
+	"github.com/huangsam/go-trial/lesson/realworld"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

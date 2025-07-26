@@ -1,6 +1,6 @@
 package model
 
-import "github.com/huangsam/go-trial/pkg/abstraction"
+import "github.com/huangsam/go-trial/lesson/abstraction"
 
 // ShapePayload is the JSON response for any handler that deals with shapes.
 //

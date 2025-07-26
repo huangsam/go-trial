@@ -3,7 +3,7 @@ package realworld_test
 import (
 	"testing"
 
-	"github.com/huangsam/go-trial/pkg/realworld"
+	"github.com/huangsam/go-trial/lesson/realworld"
 	kjson "github.com/knadh/koanf/parsers/json"
 	kyaml "github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
