@@ -18,12 +18,10 @@ func GetAnswersWithWaitGroup() [100]int {
 			answers[i] = i * 2
 		}
 	}
-	wg.Add(answersRoutineCount)
 	for i := range answersRoutineCount {
-		go func(i int) {
+		wg.Go(func() {
 			update(i*10, (i+1)*10) // Skip mutex since writes are isolated
-			wg.Done()              // Signal that the goroutine has finished
-		}(i)
+		})
 	}
 	wg.Wait() // Wait for all goroutines to finish
 	return answers
