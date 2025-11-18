@@ -1,6 +1,7 @@
 package sub
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -9,8 +10,7 @@ import (
 	"github.com/huangsam/go-trial/lesson/concurrency"
 	"github.com/huangsam/go-trial/lesson/realworld"
 	"github.com/rs/zerolog/log"
-	"github.com/urfave/cli/v2"
-	"golang.org/x/net/context"
+	"github.com/urfave/cli/v3"
 )
 
 // DemoCommand is a command to run a demo.
@@ -18,7 +18,7 @@ var DemoCommand *cli.Command = &cli.Command{
 	Name:        "demo",
 	Usage:       "Run demo with some functions",
 	Description: "This command runs functions from multiple packages.",
-	Action: func(*cli.Context) error {
+	Action: func(ctx context.Context, _ *cli.Command) error {
 		// basicintro
 		log.Info().Msg(basicintro.GreetWorld())
 
@@ -30,9 +30,9 @@ var DemoCommand *cli.Command = &cli.Command{
 		// concurrency
 		answers := concurrency.GetAnswersWithChannels()
 		log.Info().Interface("answers", answers).Msg("Got answers with channels")
-		ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
+		timeCtx, cancel := context.WithTimeout(ctx, 200*time.Millisecond)
 		defer cancel()
-		count := concurrency.RateLimitCounter(ctx, 10, 50*time.Millisecond)
+		count := concurrency.RateLimitCounter(timeCtx, 10, 50*time.Millisecond)
 		log.Info().Int("count", count).Msg("Got rate limit count")
 
 		// realworld
