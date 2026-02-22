@@ -11,6 +11,11 @@ linters:
     - unconvert
     # https://github.com/mvdan/unparam
     - unparam
+  settings:
+    revive:
+      rules:
+        - name: var-naming
+          disabled: true
 formatters:
   enable:
     - gofmt

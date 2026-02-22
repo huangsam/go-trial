@@ -19,7 +19,7 @@ func TestGetAnswers(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			results := tt.function()
-			for i := 0; i < 100; i++ {
+			for i := range 100 {
 				assert.Equal(t, i*2, results[i])
 			}
 		})

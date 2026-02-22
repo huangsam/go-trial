@@ -12,7 +12,7 @@ func PositiveSliceContains(value int) bool {
 // PositiveSliceIsPositive checks if all values in positiveSlice are positive.
 func PositiveSliceIsPositive() bool {
 	result := true
-	for i := 0; i < len(positiveSlice); i++ {
+	for i := range positiveSlice {
 		result = result && positiveSlice[i] > 0
 	}
 	return result
