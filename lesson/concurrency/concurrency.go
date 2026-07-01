@@ -1,2 +1,2 @@
-// Package concurrency has examples using goroutines, channels.
+// Package concurrency provides lessons on Go concurrency primitives, context management, cancellations, timeouts, and time/date handling.
 package concurrency

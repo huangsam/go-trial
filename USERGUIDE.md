@@ -9,10 +9,10 @@ To see the codebase docs via CLI:
 
 ```shell
 # Show docs for package
-go doc github.com/huangsam/go-trial/pkg/basicintro
+go doc github.com/huangsam/go-trial/lesson/basics
 
 # Show docs for package entity
-go doc github.com/huangsam/go-trial/pkg/basicintro.Person
+go doc github.com/huangsam/go-trial/lesson/basics.Person
 ```
 
 To see the codebase docs via web server:

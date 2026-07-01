@@ -2,6 +2,6 @@
 
 template: testify
 packages:
-  github.com/huangsam/go-trial/pkg/abstraction:
+  github.com/huangsam/go-trial/lesson/basics:
     interfaces:
       UserRepository:

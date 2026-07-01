@@ -27,7 +27,7 @@ case "$mode" in
         go test -cover -coverprofile="$testout" "${selector[@]}"
         go tool cover -html="$testout" -o "$testhtml" ;;
     race)
-        go test -race github.com/huangsam/go-trial/pkg/concurrency ;;
+        go test -race github.com/huangsam/go-trial/lesson/concurrency ;;
     *)
         echo "Invalid mode '$mode' detected" && exit 1 ;;
 esac

@@ -7,7 +7,7 @@ import (
 
 	pb "github.com/huangsam/go-trial/api/protobuf"
 	"github.com/huangsam/go-trial/internal/cmd"
-	"github.com/huangsam/go-trial/lesson/endpoint"
+	"github.com/huangsam/go-trial/lesson/practical"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v3"
 	"google.golang.org/grpc"
@@ -45,10 +45,10 @@ var GrpcServeCommand *cli.Command = &cli.Command{
 			log.Fatal().Err(err).Msg("Failed to listen")
 		}
 		server := grpc.NewServer(
-			grpc.UnaryInterceptor(endpoint.LogServerUnaryInfo),
-			grpc.StreamInterceptor(endpoint.LogServerStreamInfo),
+			grpc.UnaryInterceptor(practical.LogServerUnaryInfo),
+			grpc.StreamInterceptor(practical.LogServerStreamInfo),
 		)
-		pb.RegisterEchoerServer(server, &endpoint.EchoerServer{})
+		pb.RegisterEchoerServer(server, &practical.EchoerServer{})
 		log.Info().Msgf("gRPC server listening on %s", addr)
 		return server.Serve(lis)
 	},
@@ -66,7 +66,7 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 		addr := ctx.Value("addr").(string)
 		conn, err := grpc.NewClient(addr,
 			grpc.WithTransportCredentials(insecure.NewCredentials()),
-			grpc.WithUnaryInterceptor(endpoint.LogClientUnaryInfo),
+			grpc.WithUnaryInterceptor(practical.LogClientUnaryInfo),
 		)
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
@@ -75,7 +75,7 @@ var GrpcEchoOnceCommand *cli.Command = &cli.Command{
 		client := pb.NewEchoerClient(conn)
 		ctx2, cancel := context.WithTimeout(context.Background(), requestTimeout)
 		defer cancel()
-		return endpoint.EchoOnceWithClient(ctx2, client)
+		return practical.EchoOnceWithClient(ctx2, client)
 	},
 }
 
@@ -88,7 +88,7 @@ var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 		addr := ctx.Value("addr").(string)
 		conn, err := grpc.NewClient(addr,
 			grpc.WithTransportCredentials(insecure.NewCredentials()),
-			grpc.WithStreamInterceptor(endpoint.LogClientStreamInfo),
+			grpc.WithStreamInterceptor(practical.LogClientStreamInfo),
 		)
 		if err != nil {
 			log.Fatal().Err(err).Msg("Failed to connect to server")
@@ -97,6 +97,6 @@ var GrpcEchoStreamCommand *cli.Command = &cli.Command{
 		client := pb.NewEchoerClient(conn)
 		ctx2, cancel := context.WithTimeout(context.Background(), requestTimeout)
 		defer cancel()
-		return endpoint.EchoManyWithClient(ctx2, client)
+		return practical.EchoManyWithClient(ctx2, client)
 	},
 }

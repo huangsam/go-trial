@@ -7,7 +7,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/huangsam/go-trial/internal/model"
-	"github.com/huangsam/go-trial/lesson/endpoint"
+	"github.com/huangsam/go-trial/lesson/practical"
 	"github.com/urfave/cli/v3"
 )
 
@@ -41,11 +41,11 @@ var HTTPCommand *cli.Command = &cli.Command{
 		acc := model.UserAccount{Username: ctx.Value("user").(string), Password: ctx.Value("pass").(string)}
 		authMiddleware := lesson.BasicAuth(acc)
 
-		r.Get("/", endpoint.HelloHandler)
-		r.Get("/error", endpoint.ErrorHandler)
-		r.Get("/rectangle-size", endpoint.RectangleSizeHandler)
-		r.Get("/circle-size", endpoint.CircleSizeHandler)
-		r.With(authMiddleware).Get("/secret", endpoint.HelloHandler)
+		r.Get("/", practical.HelloHandler)
+		r.Get("/error", practical.ErrorHandler)
+		r.Get("/rectangle-size", practical.RectangleSizeHandler)
+		r.Get("/circle-size", practical.CircleSizeHandler)
+		r.With(authMiddleware).Get("/secret", practical.HelloHandler)
 
 		return lesson.RunServer(ctx.Value("addr").(string), r)
 	},

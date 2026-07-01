@@ -46,18 +46,12 @@ and experiment with.
 
 ### Core concepts
 
-- [Functions, structs, pointers](lesson/basicintro/)
-- [Common data structures](lesson/datastructure/)
-- [Goroutines, channels, synchronization](lesson/concurrency/)
-- [Context, cancellation, timeouts](lesson/context/)
-- [Time and date handling](lesson/time/)
-- [Interfaces, generics, mocking](lesson/abstraction/)
+- [Basics: Syntax, data structures, abstractions, string formatting](lesson/basics/)
+- [Concurrency: Goroutines, channels, context, time handling](lesson/concurrency/)
 
 ### Practical concepts
 
-- [String formatting options](lesson/stringformat/)
-- [Files, I/O, time](lesson/realworld/)
-- [gRPC, HTTP](lesson/endpoint/)
+- [Practical: JSON, I/O, configuration, templates, HTTP, gRPC](lesson/practical/)
 
 ### Apply your knowledge
 
