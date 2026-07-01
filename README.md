@@ -49,10 +49,13 @@ and experiment with.
 - [Functions, structs, pointers](lesson/basicintro/)
 - [Common data structures](lesson/datastructure/)
 - [Goroutines, channels, synchronization](lesson/concurrency/)
+- [Context, cancellation, timeouts](lesson/context/)
+- [Time and date handling](lesson/time/)
 - [Interfaces, generics, mocking](lesson/abstraction/)
 
 ### Practical concepts
 
+- [String formatting options](lesson/stringformat/)
 - [Files, I/O, time](lesson/realworld/)
 - [gRPC, HTTP](lesson/endpoint/)
 
