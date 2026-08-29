@@ -77,14 +77,14 @@ func TestNumberParsing(t *testing.T) {
 func TestUnmarshalArrayIntoInterface(t *testing.T) {
 	jsonData := `[1, 2, 3]`
 
-	var data interface{}
+	var data any
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		t.Fatalf("Unmarshal failed: %v", err)
 	}
 
 	// Arrays become []interface{} in Go
-	arr, ok := data.([]interface{})
+	arr, ok := data.([]any)
 	if !ok {
 		t.Errorf("Expected []interface{}, got %T", data)
 	}

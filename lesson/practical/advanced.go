@@ -73,10 +73,10 @@ func RawMessage() (string, error) {
 }
 
 // UnmarshalUnknownStructure demonstrates unmarshaling into interface{}.
-func UnmarshalUnknownStructure() (map[string]interface{}, error) {
+func UnmarshalUnknownStructure() (map[string]any, error) {
 	jsonData := `{"name": "Test", "count": 42, "active": true}`
 
-	var data map[string]interface{}
+	var data map[string]any
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		return nil, err

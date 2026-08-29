@@ -31,7 +31,7 @@ func CancellableContext() (string, error) {
 	resultChan := make(chan string, 1)
 
 	go func() {
-		for i := 0; i < 10; i++ {
+		for i := range 10 {
 			select {
 			case <-ctx.Done():
 				resultChan <- fmt.Sprintf("stopped at iteration %d", i)

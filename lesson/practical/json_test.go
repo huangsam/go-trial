@@ -128,14 +128,14 @@ func TestOmitEmpty(t *testing.T) {
 func TestUnmarshalToInterface(t *testing.T) {
 	jsonData := `{"name": "Test", "count": 42}`
 
-	var data interface{}
+	var data any
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		t.Fatalf("Unmarshal failed: %v", err)
 	}
 
 	// The result is a map[string]interface{}
-	resultMap, ok := data.(map[string]interface{})
+	resultMap, ok := data.(map[string]any)
 	if !ok {
 		t.Errorf("Expected map[string]interface{}, got %T", data)
 	}

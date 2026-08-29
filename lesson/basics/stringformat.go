@@ -45,14 +45,14 @@ func FmtPrint(name string, age int) string {
 
 // StringConcat demonstrates simple string concatenation with + operator.
 func StringConcat(words []string) string {
-	result := ""
+	var result strings.Builder
 	for i, word := range words {
 		if i > 0 {
-			result += ", "
+			result.WriteString(", ")
 		}
-		result += word
+		result.WriteString(word)
 	}
-	return result
+	return result.String()
 }
 
 // Join demonstrates using strings.Join for joining slices.
@@ -61,7 +61,7 @@ func Join(words []string) string {
 }
 
 // PercentFormatting demonstrates C-style % formatting.
-func PercentFormatting(format string, a interface{}, b interface{}) string {
+func PercentFormatting(format string, a any, b any) string {
 	return fmt.Sprintf(format, a, b)
 }
 
