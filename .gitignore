@@ -11,4 +11,4 @@ coverage.*
 # Project
 /gotrial
 *.pb.go
-coverage.*
+.aider*
