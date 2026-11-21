@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Define custom types for context keys to avoid collisions
+// Define custom types for context keys to avoid collisions.
 type (
 	grpcMethodKey  struct{}
 	peerAddressKey struct{}

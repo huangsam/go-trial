@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// An example car to use for testing purposes
+// An example car to use for testing purposes.
 var exampleCar = &practical.Car{
 	Make:       "Toyota",
 	Model:      "Corolla",
@@ -18,7 +18,7 @@ var exampleCar = &practical.Car{
 	MileCount:  15000,
 }
 
-// An example employee to use for testing purposes
+// An example employee to use for testing purposes.
 var exampleEmployee = &practical.Employee{
 	FirstName: "John",
 	LastName:  "Doe",

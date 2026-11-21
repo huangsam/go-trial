@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// Define custom types for context keys to avoid collisions
+// Define custom types for context keys to avoid collisions.
 type (
 	requestIDKey     struct{}
 	userIDKey        struct{}
@@ -110,7 +110,7 @@ type AntiPattern struct {
 	// DON'T do this - context should be passed as parameter
 }
 
-// Good pattern: pass context as first parameter
+// Good pattern: pass context as first parameter.
 func goodPattern(ctx context.Context) error {
 	// Use ctx for cancellation/timeout checks
 	<-ctx.Done()
