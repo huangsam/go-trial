@@ -46,7 +46,7 @@ and experiment with.
 ### Core concepts
 
 - [Basics: Syntax, data structures, abstractions, string formatting](lesson/basics/)
-- [Concurrency: Goroutines, channels, context, time handling](lesson/concurrency/)
+- [Concurrency: Goroutines, channels, sync, context, time handling](lesson/concurrency/)
 
 ### Practical concepts
 
