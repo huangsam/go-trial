@@ -11,4 +11,5 @@ coverage.*
 # Project
 /gotrial
 *.pb.go
+!api/protobuf/extended.pb.go
 .aider*

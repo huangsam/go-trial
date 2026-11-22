@@ -33,6 +33,9 @@ After the build runs successfully, run `./bin/gotrial` as a CLI:
 
 # Run the demo command
 ./bin/gotrial demo
+
+# Explore Protobuf data modeling and binary serialization
+./bin/gotrial protobuf
 ```
 
 To learn more, please consult the [user guide](USERGUIDE.md).
@@ -45,7 +48,8 @@ and experiment with.
 
 - [Basics: Syntax, data structures, abstractions, string formatting](lesson/basics/)
 - [Concurrency: Goroutines, channels, sync, context, time handling](lesson/concurrency/)
-- [Practical: JSON, I/O, configuration, templates, HTTP, gRPC](lesson/practical/)
+- [Practical: JSON, I/O, configuration, templates, HTTP, gRPC, Protobuf data
+  modeling](lesson/practical/)
 - [Performance: Allocations, benchmarks, profiling, escape analysis, sync.Pool](lesson/performance/)
 
 ### Apply your knowledge

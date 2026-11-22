@@ -25,6 +25,7 @@ func main() {
 			sub.DemoCommand,
 			sub.HTTPCommand,
 			sub.GrpcCommand,
+			sub.ProtobufCommand,
 		},
 	}
 
