@@ -43,14 +43,10 @@ This learning path is designed to take you from Go beginner to proficient
 in a matter of weeks. Each section contains practical examples to read
 and experiment with.
 
-### Core concepts
-
 - [Basics: Syntax, data structures, abstractions, string formatting](lesson/basics/)
 - [Concurrency: Goroutines, channels, sync, context, time handling](lesson/concurrency/)
-
-### Practical concepts
-
 - [Practical: JSON, I/O, configuration, templates, HTTP, gRPC](lesson/practical/)
+- [Performance: Allocations, benchmarks, sync.Pool](lesson/performance/)
 
 ### Apply your knowledge
 
