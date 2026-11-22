@@ -46,7 +46,7 @@ and experiment with.
 - [Basics: Syntax, data structures, abstractions, string formatting](lesson/basics/)
 - [Concurrency: Goroutines, channels, sync, context, time handling](lesson/concurrency/)
 - [Practical: JSON, I/O, configuration, templates, HTTP, gRPC](lesson/practical/)
-- [Performance: Allocations, benchmarks, sync.Pool](lesson/performance/)
+- [Performance: Allocations, benchmarks, profiling, escape analysis, sync.Pool](lesson/performance/)
 
 ### Apply your knowledge
 
