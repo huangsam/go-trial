@@ -15,14 +15,14 @@ There's no better time to master Golang than now! 🔥
 ## Getting started
 
 ```shell
-# Run setup
-bash scripts/setup.sh
+# Install development tools and generate code
+make setup
 
-# Run build
-bash scripts/build.sh
+# Build the CLI
+make build
 
 # Run tests
-bash scripts/test.sh
+make test
 ```
 
 After the build runs successfully, run `./bin/gotrial` as a CLI:

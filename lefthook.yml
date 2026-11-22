@@ -9,7 +9,7 @@ pre-commit:
   commands:
     go-lint:
       glob: "*.go"
-      run: ./scripts/lint.sh
+      run: make lint
     go-test:
       glob: "*.go"
-      run: ./scripts/test.sh
+      run: make test

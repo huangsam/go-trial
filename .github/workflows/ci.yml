@@ -23,13 +23,13 @@ jobs:
         uses: actions/cache@v6
         with:
           path: ~/.protoc
-          key: protoc-${{ runner.os }}-${{ hashFiles('scripts/setup.sh') }}
+          key: protoc-${{ runner.os }}-${{ hashFiles('Makefile') }}
       - name: Run setup
-        run: bash ./scripts/setup.sh ci
+        run: make setup-ci
       - name: Run tests
-        run: bash ./scripts/test.sh
+        run: make test
       - name: Run build
-        run: bash ./scripts/build.sh
+        run: make build
       - name: Run linters
         uses: golangci/golangci-lint-action@v9
         with:
