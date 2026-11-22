@@ -2,9 +2,8 @@ package sub
 
 import (
 	"context"
+	"net/http"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/huangsam/go-trial/internal/model"
 	"github.com/huangsam/go-trial/lesson/practical"
@@ -34,19 +33,16 @@ var HTTPCommand *cli.Command = &cli.Command{
 		},
 	},
 	Action: func(ctx context.Context, _ *cli.Command) error {
-		r := chi.NewRouter()
-		r.Use(lesson.ZeroLogger)
-		r.Use(middleware.Recoverer)
+		mux := http.NewServeMux()
+		mux.HandleFunc("GET /{$}", practical.HelloHandler)
+		mux.HandleFunc("GET /error", practical.ErrorHandler)
+		mux.HandleFunc("GET /rectangle-size", practical.RectangleSizeHandler)
+		mux.HandleFunc("GET /circle-size", practical.CircleSizeHandler)
 
 		acc := model.UserAccount{Username: ctx.Value("user").(string), Password: ctx.Value("pass").(string)}
 		authMiddleware := lesson.BasicAuth(acc)
+		mux.Handle("GET /secret", authMiddleware(http.HandlerFunc(practical.HelloHandler)))
 
-		r.Get("/", practical.HelloHandler)
-		r.Get("/error", practical.ErrorHandler)
-		r.Get("/rectangle-size", practical.RectangleSizeHandler)
-		r.Get("/circle-size", practical.CircleSizeHandler)
-		r.With(authMiddleware).Get("/secret", practical.HelloHandler)
-
-		return lesson.RunServer(ctx.Value("addr").(string), r)
+		return lesson.RunServer(ctx.Value("addr").(string), lesson.ZeroLogger(mux))
 	},
 }

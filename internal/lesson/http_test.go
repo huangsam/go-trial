@@ -7,7 +7,6 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/huangsam/go-trial/internal/lesson"
 	"github.com/huangsam/go-trial/internal/model"
 	"github.com/stretchr/testify/assert"
@@ -15,22 +14,22 @@ import (
 )
 
 func TestBasicAuthMiddleware(t *testing.T) {
-	r := chi.NewRouter()
+	mux := http.NewServeMux()
 	validAccount := model.UserAccount{Username: "testuser", Password: "testpass"}
 	invalidAccount := model.UserAccount{Username: "invaliduser", Password: "invalidpass"}
 	basicAuthHeader := base64.StdEncoding.EncodeToString([]byte(validAccount.Username + ":" + validAccount.Password))
 	invalidAuthHeader := base64.StdEncoding.EncodeToString([]byte(invalidAccount.Username + ":" + invalidAccount.Password))
 
-	r.With(lesson.BasicAuth(validAccount)).Get("/protected", func(w http.ResponseWriter, _ *http.Request) {
+	mux.Handle("GET /protected", lesson.BasicAuth(validAccount)(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte("Protected content"))
-	})
+	})))
 
 	t.Run("NoAuthHeader", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/protected", nil)
 		w := httptest.NewRecorder()
 
-		r.ServeHTTP(w, req)
+		mux.ServeHTTP(w, req)
 
 		resp := w.Result()
 		assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
@@ -46,7 +45,7 @@ func TestBasicAuthMiddleware(t *testing.T) {
 		req.Header.Set("Authorization", "Basic "+invalidAuthHeader)
 		w := httptest.NewRecorder()
 
-		r.ServeHTTP(w, req)
+		mux.ServeHTTP(w, req)
 
 		resp := w.Result()
 		assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
@@ -62,7 +61,7 @@ func TestBasicAuthMiddleware(t *testing.T) {
 		req.Header.Set("Authorization", "Basic "+basicAuthHeader)
 		w := httptest.NewRecorder()
 
-		r.ServeHTTP(w, req)
+		mux.ServeHTTP(w, req)
 
 		resp := w.Result()
 		assert.Equal(t, http.StatusOK, resp.StatusCode)

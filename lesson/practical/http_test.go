@@ -7,15 +7,12 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/huangsam/go-trial/lesson/practical"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestRawHandlers(t *testing.T) {
-	r := chi.NewRouter()
-
 	testCases := []struct {
 		name             string
 		path             string
@@ -42,11 +39,12 @@ func TestRawHandlers(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			r.Get(tc.path, tc.handler)
+			mux := http.NewServeMux()
+			mux.Handle("GET "+tc.path, tc.handler)
 			req := httptest.NewRequest(http.MethodGet, tc.path+tc.query, nil)
 			w := httptest.NewRecorder()
 
-			r.ServeHTTP(w, req)
+			mux.ServeHTTP(w, req)
 
 			resp := w.Result()
 			assert.Equal(t, tc.expectedStatus, resp.StatusCode)
@@ -63,8 +61,6 @@ func TestRawHandlers(t *testing.T) {
 }
 
 func TestJsonHandlers(t *testing.T) {
-	r := chi.NewRouter()
-
 	testCases := []struct {
 		name           string
 		path           string
@@ -109,11 +105,12 @@ func TestJsonHandlers(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			r.Get(tc.path, tc.handler)
+			mux := http.NewServeMux()
+			mux.Handle("GET "+tc.path, tc.handler)
 			req := httptest.NewRequest(http.MethodGet, tc.path+tc.query, nil)
 			w := httptest.NewRecorder()
 
-			r.ServeHTTP(w, req)
+			mux.ServeHTTP(w, req)
 
 			resp := w.Result()
 			assert.Equal(t, tc.expectedStatus, resp.StatusCode)

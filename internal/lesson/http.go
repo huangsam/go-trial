@@ -9,7 +9,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/go-chi/chi/v5/middleware"
 	"github.com/huangsam/go-trial/internal/model"
 	"github.com/rs/zerolog/log"
 )
@@ -46,17 +45,15 @@ func RunServer(addr string, handler http.Handler) error {
 
 // ZeroLogger emits a log for each incoming HTTP request.
 //
-// It logs the request URI, status code, and latency.
+// It logs the request URI and latency.
 func ZeroLogger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
-		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
-		next.ServeHTTP(ww, r)
+		next.ServeHTTP(w, r)
 		latency := time.Since(start)
 
 		log.Debug().
 			Str("uri", r.RequestURI).
-			Int("status", ww.Status()).
 			Dur("latency", latency).
 			Msg("Got request")
 	})

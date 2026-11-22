@@ -3,7 +3,6 @@ module github.com/huangsam/go-trial
 go 1.27.0
 
 require (
-	github.com/go-chi/chi/v5 v5.5.0
 	github.com/knadh/koanf/parsers/json v1.0.1
 	github.com/knadh/koanf/parsers/yaml v1.1.1
 	github.com/knadh/koanf/providers/file v1.2.1
